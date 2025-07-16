@@ -1,0 +1,12 @@
+[
+  {
+    "across": ["grammar", "radical", "extreme", "turkeys"],
+    "down": ["garment", "auditor", "machete", "rollers"],
+    "clues": {
+      "0": { "0": "g", "6": "r" },
+      "2": { "0": "r", "6": "l" },
+      "4": { "0": "e", "6": "e" },
+      "6": { "0": "t", "6": "s" }
+    }
+  }
+]
