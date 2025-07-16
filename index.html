@@ -1,33 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Duxxess Square – A unique word puzzle game" />
-  <title>Duxxess Square</title>
+  <meta charset="UTF-8">
+  <title>Duxxess Puzzle Grid</title>
   <style>
     body {
       font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f4;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 50px);
+      grid-template-rows: repeat(7, 50px);
+      gap: 2px;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
       text-align: center;
-      margin: 2em;
+      font-size: 20px;
+      border: 1px solid #999;
     }
-    a.button {
-      display: inline-block;
-      padding: 1em 2em;
-      background: #222;
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 2em;
+    .editable {
+      background-color: #ffffff;
     }
-    a.button:hover {
-      background: #444;
+    .shaded {
+      background-color: #cccccc;
+    }
+    input.cell {
+      border: none;
+      outline: none;
+      text-transform: uppercase;
+    }
+    .cell:disabled {
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to <strong>Duxxess Square</strong></h1>
-  <p>The ultimate interlocking word puzzle game.</p>
-  <a class="button" href="home.html">Enter Game</a>
+
+<div class="grid" id="duxxessGrid"></div>
+
+<script>
+  const gridContainer = document.getElementById('duxxessGrid');
+
+  for (let row = 0; row < 7; row++) {
+    for (let col = 0; col < 7; col++) {
+      const input = document.createElement('input');
+      input.maxLength = 1;
+      input.classList.add('cell');
+
+      // Human-style numbering (1-indexed)
+      const humanRow = row + 1;
+      const humanCol = col + 1;
+
+      // Only allow typing into odd rows and columns
+      if (humanRow % 2 === 1 && humanCol % 2 === 1) {
+        input.classList.add('editable');
+      } else {
+        input.classList.add('shaded');
+        input.disabled = true;
+      }
+
+      gridContainer.appendChild(input);
+    }
+  }
+</script>
+
 </body>
 </html>
