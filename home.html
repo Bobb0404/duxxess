@@ -18,5 +18,46 @@
     <a href="help.html" class="button">📖 Help / Rules</a>
     <a href="advertiser.html" class="button">📢 Advertiser</a>
   </div>
+  <script>
+  fetch("puzzles.json")
+    .then((res) => res.json())
+    .then((data) => {
+      const total = data.length;
+      const seen = parseInt(localStorage.getItem("puzzlesSeen") || "0");
+
+      if (total > seen) {
+        const banner = document.createElement("div");
+        banner.innerHTML = `
+          <a href="player.html" style="color: black; text-decoration: none;">
+            🔔 New puzzle available! Click to play now.
+          </a>
+          <span id="close-banner" style="
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-weight: normal;
+            font-size: 16px;
+            cursor: pointer;
+            color: #000;
+          ">&times;</span>
+        `;
+
+        banner.style.background = "#ffeb3b";
+        banner.style.padding = "12px 16px";
+        banner.style.fontWeight = "bold";
+        banner.style.margin = "10px auto";
+        banner.style.maxWidth = "400px";
+        banner.style.borderRadius = "6px";
+        banner.style.position = "relative";
+
+        document.body.insertBefore(banner, document.body.firstChild);
+
+        document.getElementById("close-banner").onclick = function (e) {
+          e.stopPropagation();
+          banner.style.display = "none";
+        };
+      }
+    });
+</script>
 </body>
 </html>
