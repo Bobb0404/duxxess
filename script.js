@@ -85,3 +85,53 @@ function submitPuzzle() {
     ? '🎉 Correct! Puzzle complete.'
     : '❌ Some words are incorrect. Try again.';
 }
+function submitPuzzle() {
+  fetch('puzzles.json')
+    .then(res => res.json())
+    .then(data => {
+      const puzzle = data[0]; // Load first puzzle for now
+      const gridSize = 7;
+      const userAcross = [];
+      const userDown = [];
+
+      // Collect across words (rows 0,2,4,6)
+      for (let r = 0; r < gridSize; r += 2) {
+        let word = "";
+        for (let c = 0; c < gridSize; c += 2) {
+          const input = document.querySelector(`input[data-row='${r}'][data-col='${c}']`);
+          word += input?.value?.toLowerCase() || "";
+        }
+        userAcross.push(word);
+      }
+
+      // Collect down words (cols 0,2,4,6)
+      for (let c = 0; c < gridSize; c += 2) {
+        let word = "";
+        for (let r = 0; r < gridSize; r += 2) {
+          const input = document.querySelector(`input[data-row='${r}'][data-col='${c}']`);
+          word += input?.value?.toLowerCase() || "";
+        }
+        userDown.push(word);
+      }
+
+      // Get expected words
+      const expectedAcross = puzzle.across.map(w => w.toLowerCase());
+      const expectedDown   = puzzle.down.map(w => w.toLowerCase());
+
+      // Compare player vs correct
+      const isMatch = JSON.stringify(userAcross) === JSON.stringify(expectedAcross)
+                   && JSON.stringify(userDown) === JSON.stringify(expectedDown);
+
+      const result = document.getElementById("result");
+      if (isMatch) {
+        result.textContent = "🎉 Correct! Puzzle complete.";
+        result.style.color = "green";
+        // Optionally record completion
+        let seen = parseInt(localStorage.getItem("puzzlesSeen") || "0");
+        localStorage.setItem("puzzlesSeen", seen + 1);
+      } else {
+        result.textContent = "❌ Some words are incorrect. Try again.";
+        result.style.color = "red";
+      }
+    });
+}
