@@ -111,18 +111,16 @@
 <script>
   const grid = document.getElementById('duxxessGrid');
 
-  for (let row = 0; row < 7; row++) {
-    for (let col = 0; col < 7; col++) {
+  for (let row = 1; row <= 7; row++) {
+    for (let col = 1; col <= 7; col++) {
       const cell = document.createElement('input');
       cell.type = 'text';
       cell.maxLength = 1;
       cell.classList.add('cell');
 
-      const r = row + 1;
-      const c = col + 1;
-
-      // Approved Duxxess logic: Editable if both row AND col are odd
-      if (r % 2 === 1 && c % 2 === 1) {
+      // Human-style shading logic:
+      // Editable only if row is odd AND col is odd
+      if (row % 2 === 1 && col % 2 === 1) {
         cell.classList.add('editable');
       } else {
         cell.classList.add('shaded');
