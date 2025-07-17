@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Duxxess Grid – With Grid Lines</title>
+  <title>Duxxess Grid – Bolder Grid Lines</title>
   <style>
     body {
       font-family: sans-serif;
@@ -32,9 +32,9 @@
       text-align: center;
       font-weight: bold;
       text-transform: uppercase;
-      border: 1px solid #ccc;
+      border: 2px solid #888;
       box-sizing: border-box;
-      border-radius: 0; /* Remove rounding inside the grid to keep edges clean */
+      border-radius: 0;
       transition: 0.2s;
     }
 
@@ -80,7 +80,6 @@
 
       let isEditable = false;
 
-      // Rule: Odd rows = editable. Even rows = editable only at odd columns.
       if (r % 2 === 1 || (r % 2 === 0 && c % 2 === 1)) {
         isEditable = true;
       }
