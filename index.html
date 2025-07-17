@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Duxxess Grid Final</title>
+  <meta charset="UTF-8" />
+  <title>Duxxess Grid — Final Version</title>
   <style>
     body {
       font-family: sans-serif;
-      background: #f4f4f4;
+      background: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(7, 50px);
       grid-template-rows: repeat(7, 50px);
       gap: 2px;
       background-color: #444;
-      padding: 5px;
+      padding: 6px;
       border-radius: 10px;
     }
+
     .cell {
       width: 50px;
       height: 50px;
       font-size: 20px;
       text-align: center;
       font-weight: bold;
+      text-transform: uppercase;
       border: none;
       box-sizing: border-box;
-      text-transform: uppercase;
     }
+
     .editable {
       background-color: #ffffff;
-      color: #000;
+      color: #000000;
     }
+
     .shaded {
-      background-color: #bbbbbb;
-      color: #666;
+      background-color: #cccccc;
+      color: #777777;
     }
+
     .cell:disabled {
       cursor: not-allowed;
     }
@@ -58,11 +63,24 @@
       cell.maxLength = 1;
       cell.classList.add('cell');
 
-      const humanRow = row + 1;
-      const humanCol = col + 1;
+      const r = row + 1;
+      const c = col + 1;
 
-      // Editable if row is odd AND col is odd
-      if (humanRow % 2 === 1 && humanCol % 2 === 1) {
+      let isEditable = false;
+
+      // Final Logic:
+      if (r % 2 === 1) {
+        // Odd rows → all editable
+        isEditable = true;
+      } else {
+        // Even rows
+        if (c % 2 === 1) {
+          // Odd columns → editable
+          isEditable = true;
+        }
+      }
+
+      if (isEditable) {
         cell.classList.add('editable');
       } else {
         cell.classList.add('shaded');
