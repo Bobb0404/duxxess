@@ -55,7 +55,6 @@
       font-weight: bold;
       text-transform: uppercase;
       border: 2.5px solid #000;
-      background-color: white;
       transition: 0.2s;
     }
 
@@ -118,11 +117,12 @@
       cell.maxLength = 1;
       cell.classList.add('cell');
 
-      // Human-style shading logic:
-      // Editable only if row is odd AND col is odd
+      // ✅ Human-style logic:
       if (row % 2 === 1 && col % 2 === 1) {
+        // Editable: odd row, odd col
         cell.classList.add('editable');
       } else {
+        // Shaded: everything else
         cell.classList.add('shaded');
         cell.disabled = true;
       }
