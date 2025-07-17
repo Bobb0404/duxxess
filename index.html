@@ -2,36 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Duxxess Grid — Final Version</title>
+  <title>Duxxess Grid – Enhanced</title>
   <style>
     body {
       font-family: sans-serif;
-      background: #f0f0f0;
+      background: #1c1c1c;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(7, 50px);
-      grid-template-rows: repeat(7, 50px);
-      gap: 2px;
-      background-color: #444;
-      padding: 6px;
-      border-radius: 10px;
+      grid-template-columns: repeat(7, 100px);
+      grid-template-rows: repeat(7, 100px);
+      gap: 4px;
+      background-color: #000;
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #000;
     }
 
     .cell {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
+      width: 100px;
+      height: 100px;
+      font-size: 40px;
       text-align: center;
       font-weight: bold;
       text-transform: uppercase;
       border: none;
       box-sizing: border-box;
+      border-radius: 8px;
+      transition: 0.2s;
     }
 
     .editable {
@@ -39,13 +43,21 @@
       color: #000000;
     }
 
+    .editable:hover {
+      background-color: #f5f5f5;
+    }
+
     .shaded {
-      background-color: #cccccc;
-      color: #777777;
+      background-color: #000000;
+      color: #333333;
     }
 
     .cell:disabled {
       cursor: not-allowed;
+    }
+
+    .cell:focus {
+      outline: 2px solid #0066ff;
     }
   </style>
 </head>
@@ -68,14 +80,11 @@
 
       let isEditable = false;
 
-      // Final Logic:
+      // Final grid logic:
       if (r % 2 === 1) {
-        // Odd rows → all editable
         isEditable = true;
       } else {
-        // Even rows
         if (c % 2 === 1) {
-          // Odd columns → editable
           isEditable = true;
         }
       }
