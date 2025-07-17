@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Duxxess Grid – Clean & Bright</title>
+  <title>Duxxess Grid – With Grid Lines</title>
   <style>
     body {
       font-family: sans-serif;
@@ -18,7 +18,7 @@
       display: grid;
       grid-template-columns: repeat(7, 100px);
       grid-template-rows: repeat(7, 100px);
-      gap: 4px;
+      gap: 0;
       padding: 10px;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -32,9 +32,9 @@
       text-align: center;
       font-weight: bold;
       text-transform: uppercase;
-      border: none;
+      border: 1px solid #ccc;
       box-sizing: border-box;
-      border-radius: 8px;
+      border-radius: 0; /* Remove rounding inside the grid to keep edges clean */
       transition: 0.2s;
     }
 
@@ -80,7 +80,7 @@
 
       let isEditable = false;
 
-      // Duxxess rule: odd rows = all editable, even rows = odd cols editable
+      // Rule: Odd rows = editable. Even rows = editable only at odd columns.
       if (r % 2 === 1 || (r % 2 === 0 && c % 2 === 1)) {
         isEditable = true;
       }
