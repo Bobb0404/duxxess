@@ -1,17 +1,5 @@
 const puzzles = [
-  {
-    id: 'DS0001',
-    across: ['Garland', 'Orbited', 'Macaque', 'Dangers'],
-    down: ['Groomed', 'Rubicon', 'Antique', 'Dodgers']
-  },
-  {
-    id: 'DS0002',
-    across: ['Chainer', 'Informs', 'Barmaid', 'Distend'],
-    down: ['Climbed', 'Affirms', 'Narrate', 'Resided']
-  },
-  {
-    id: 'DS0003',
-    across: ['Solidly', 'Lactate', 'Intoned', 'Resided'],
-    down: ['Soldier', 'Locates', 'Drained', 'Yielded']
-  }
+  { id: 'DS0001', across: ['Garland','Orbited','Macaque','Dangers'], down: ['Groomed','Rubicon','Antique','Dodgers'] },
+  { id: 'DS0002', across: ['Chainer','Informs','Barmaid','Distend'], down: ['Climbed','Affirms','Narrate','Resided'] },
+  { id: 'DS0003', across: ['Solidly','Lactate','Intoned','Resided'], down: ['Soldier','Locates','Drained','Yielded'] }
 ];
