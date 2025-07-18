@@ -1,66 +1,36 @@
-const puzzles = [
-  {
-    id: 'DS0001',
-    across: ['Garland', 'Orbited', 'Macaque', 'Dangers'],
-    down: ['Groomed', 'Rubicon', 'Antique', 'Dodgers']
-  },
-  {
-    id: 'DS0002',
-    across: ['Chainer', 'Informs', 'Barmaid', 'Distend'],
-    down: ['Climbed', 'Affirms', 'Narrate', 'Resided']
-  },
-  {
-    id: 'DS0003',
-    across: ['Solidly', 'Lactate', 'Intoned', 'Resided'],
-    down: ['Soldier', 'Locates', 'Drained', 'Yielded']
-  }
-];
+let current = 0;
 
-let currentPuzzleIndex = 0;
+function renderGrid() {
+  const puzzle = puzzles[current];
+  const grid = document.getElementById('grid-container');
+  grid.innerHTML = '';
+  document.getElementById('puzzle-id').innerText = `Puzzle ID: ${puzzle.id}`;
 
-function isEditable(row, col) {
-  // Editable if either row or column is odd (1-based)
-  return row % 2 === 1 || col % 2 === 1;
-}
-
-function renderPuzzle(puzzle) {
-  const grid = document.getElementById("grid-container");
-  grid.innerHTML = "";
-
-  for (let r = 0; r < 7; r++) {
-    for (let c = 0; c < 7; c++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-      if (isEditable(r + 1, c + 1)) {
-        cell.classList.add("editable");
+  for (let r=0; r<7; r++) {
+    for (let c=0; c<7; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      if (r%2===1 && c%2===1) {
+        cell.classList.add('shaded');
       } else {
-        cell.classList.add("shaded");
+        cell.classList.add('editable');
       }
       grid.appendChild(cell);
     }
   }
-
-  document.getElementById("game-id").innerText = `(${puzzle.id})`;
 }
 
-function loadPuzzle(index) {
-  if (index >= 0 && index < puzzles.length) {
-    currentPuzzleIndex = index;
-    renderPuzzle(puzzles[currentPuzzleIndex]);
-  }
+function nextPuzzle() {
+  if (current < puzzles.length - 1) current++;
+  renderGrid();
 }
 
-document.getElementById("prev-btn").addEventListener("click", () => {
-  if (currentPuzzleIndex > 0) {
-    loadPuzzle(currentPuzzleIndex - 1);
-  }
-});
+function previousPuzzle() {
+  if (current > 0) current--;
+  renderGrid();
+}
 
-document.getElementById("next-btn").addEventListener("click", () => {
-  if (currentPuzzleIndex < puzzles.length - 1) {
-    loadPuzzle(currentPuzzleIndex + 1);
-  }
-});
+document.getElementById('next-btn').addEventListener('click', nextPuzzle);
+document.getElementById('prev-btn').addEventListener('click', previousPuzzle);
 
-// Load first puzzle on page load
-window.onload = () => loadPuzzle(currentPuzzleIndex);
+window.onload = () => renderGrid();
