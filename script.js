@@ -16,43 +16,51 @@ const puzzles = [
   }
 ];
 
-let currentPuzzle = 0;
+let currentPuzzleIndex = 0;
 
-function renderGrid() {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  document.getElementById('puzzle-id').textContent = puzzles[currentPuzzle].id;
+function isEditable(row, col) {
+  // Editable if either row or column is odd (1-based)
+  return row % 2 === 1 || col % 2 === 1;
+}
 
-  for (let row = 0; row < 7; row++) {
-    for (let col = 0; col < 7; col++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
+function renderPuzzle(puzzle) {
+  const grid = document.getElementById("grid-container");
+  grid.innerHTML = "";
 
-      const isEditable = (row % 2 === 0 || col % 2 === 0); // JS 0-indexed
-      const isShaded = (row % 2 === 1 && col % 2 === 1);   // human even = js odd
-
-      if (isShaded) {
-        cell.classList.add('shaded');
+  for (let r = 0; r < 7; r++) {
+    for (let c = 0; c < 7; c++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      if (isEditable(r + 1, c + 1)) {
+        cell.classList.add("editable");
       } else {
-        const input = document.createElement('input');
-        input.maxLength = 1;
-        cell.appendChild(input);
+        cell.classList.add("shaded");
       }
-
       grid.appendChild(cell);
     }
   }
+
+  document.getElementById("game-id").innerText = `(${puzzle.id})`;
 }
 
-function nextPuzzle() {
-  currentPuzzle = (currentPuzzle + 1) % puzzles.length;
-  renderGrid();
+function loadPuzzle(index) {
+  if (index >= 0 && index < puzzles.length) {
+    currentPuzzleIndex = index;
+    renderPuzzle(puzzles[currentPuzzleIndex]);
+  }
 }
 
-function prevPuzzle() {
-  currentPuzzle = (currentPuzzle - 1 + puzzles.length) % puzzles.length;
-  renderGrid();
-}
+document.getElementById("prev-btn").addEventListener("click", () => {
+  if (currentPuzzleIndex > 0) {
+    loadPuzzle(currentPuzzleIndex - 1);
+  }
+});
 
-// Load first puzzle on start
-window.onload = renderGrid;
+document.getElementById("next-btn").addEventListener("click", () => {
+  if (currentPuzzleIndex < puzzles.length - 1) {
+    loadPuzzle(currentPuzzleIndex + 1);
+  }
+});
+
+// Load first puzzle on page load
+window.onload = () => loadPuzzle(currentPuzzleIndex);
