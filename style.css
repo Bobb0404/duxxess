@@ -1,46 +1,39 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f2f2f2;
-  margin: 0;
-  padding: 20px;
+  margin: 20px;
 }
 
 h1 {
+  font-size: 2em;
   margin-bottom: 20px;
 }
 
-.grid {
+#grid-container {
   display: grid;
-  grid-template-columns: repeat(7, 50px);
-  grid-template-rows: repeat(7, 50px);
-  gap: 3px;
+  grid-template-columns: repeat(7, 40px);
+  grid-template-rows: repeat(7, 40px);
+  gap: 4px;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
+  line-height: 40px;
   border: 1px solid #ccc;
-  background-color: #fff;
 }
 
-.cell input {
-  width: 100%;
-  height: 100%;
-  border: none;
-  text-align: center;
-  font-size: 20px;
-  background-color: transparent;
+.editable {
+  background-color: white;
 }
 
 .shaded {
-  background-color: #d3d3d3;
+  background-color: #ccc;
 }
 
 .nav-buttons {
@@ -49,7 +42,6 @@ h1 {
 
 button {
   padding: 10px 20px;
+  margin: 0 10px;
   font-size: 16px;
-  margin: 5px;
-  cursor: pointer;
 }
