@@ -1,12 +1,17 @@
-[
+const puzzles = [
   {
-    "across": ["grammar", "radical", "extreme", "turkeys"],
-    "down": ["garment", "auditor", "machete", "rollers"],
-    "clues": {
-      "0": { "0": "g", "6": "r" },
-      "2": { "0": "r", "6": "l" },
-      "4": { "0": "e", "6": "e" },
-      "6": { "0": "t", "6": "s" }
-    }
+    id: 'DS0001',
+    across: ['Garland', 'Orbited', 'Macaque', 'Dangers'],
+    down: ['Groomed', 'Rubicon', 'Antique', 'Dodgers']
+  },
+  {
+    id: 'DS0002',
+    across: ['Chainer', 'Informs', 'Barmaid', 'Distend'],
+    down: ['Climbed', 'Affirms', 'Narrate', 'Resided']
+  },
+  {
+    id: 'DS0003',
+    across: ['Solidly', 'Lactate', 'Intoned', 'Resided'],
+    down: ['Soldier', 'Locates', 'Drained', 'Yielded']
   }
-]
+];
