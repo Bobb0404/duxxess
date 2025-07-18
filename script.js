@@ -1,52 +1,58 @@
-let currentPuzzleIndex = 0;
+const puzzles = [
+  {
+    id: 'DS0001',
+    across: ['Garland', 'Orbited', 'Macaque', 'Dangers'],
+    down: ['Groomed', 'Rubicon', 'Antique', 'Dodgers']
+  },
+  {
+    id: 'DS0002',
+    across: ['Chainer', 'Informs', 'Barmaid', 'Distend'],
+    down: ['Climbed', 'Affirms', 'Narrate', 'Resided']
+  },
+  {
+    id: 'DS0003',
+    across: ['Solidly', 'Lactate', 'Intoned', 'Resided'],
+    down: ['Soldier', 'Locates', 'Drained', 'Yielded']
+  }
+];
 
-function isEditableCell(row, col) {
-  return row % 2 === 0 || col % 2 === 0;
-}
+let currentPuzzle = 0;
 
-function isShadedCell(row, col) {
-  return row % 2 === 1 && col % 2 === 1;
-}
-
-function renderPuzzle(index) {
-  const puzzle = puzzles[index];
-  const container = document.getElementById("grid-container");
-  container.innerHTML = "";
-  document.getElementById("puzzle-id").textContent = puzzle.id;
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  document.getElementById('puzzle-id').textContent = puzzles[currentPuzzle].id;
 
   for (let row = 0; row < 7; row++) {
     for (let col = 0; col < 7; col++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
+      const cell = document.createElement('div');
+      cell.className = 'cell';
 
-      if (isShadedCell(row, col)) {
-        cell.classList.add("shaded");
+      const isEditable = (row % 2 === 0 || col % 2 === 0); // JS 0-indexed
+      const isShaded = (row % 2 === 1 && col % 2 === 1);   // human even = js odd
+
+      if (isShaded) {
+        cell.classList.add('shaded');
       } else {
-        cell.classList.add("editable");
-        const letter =
-          row % 2 === 0
-            ? puzzle.across[row / 2][col]
-            : puzzle.down[col / 2][row];
-        cell.textContent = letter;
+        const input = document.createElement('input');
+        input.maxLength = 1;
+        cell.appendChild(input);
       }
 
-      container.appendChild(cell);
+      grid.appendChild(cell);
     }
   }
 }
 
-document.getElementById("prev").addEventListener("click", () => {
-  if (currentPuzzleIndex > 0) {
-    currentPuzzleIndex--;
-    renderPuzzle(currentPuzzleIndex);
-  }
-});
+function nextPuzzle() {
+  currentPuzzle = (currentPuzzle + 1) % puzzles.length;
+  renderGrid();
+}
 
-document.getElementById("next").addEventListener("click", () => {
-  if (currentPuzzleIndex < puzzles.length - 1) {
-    currentPuzzleIndex++;
-    renderPuzzle(currentPuzzleIndex);
-  }
-});
+function prevPuzzle() {
+  currentPuzzle = (currentPuzzle - 1 + puzzles.length) % puzzles.length;
+  renderGrid();
+}
 
-window.onload = () => renderPuzzle(currentPuzzleIndex);
+// Load first puzzle on start
+window.onload = renderGrid;
