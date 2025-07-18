@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Duxxess</h1>
-  <div id="puzzle-info">Puzzle ID: <span id="puzzle-id">DS0001</span></div>
-  <div id="grid-container"></div>
+  <h1>Duxxess Puzzle <span id="puzzle-id">DS0001</span></h1>
+
+  <div id="grid" class="grid"></div>
+
   <div class="nav-buttons">
-    <button id="prev">⬅ Previous</button>
-    <button id="next">Next ➡</button>
+    <button onclick="prevPuzzle()">⬅ Previous</button>
+    <button onclick="nextPuzzle()">Next ➡</button>
   </div>
-  <script src="puzzles.js"></script>
+
   <script src="script.js"></script>
 </body>
 </html>
