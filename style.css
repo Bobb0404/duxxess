@@ -1,23 +1,27 @@
 body {
   font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
-  background-color: #f4f4f4;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.title {
-  font-size: 2em;
-  margin-bottom: 1em;
-  color: #333;
+h1 {
+  margin-bottom: 10px;
 }
 
-.grid {
+#puzzle-info {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#grid-container {
   display: grid;
   grid-template-columns: repeat(7, 40px);
   grid-template-rows: repeat(7, 40px);
-  gap: 4px;
+  gap: 2px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .cell {
@@ -25,18 +29,25 @@ body {
   height: 40px;
   text-transform: uppercase;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 20px;
+  line-height: 40px;
   border: 1px solid #ccc;
-  background-color: white;
-  outline: none;
 }
 
-.cell:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.editable {
+  background-color: #fff;
 }
 
 .shaded {
-  background-color: #999 !important;
-  border: 1px solid #666;
+  background-color: #ccc;
+}
+
+.nav-buttons {
+  margin-top: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  font-size: 16px;
 }
