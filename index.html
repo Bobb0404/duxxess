@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duxxess</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="title">DUXXESS</div>
-  <div id="puzzle-id">Game: DS0001</div>
   <div id="game-container">
-    <div id="grid-container"></div>
+    <h1 class="title">DUXXESS</h1>
+    <div id="puzzle-id">Puzzle ID: DS0001</div>
+    <div id="grid-container" class="grid"></div>
     <div class="nav-buttons">
-      <button onclick="previousPuzzle()">← Prev</button>
-      <button onclick="nextPuzzle()">Next →</button>
+      <button id="prev-btn">⬅ Previous</button>
+      <button id="next-btn">Next ➡</button>
     </div>
   </div>
   <script src="puzzles.js"></script>
