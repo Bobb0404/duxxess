@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess</title>
+  <title>Duxxess Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Duxxess Puzzle <span id="puzzle-id">DS0001</span></h1>
-
-  <div id="grid" class="grid"></div>
+  <h1>Duxxess Game <span id="game-id">(DS0001)</span></h1>
+  <div id="grid-container"></div>
 
   <div class="nav-buttons">
-    <button onclick="prevPuzzle()">⬅ Previous</button>
-    <button onclick="nextPuzzle()">Next ➡</button>
+    <button id="prev-btn">◀ Previous</button>
+    <button id="next-btn">Next ▶</button>
   </div>
 
   <script src="script.js"></script>
