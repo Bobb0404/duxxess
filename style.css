@@ -1,26 +1,6 @@
 body {
+  background-color: white;
   font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-header {
-  width: 100%;
-  padding: 1rem;
-  background-color: #222;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.5rem;
-}
-
-#notification-bell {
-  font-size: 1.5rem;
 }
 
 #grid-container {
@@ -29,21 +9,30 @@ header {
   grid-template-rows: repeat(7, 36px);
   gap: 3px;
   margin: 20px 0;
+  border: 1px solid black;
 }
 
 .cell {
-  width: 36px;
-  height: 36px;
-  text-align: center;
-  font-size: 0.95rem;
-  border: 1px solid #999;
-  border-radius: 6px;
-  background-color: #fff;
-  box-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 75%;
 }
 
-.shaded {
-  background-color: #d0d0d0;
+.cell.editable {
+  background-color: #FFD700; /* Deep yellow */
+}
+
+.cell.clue {
+  background-color: #FFFFE0; /* Light yellow */
+  pointer-events: none;
+}
+
+.cell.shaded {
+  background-color: royalblue;
+  color: white;
   pointer-events: none;
 }
 
@@ -62,9 +51,4 @@ button {
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: #555;
 }
