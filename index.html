@@ -6,77 +6,55 @@
   <title>Duxxess Square</title>
   <style>
     body {
-      background-color: white;
+      background: white;
       font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
       margin: 0;
-      padding: 0;
-      text-align: center;
     }
-
     h1 {
-      margin: 20px 0;
       font-size: 24px;
+      margin-bottom: 10px;
     }
-
     #grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      width: 75vmin;
-      height: 75vmin;
-      margin: 0 auto;
-      border: 1px solid black;
+      grid-template-columns: repeat(7, 50px);
+      grid-template-rows: repeat(7, 50px);
+      gap: 1px;
+      margin-bottom: 30px;
+      background: black;
     }
-
     .cell {
-      border: 1px solid black;
+      width: 50px;
+      height: 50px;
+      border: none;
+      box-sizing: border-box;
       font-weight: bold;
       font-size: 75%;
-      text-align: center;
-      vertical-align: middle;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-
-    .editable {
-      background-color: #FFD700; /* deep yellow */
-    }
-
-    .clue {
-      background-color: #FFFFE0; /* light yellow */
-      pointer-events: none;
-    }
-
-    .shaded {
-      background-color: royalblue;
-      color: white;
-      pointer-events: none;
-    }
-
-    input {
+    .editable input {
       width: 100%;
       height: 100%;
       border: none;
+      background: transparent;
       text-align: center;
       font-weight: bold;
       font-size: 75%;
-      background: transparent;
     }
-
-    #navigation {
-      margin-top: 20px;
+    .editable {
+      background-color: #FFD700;
     }
-
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 16px;
-      cursor: pointer;
+    .clue {
+      background-color: #FFFFCC;
     }
-
-    #solution-words {
-      margin-top: 20px;
-      font-size: 16px;
+    .shaded {
+      background-color: royalblue;
+      color: white;
     }
   </style>
 </head>
@@ -84,16 +62,29 @@
   <h1>Duxxess Square</h1>
   <div id="grid"></div>
 
-  <div id="navigation">
-    <button onclick="alert('Previous puzzle')">⬅ Prev</button>
-    <button onclick="alert('Next puzzle')">Next ➡</button>
-  </div>
+  <script>
+    const grid = document.getElementById('grid');
+    const SIZE = 7;
 
-  <div id="solution-words">
-    <p><strong>Across:</strong> Garland, Orbited, Macaque, Dangers</p>
-    <p><strong>Down:</strong> Groomed, Rubicon, Antique, Dodgers</p>
-  </div>
+    for (let row = 1; row <= SIZE; row++) {
+      for (let col = 1; col <= SIZE; col++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
 
-  <script src="script.js"></script>
+        if (row % 2 === 0 && col % 2 === 0) {
+          cell.classList.add('shaded');
+          cell.textContent = '';
+        } else {
+          cell.classList.add('editable');
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          cell.appendChild(input);
+        }
+
+        grid.appendChild(cell);
+      }
+    }
+  </script>
 </body>
 </html>
