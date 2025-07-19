@@ -1,19 +1,36 @@
-const grid = document.getElementById("grid-container");
+const gridElement = document.getElementById("grid");
 
-// Create a 7x7 grid following the locked shading rule:
-// Editable cells on all odd-numbered rows and columns
-// Shaded only where BOTH row and column are even-numbered
-for (let row = 1; row <= 7; row++) {
-  for (let col = 1; col <= 7; col++) {
-    const cell = document.createElement("input");
-    cell.classList.add("cell");
+// 7x7 grid
+const SIZE = 7;
 
-    // Rule: shaded if both row and column are even
-    if (row % 2 === 0 && col % 2 === 0) {
-      cell.classList.add("shaded");
-      cell.setAttribute("disabled", true);
+// Function to determine cell type
+function getCellType(row, col) {
+  if (row % 2 === 1 && col % 2 === 1) return "editable";
+  if (row % 2 === 0 && col % 2 === 0) return "shaded";
+  return "clue";
+}
+
+// Render grid
+function renderGrid() {
+  for (let row = 0; row < SIZE; row++) {
+    for (let col = 0; col < SIZE; col++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+
+      const type = getCellType(row, col);
+      cell.classList.add(type);
+
+      if (type === "editable") {
+        const input = document.createElement("input");
+        input.maxLength = 1;
+        cell.appendChild(input);
+      } else {
+        cell.textContent = "";
+      }
+
+      gridElement.appendChild(cell);
     }
-
-    grid.appendChild(cell);
   }
 }
+
+renderGrid();
