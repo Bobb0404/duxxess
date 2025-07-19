@@ -25,21 +25,21 @@ header {
 
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(7, 50px);
-  grid-template-rows: repeat(7, 50px);
-  gap: 4px;
-  margin: 30px 0;
+  grid-template-columns: repeat(7, 38px);  /* scaled from 50px */
+  grid-template-rows: repeat(7, 38px);     /* scaled from 50px */
+  gap: 3px;                                /* scaled from 4px */
+  margin: 20px 0;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
+  width: 38px;                             /* was 50px */
+  height: 38px;                            /* was 50px */
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;                         /* slightly smaller */
   border: 1px solid #999;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1.5px 3px rgba(0,0,0,0.1);
 }
 
 .shaded {
