@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Duxxess Square</title>
   <style>
     body {
@@ -11,80 +10,86 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
-      margin: 0;
+      padding: 1rem;
     }
-    h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
+    table {
+      border-collapse: collapse;
+      margin-bottom: 1rem;
     }
-    #grid {
-      display: grid;
-      grid-template-columns: repeat(7, 50px);
-      grid-template-rows: repeat(7, 50px);
-      gap: 1px;
-      margin-bottom: 30px;
-      background: black;
+    td {
+      width: 45px;
+      height: 45px;
+      text-align: center;
+      vertical-align: middle;
+      padding: 0;
+      border: 1px solid black;
     }
-    .cell {
-      width: 50px;
-      height: 50px;
-      border: none;
-      box-sizing: border-box;
-      font-weight: bold;
-      font-size: 75%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .editable input {
+    input {
       width: 100%;
       height: 100%;
-      border: none;
-      background: transparent;
       text-align: center;
+      border: none;
+      outline: none;
       font-weight: bold;
-      font-size: 75%;
+      font-size: 0.75em;
+      background: transparent;
     }
     .editable {
-      background-color: #FFD700;
+      background-color: #FFD700; /* Deep yellow */
     }
     .clue {
-      background-color: #FFFFCC;
+      background-color: #FFFFE0; /* Light yellow */
     }
     .shaded {
       background-color: royalblue;
-      color: white;
+    }
+    .tile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      border: 1px solid black;
+      font-size: 0.75em;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 3px #00000022, 2px 2px 3px #cccccc;
+      transition: background 0.3s ease;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <h1>Duxxess Square</h1>
-  <div id="grid"></div>
-
+  <table id="grid"></table>
   <script>
-    const grid = document.getElementById('grid');
-    const SIZE = 7;
+    const gridSize = 7;
+    const table = document.getElementById('grid');for (let row = 0; row < gridSize; row++) {
+  const tr = document.createElement('tr');
+  for (let col = 0; col < gridSize; col++) {
+    const td = document.createElement('td');
 
-    for (let row = 1; row <= SIZE; row++) {
-      for (let col = 1; col <= SIZE; col++) {
-        const cell = document.createElement('div');
-        cell.classList.add('cell');
+    const isShaded = row % 2 === 1 && col % 2 === 1;
+    const isClue = (row === 0 || col === 0); // placeholder logic
+    const input = document.createElement('input');
+    input.maxLength = 1;
+    input.classList.add('tile');
 
-        if (row % 2 === 0 && col % 2 === 0) {
-          cell.classList.add('shaded');
-          cell.textContent = '';
-        } else {
-          cell.classList.add('editable');
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.maxLength = 1;
-          cell.appendChild(input);
-        }
-
-        grid.appendChild(cell);
-      }
+    if (isShaded) {
+      input.disabled = true;
+      td.classList.add('shaded');
+    } else if (isClue) {
+      input.disabled = true;
+      td.classList.add('clue');
+    } else {
+      td.classList.add('editable');
     }
+
+    td.appendChild(input);
+    tr.appendChild(td);
+  }
+  table.appendChild(tr);
+}
+
   </script>
 </body>
 </html>
