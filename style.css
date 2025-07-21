@@ -2,9 +2,9 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f7fa;
+  background: #f0f4f8;
   text-align: center;
-  color: #333;
+  color: #222;
 }
 
 h1 {
@@ -20,7 +20,7 @@ h1 {
 input[type="text"], button {
   padding: 0.5rem;
   font-size: 1rem;
-  margin: 0.2rem;
+  margin: 0.3rem;
 }
 
 #gridContainer {
@@ -28,32 +28,33 @@ input[type="text"], button {
   display: grid;
   grid-template-columns: repeat(7, 50px);
   grid-template-rows: repeat(7, 50px);
-  gap: 1px;
-  background-color: #999;
-  max-width: max-content;
-  border: 2px solid #555;
+  border: 2px solid #333;
+  background-color: #333; /* dark grid lines */
+  gap: 2px; /* clear line between cells */
 }
 
 .cell {
   width: 50px;
   height: 50px;
   font-size: 1.2rem;
-  text-transform: uppercase;
-  border: none;
   text-align: center;
+  vertical-align: middle;
   line-height: 50px;
+  text-transform: uppercase;
   box-sizing: border-box;
-}
-
-.editable {
-  background-color: #2563eb; /* blue */
-  color: white;
-  border: 1px solid #1e40af;
   font-weight: bold;
 }
 
+/* Editable cells (odd rows OR columns) */
+.editable {
+  background-color: #2563eb; /* strong blue */
+  color: white;
+  border: none;
+}
+
+/* Shaded cells (even rows AND columns) */
 .shaded {
   background-color: #facc15; /* yellow */
-  color: #333;
-  border: 1px solid #eab308;
+  color: #222;
+  border: none;
 }
