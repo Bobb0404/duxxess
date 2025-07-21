@@ -1,37 +1,40 @@
-function createGrid(size = 7) {
-  const gridContainer = document.getElementById('grid');
-  gridContainer.innerHTML = '';
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId.toUpperCase()];
+  const grid = document.getElementById("grid-container");
+  const label = document.getElementById("puzzle-id-label");
 
-  for (let row = 1; row <= size; row++) {
-    for (let col = 1; col <= size; col++) {
-      const input = document.createElement('input');
-      input.maxLength = 1;
-      input.classList.add('cell');
+  if (!puzzle) {
+    alert("Puzzle not found. Please check the ID.");
+    return;
+  }
 
-      // Sacred shading logic:
-      if (row % 2 === 1 && col % 2 === 1) {
-        // Editable cell: odd row & odd column
-        input.classList.add('editable');
-      } else if (row % 2 === 0 && col % 2 === 0) {
-        // Non-editable cell: even row & even column
-        input.classList.add('non-editable');
-        input.disabled = true;
+  grid.innerHTML = "";
+  grid.style.gridTemplateColumns = `repeat(${puzzle.size}, 40px)`;
+
+  label.textContent = `Puzzle ID: ${puzzle.id}`;
+
+  for (let r = 0; r < puzzle.size; r++) {
+    for (let c = 0; c < puzzle.size; c++) {
+      const cell = document.createElement("input");
+      cell.classList.add("cell");
+
+      // Sacred shading logic: Only even-even cells are shaded
+      if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
+        cell.classList.add("shaded");
+        cell.disabled = true;
       } else {
-        // All other cells: plain but not shaded
-        input.classList.add('editable');
+        cell.classList.add("editable");
+        cell.maxLength = 1;
       }
 
-      gridContainer.appendChild(input);
+      grid.appendChild(cell);
     }
   }
 }
 
-// Load puzzle button
-document.getElementById('loadPuzzleBtn').addEventListener('click', () => {
-  createGrid(7); // For now, always create 7x7
-});
+function handleLoad() {
+  const input = document.getElementById("puzzle-id-input");
+  loadPuzzle(input.value.trim());
+}
 
-// Create default grid on page load
-window.addEventListener('DOMContentLoaded', () => {
-  createGrid(7);
-});
+window.onload = () => loadPuzzle("DS0001B");
