@@ -1,116 +1,95 @@
-// === Duxxess Sacred Script ===
-// Preserves grid shading logic and adds Game ID search functionality
-
-const GRID_SIZES = {
-  3: "Beginner",
-  5: "Rookie/Intermediate",
-  7: "Elite/Master",
-};
-
-const puzzleLog = {
-  "B-001": {
-    size: 3,
-    title: "CAT Puzzle",
-    words: ["CAT", "TOP", "CUT", "TAP"],
-    grid: [
-      ["C", "A", "T"],
-      ["U", "", "O"],
-      ["T", "A", "P"],
-    ],
-  },
-  "R-001": {
-    size: 5,
-    title: "BIRDS & STARS",
-    words: ["BRISK", "IRATE", "RADIO", "STING", "KITES"],
-    grid: [
-      ["B", "R", "I", "S", "K"],
-      ["", "", "", "", ""],
-      ["R", "A", "D", "I", "O"],
-      ["", "", "", "", ""],
-      ["S", "T", "I", "N", "G"],
-    ],
-  },
-  "E-001": {
-    size: 7,
-    title: "GARLAND MASTER",
-    words: [
-      "GARLAND",
-      "ORBITED",
-      "MACAQUE",
-      "DANGERS",
-      "GROOMED",
-      "RUBICON",
-      "ANTIQUE",
-      "DODGERS",
-    ],
-    grid: [
-      ["G", "A", "R", "L", "A", "N", "D"],
-      ["", "", "", "", "", "", ""],
-      ["O", "R", "B", "I", "T", "E", "D"],
-      ["", "", "", "", "", "", ""],
-      ["M", "A", "C", "A", "Q", "U", "E"],
-      ["", "", "", "", "", "", ""],
-      ["D", "A", "N", "G", "E", "R", "S"],
-    ],
-  },
-};
-
-function createGrid(size) {
-  const container = document.getElementById("grid");
-  container.innerHTML = "";
-  for (let row = 0; row < size; row++) {
-    const rowDiv = document.createElement("div");
-    rowDiv.className = "row";
-    for (let col = 0; col < size; col++) {
-      const cell = document.createElement("input");
-      cell.maxLength = 1;
-      cell.className = "cell";
-
-      // Sacred Shading Rule: Shade when BOTH row and col are even-numbered (1-based)
-      if ((row + 1) % 2 === 0 && (col + 1) % 2 === 0) {
-        cell.disabled = true;
-        cell.classList.add("shaded");
-      }
-      rowDiv.appendChild(cell);
+// Puzzle data store
+const puzzleData = {
+  "DS0001B": {
+    gridSize: 3,
+    words: {
+      across: ["CAT", "TOP"],
+      down: ["CUT", "TAP"]
     }
-    container.appendChild(rowDiv);
+  },
+  "DS0002R": {
+    gridSize: 5,
+    words: {
+      across: ["FAITH", "ENACT", "ALONE", "STEEL", "TENOR"],
+      down: ["FEAST", "ANENT", "ICONS", "THREE", "HALON"]
+    }
+  },
+  "DS0003M": {
+    gridSize: 7,
+    words: {
+      across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS", "EXAMPLE", "RECEIVE", "YAWNING"],
+      down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS", "LAMINAR", "ENVYING", "DESERVE"]
+    }
+  }
+};
+
+// Utility to create shaded or editable cells
+function createCell(row, col, gridSize) {
+  const isShaded = row % 2 === 0 && col % 2 === 0; // Even row and even col (1-based)
+  const cell = document.createElement("div");
+  cell.classList.add("cell");
+
+  if (isShaded) {
+    cell.classList.add("shaded");
+    cell.textContent = "";
+  } else {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.maxLength = 1;
+    input.classList.add("grid-input");
+    cell.appendChild(input);
+  }
+
+  return cell;
+}
+
+// Render the grid
+function renderGrid(gridSize, words, puzzleId) {
+  const gridContainer = document.getElementById("grid-container");
+  gridContainer.innerHTML = ""; // Clear previous content
+
+  const grid = document.createElement("div");
+  grid.classList.add("grid");
+  grid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+  grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+
+  for (let row = 1; row <= gridSize; row++) {
+    for (let col = 1; col <= gridSize; col++) {
+      const cell = createCell(row, col, gridSize);
+      grid.appendChild(cell);
+    }
+  }
+
+  gridContainer.appendChild(grid);
+
+  // Set title
+  const title = document.getElementById("puzzle-title");
+  if (title) {
+    title.textContent = `Puzzle: ${puzzleId}`;
   }
 }
 
-function loadPuzzleById(gameId) {
-  const puzzle = puzzleLog[gameId.toUpperCase()];
-  const status = document.getElementById("status");
+// Load puzzle by ID
+function loadPuzzleById(id) {
+  const puzzle = puzzleData[id.toUpperCase()];
   if (!puzzle) {
-    status.textContent = "❌ Puzzle not found.";
-    createGrid(3); // fallback default
+    alert("Puzzle ID not found.");
     return;
   }
 
-  status.textContent = `✅ Loaded "${puzzle.title}" (${gameId}) — ${GRID_SIZES[puzzle.size]}`;
-  createGrid(puzzle.size);
-
-  const container = document.getElementById("grid");
-  puzzle.grid.forEach((rowArr, rowIdx) => {
-    rowArr.forEach((letter, colIdx) => {
-      const row = container.children[rowIdx];
-      const cell = row.children[colIdx];
-      if (letter !== "") {
-        cell.value = letter.toUpperCase();
-        cell.disabled = true;
-        cell.classList.add("prefilled");
-      }
-    });
-  });
+  renderGrid(puzzle.gridSize, puzzle.words, id.toUpperCase());
 }
 
-// Wire up the search box
-document.getElementById("gameIdForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const id = document.getElementById("gameIdInput").value.trim();
-  if (id) {
-    loadPuzzleById(id);
+// Attach event listener to Load button
+document.getElementById("load-btn").addEventListener("click", () => {
+  const idInput = document.getElementById("puzzle-id-input");
+  const puzzleId = idInput.value.trim();
+  if (puzzleId) {
+    loadPuzzleById(puzzleId);
   }
 });
 
-// Load default puzzle
-loadPuzzleById("B-001");
+// Load a default puzzle when page loads
+window.addEventListener("DOMContentLoaded", () => {
+  loadPuzzleById("DS0001B");
+});
