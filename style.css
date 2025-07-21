@@ -1,12 +1,36 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f8f9fa;
   text-align: center;
   padding: 20px;
-  background-color: #f4f4f4;
 }
 
 h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.controls {
   margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  font-size: 1em;
+  width: 220px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#gridContainer {
+  display: inline-block;
+  margin-top: 20px;
 }
 
 .grid {
@@ -14,24 +38,27 @@ h1 {
   grid-template-columns: repeat(7, 50px);
   grid-template-rows: repeat(7, 50px);
   gap: 2px;
-  justify-content: center;
-  margin: auto;
 }
 
 .cell {
   width: 50px;
   height: 50px;
-  font-size: 20px;
-  text-transform: uppercase;
+  font-size: 1.2em;
   text-align: center;
-  vertical-align: middle;
-  border: 1px solid #999;
+  line-height: 50px;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
-.cell.editable {
-  background-color: #fff;
+.cell input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
 }
 
-.cell.shaded {
-  background-color: #ccc;
+.shaded {
+  background: #ccc;
 }
