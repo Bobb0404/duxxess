@@ -98,6 +98,9 @@ document.getElementById("load-btn").addEventListener("click", () => {
   const puzzleId = document.getElementById("search-input").value.trim();
   loadPuzzle(puzzleId);
 });
-
 // Initialize default grid (7x7)
 createGrid(7);
+window.onload = () => {
+  createGrid(7);          // Prepare blank 7x7 grid
+  loadPuzzle("DS0001B");  // Automatically load first puzzle
+};
