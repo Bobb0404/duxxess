@@ -1,60 +1,72 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
   margin: 0;
   padding: 0;
-  background: #f0f4f8;
-  text-align: center;
-  color: #222;
+  background-color: #f4f7fa;
 }
 
 h1 {
-  margin-top: 1rem;
-  font-size: 2rem;
-  color: #1e3a8a;
+  margin: 20px 0 10px;
+  color: #2b2e4a;
 }
 
-#controls {
-  margin: 1rem auto;
+#searchBox {
+  padding: 8px;
+  width: 200px;
+  margin: 10px;
+  font-size: 16px;
 }
 
-input[type="text"], button {
-  padding: 0.5rem;
-  font-size: 1rem;
-  margin: 0.3rem;
+#loadPuzzle {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #3c8dbc;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+#loadPuzzle:hover {
+  background-color: #337ab7;
 }
 
 #gridContainer {
-  margin: 2rem auto;
+  display: inline-block;
+  border: 2px solid #2b2e4a;
+  margin-bottom: 30px;
+}
+
+.grid {
   display: grid;
   grid-template-columns: repeat(7, 50px);
   grid-template-rows: repeat(7, 50px);
-  border: 2px solid #333;
-  background-color: #333; /* dark grid lines */
-  gap: 2px; /* clear line between cells */
 }
 
 .cell {
   width: 50px;
   height: 50px;
-  font-size: 1.2rem;
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
-  text-transform: uppercase;
-  box-sizing: border-box;
+  font-size: 20px;
   font-weight: bold;
+  border: 1px solid #999;
+  box-sizing: border-box;
+  padding: 0;
+  outline: none;
 }
 
-/* Editable cells (odd rows OR columns) */
 .editable {
-  background-color: #2563eb; /* strong blue */
-  color: white;
-  border: none;
+  background-color: #ffffcc; /* Yellow for editable cells */
+  color: #000;
 }
 
-/* Shaded cells (even rows AND columns) */
 .shaded {
-  background-color: #facc15; /* yellow */
-  color: #222;
-  border: none;
+  background-color: #ccddff; /* Blue for shaded non-editable cells */
+}
+
+.cell:focus {
+  border: 2px solid #3c8dbc;
 }
