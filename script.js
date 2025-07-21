@@ -1,40 +1,48 @@
-function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId.toUpperCase()];
-  const grid = document.getElementById("grid-container");
-  const label = document.getElementById("puzzle-id-label");
+function createGrid(puzzle) {
+  const gridElement = document.getElementById("grid");
+  gridElement.innerHTML = "";
 
-  if (!puzzle) {
-    alert("Puzzle not found. Please check the ID.");
-    return;
-  }
+  const size = puzzle.size;
+  gridElement.style.gridTemplateColumns = `repeat(${size}, 40px)`;
 
-  grid.innerHTML = "";
-  grid.style.gridTemplateColumns = `repeat(${puzzle.size}, 40px)`;
-
-  label.textContent = `Puzzle ID: ${puzzle.id}`;
-
-  for (let r = 0; r < puzzle.size; r++) {
-    for (let c = 0; c < puzzle.size; c++) {
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
       const cell = document.createElement("input");
-      cell.classList.add("cell");
+      cell.className = "cell";
 
-      // Sacred shading logic: Only even-even cells are shaded
-      if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
-        cell.classList.add("shaded");
+      // Shaded rule: both row and column are even (human-style)
+      const isShaded = (row % 2 === 1 && col % 2 === 1);
+      if (isShaded) {
         cell.disabled = true;
+        cell.value = "";
       } else {
-        cell.classList.add("editable");
+        const letter = puzzle.grid[row][col];
+        cell.value = letter || "";
+        cell.disabled = false;
         cell.maxLength = 1;
       }
 
-      grid.appendChild(cell);
+      gridElement.appendChild(cell);
     }
+  }
+
+  document.getElementById("currentPuzzleId").textContent = `Puzzle ID: ${puzzle.id}`;
+}
+
+function loadPuzzleById() {
+  const input = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
+  const puzzle = puzzles.find(p => p.id === input);
+
+  if (puzzle) {
+    createGrid(puzzle);
+  } else {
+    alert("Puzzle not found!");
   }
 }
 
-function handleLoad() {
-  const input = document.getElementById("puzzle-id-input");
-  loadPuzzle(input.value.trim());
-}
-
-window.onload = () => loadPuzzle("DS0001B");
+// Load first puzzle by default
+window.onload = () => {
+  if (puzzles.length > 0) {
+    createGrid(puzzles[0]);
+  }
+};
