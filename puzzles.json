@@ -1,17 +1,21 @@
-const puzzles = [
-  {
-    id: "DS0001",
-    across: ["Garland","Orbited","Macaque","Dangers"],
-    down: ["Groomed","Rubicon","Antique","Dodgers"]
+const puzzles = {
+  "DS0001B": {
+    id: "DS0001B",
+    size: 3,
+    clues: {
+      across: ["CAT", "TOP"],
+      down: ["CUT", "TAP"]
+    },
+    words: ["CAT", "TOP", "CUT", "TAP"]
   },
-  {
-    id: "DS0002",
-    across: ["Chainer","Informs","Barmaid","Distend"],
-    down: ["Climbed","Affirms","Narrate","Resided"]
-  },
-  {
-    id: "DS0003",
-    across: ["Solidly","Lactate","Intoned","Resided"],
-    down: ["Soldier","Locates","Drained","Yielded"]
+
+  "DS0002M": {
+    id: "DS0002M",
+    size: 7,
+    clues: {
+      across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
+      down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
+    },
+    words: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS", "GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
   }
-];
+};
