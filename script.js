@@ -7,13 +7,15 @@ function createGrid() {
   for (let row = 1; row <= gridSize; row++) {
     for (let col = 1; col <= gridSize; col++) {
       const cell = document.createElement('div');
-      cell.className = 'cell';
+      cell.classList.add('cell');
 
+      // Sacred shading rule: shaded only when both row and col are even
       if (row % 2 === 0 && col % 2 === 0) {
         cell.classList.add('shaded');
       } else {
         cell.classList.add('editable');
       }
+
       container.appendChild(cell);
     }
   }
