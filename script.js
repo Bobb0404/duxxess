@@ -1,75 +1,41 @@
-// Duxxess Game Script - Sacred Format Preserved
-
-const gridSize = 7;
-const puzzleData = {
-  "B001": {
-    level: "Beginner",
-    grid: [
-      ["G", "", "R", "", "M", "", "D"],
-      ["", "", "", "", "", "", ""],
-      ["O", "", "U", "", "C", "", "O"],
-      ["", "", "", "", "", "", ""],
-      ["A", "", "B", "", "T", "", "D"],
-      ["", "", "", "", "", "", ""],
-      ["N", "", "I", "", "Q", "", "E"]
-    ],
-    solutionWords: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS", "GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
-  },
-  // Add more puzzles by ID here...
-};
-
-function createGrid() {
+document.addEventListener("DOMContentLoaded", () => {
   const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = "";
-  for (let row = 0; row < gridSize; row++) {
-    const rowDiv = document.createElement("div");
-    rowDiv.className = "row";
-    for (let col = 0; col < gridSize; col++) {
-      const cell = document.createElement("input");
-      cell.maxLength = 1;
-      cell.className = "cell";
+  const gridSizeSelector = document.getElementById("grid-size");
 
-      const isEvenRow = (row + 1) % 2 === 0;
-      const isEvenCol = (col + 1) % 2 === 0;
-      const isShaded = isEvenRow && isEvenCol;
+  function createGrid(size) {
+    gridContainer.innerHTML = "";
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-      if (isShaded) {
-        cell.disabled = true;
-        cell.classList.add("shaded");
-      } else {
-        cell.classList.add("editable");
-      }
+    for (let row = 1; row <= size; row++) {
+      for (let col = 1; col <= size; col++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
 
-      cell.id = `cell-${row}-${col}`;
-      rowDiv.appendChild(cell);
-    }
-    gridContainer.appendChild(rowDiv);
-  }
-}
+        // Sacred Duxxess shading logic:
+        // Editable if row OR column is odd
+        // Shaded (non-editable) only if both row AND col are even
+        if (row % 2 === 0 && col % 2 === 0) {
+          cell.classList.add("shaded");
+        } else {
+          const input = document.createElement("input");
+          input.setAttribute("maxlength", "1");
+          input.setAttribute("autocomplete", "off");
+          input.classList.add("cell-input");
+          cell.appendChild(input);
+        }
 
-function populateGrid(gridContent) {
-  for (let row = 0; row < gridSize; row++) {
-    for (let col = 0; col < gridSize; col++) {
-      const cell = document.getElementById(`cell-${row}-${col}`);
-      if (cell && gridContent[row][col]) {
-        cell.value = gridContent[row][col];
+        gridContainer.appendChild(cell);
       }
     }
   }
-}
 
-function loadPuzzleByID() {
-  const gameId = document.getElementById("gameId").value.trim().toUpperCase();
-  if (puzzleData[gameId]) {
-    createGrid();
-    populateGrid(puzzleData[gameId].grid);
-    document.getElementById("puzzleLevel").innerText = `${puzzleData[gameId].level} – Puzzle ${gameId}`;
-  } else {
-    alert("Puzzle ID not found. Try B001, etc.");
-  }
-}
+  // Initial grid on page load
+  createGrid(parseInt(gridSizeSelector.value));
 
-window.onload = () => {
-  createGrid();
-  document.getElementById("loadBtn").addEventListener("click", loadPuzzleByID);
-};
+  // Change grid when new size selected
+  gridSizeSelector.addEventListener("change", () => {
+    const newSize = parseInt(gridSizeSelector.value);
+    createGrid(newSize);
+  });
+});
