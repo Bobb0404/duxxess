@@ -1,59 +1,59 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fdfdfd;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  background: #f4f7fa;
   text-align: center;
+  color: #333;
 }
 
 h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
-  color: #2d3436;
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #1e3a8a;
 }
 
-#searchBox {
-  padding: 10px;
-  width: 240px;
+#controls {
+  margin: 1rem auto;
+}
+
+input[type="text"], button {
+  padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  margin: 0.2rem;
 }
 
-#loadButton {
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #dfe6e9;
-  border: 1px solid #b2bec3;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-.grid {
+#gridContainer {
+  margin: 2rem auto;
   display: grid;
-  justify-content: center;
-  margin: 0 auto;
-  border: 2px solid #ccc;
-  width: fit-content;
+  grid-template-columns: repeat(7, 50px);
+  grid-template-rows: repeat(7, 50px);
+  gap: 1px;
+  background-color: #999;
+  max-width: max-content;
+  border: 2px solid #555;
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
-  text-transform: uppercase;
+  width: 50px;
+  height: 50px;
   font-size: 1.2rem;
+  text-transform: uppercase;
+  border: none;
   text-align: center;
-  vertical-align: middle;
-  border: 1px solid #ccc;
-  outline: none;
+  line-height: 50px;
+  box-sizing: border-box;
 }
 
 .editable {
-  background-color: #f0f8ff; /* soft blue */
+  background-color: #2563eb; /* blue */
+  color: white;
+  border: 1px solid #1e40af;
+  font-weight: bold;
 }
 
 .shaded {
-  background-color: #ffeaa7; /* soft yellow/gold */
+  background-color: #facc15; /* yellow */
+  color: #333;
+  border: 1px solid #eab308;
 }
