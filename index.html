@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Duxxess Square</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Duxxess Square</h1>
-      <div class="notification-bell">🔔</div>
-    </header>
+  <header>
+    <img src="logo.png" alt="Duxxess Logo" class="logo" />
+    <h1>Duxxess Square</h1>
+  </header>
 
-    <div class="controls">
-      <input type="text" id="searchBox" placeholder="Search Puzzle..." />
-      <button id="loadPuzzleBtn">Load Puzzle</button>
-    </div>
+  <section id="controls">
+    <input type="text" id="puzzle-id-input" placeholder="Enter Puzzle ID (e.g., DS0001B)" />
+    <button onclick="handleLoad()">Load</button>
+  </section>
 
-    <div id="grid" class="grid"></div>
-  </div>
+  <div id="puzzle-id-label">Puzzle ID: </div>
 
+  <main>
+    <div id="grid-container"></div>
+  </main>
+
+  <script src="puzzles.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
