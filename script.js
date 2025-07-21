@@ -1,51 +1,116 @@
-const gridElement = document.getElementById("grid");
+// === Duxxess Sacred Script ===
+// Preserves grid shading logic and adds Game ID search functionality
 
-// 7x7 grid
-const SIZE = 7;
+const GRID_SIZES = {
+  3: "Beginner",
+  5: "Rookie/Intermediate",
+  7: "Elite/Master",
+};
 
-// Function to determine cell type
-function getCellType(row, col) {
-  if (row % 2 === 1 && col % 2 === 1) return "editable";
-  if (row % 2 === 0 && col % 2 === 0) return "shaded";
-  return "clue";
-}
+const puzzleLog = {
+  "B-001": {
+    size: 3,
+    title: "CAT Puzzle",
+    words: ["CAT", "TOP", "CUT", "TAP"],
+    grid: [
+      ["C", "A", "T"],
+      ["U", "", "O"],
+      ["T", "A", "P"],
+    ],
+  },
+  "R-001": {
+    size: 5,
+    title: "BIRDS & STARS",
+    words: ["BRISK", "IRATE", "RADIO", "STING", "KITES"],
+    grid: [
+      ["B", "R", "I", "S", "K"],
+      ["", "", "", "", ""],
+      ["R", "A", "D", "I", "O"],
+      ["", "", "", "", ""],
+      ["S", "T", "I", "N", "G"],
+    ],
+  },
+  "E-001": {
+    size: 7,
+    title: "GARLAND MASTER",
+    words: [
+      "GARLAND",
+      "ORBITED",
+      "MACAQUE",
+      "DANGERS",
+      "GROOMED",
+      "RUBICON",
+      "ANTIQUE",
+      "DODGERS",
+    ],
+    grid: [
+      ["G", "A", "R", "L", "A", "N", "D"],
+      ["", "", "", "", "", "", ""],
+      ["O", "R", "B", "I", "T", "E", "D"],
+      ["", "", "", "", "", "", ""],
+      ["M", "A", "C", "A", "Q", "U", "E"],
+      ["", "", "", "", "", "", ""],
+      ["D", "A", "N", "G", "E", "R", "S"],
+    ],
+  },
+};
 
-// Render grid
-function renderGrid() {
-  for (let row = 0; row < SIZE; row++) {
-    for (let col = 0; col < SIZE; col++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
+function createGrid(size) {
+  const container = document.getElementById("grid");
+  container.innerHTML = "";
+  for (let row = 0; row < size; row++) {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row";
+    for (let col = 0; col < size; col++) {
+      const cell = document.createElement("input");
+      cell.maxLength = 1;
+      cell.className = "cell";
 
-      const type = getCellType(row, col);
-      cell.classList.add(type);
-
-      if (type === "editable") {
-        const input = document.createElement("input");
-        input.maxLength = 1;
-        cell.appendChild(input);
-      } else {
-        cell.textContent = "";
+      // Sacred Shading Rule: Shade when BOTH row and col are even-numbered (1-based)
+      if ((row + 1) % 2 === 0 && (col + 1) % 2 === 0) {
+        cell.disabled = true;
+        cell.classList.add("shaded");
       }
-
-      gridElement.appendChild(cell);
+      rowDiv.appendChild(cell);
     }
+    container.appendChild(rowDiv);
   }
 }
 
-renderGrid();
-// Example: Load puzzle with ID 'DS0001B'
-const gameId = 'DS0001B';
+function loadPuzzleById(gameId) {
+  const puzzle = puzzleLog[gameId.toUpperCase()];
+  const status = document.getElementById("status");
+  if (!puzzle) {
+    status.textContent = "❌ Puzzle not found.";
+    createGrid(3); // fallback default
+    return;
+  }
 
-if (puzzles.hasOwnProperty(gameId)) {
-  const selectedPuzzle = puzzles[gameId];
+  status.textContent = `✅ Loaded "${puzzle.title}" (${gameId}) — ${GRID_SIZES[puzzle.size]}`;
+  createGrid(puzzle.size);
 
-  console.log('Loaded Puzzle:', selectedPuzzle);
-  
-  // Example of what you can do:
-  // fillGrid(selectedPuzzle.gridType, selectedPuzzle.clues);
-  // or startPuzzle(selectedPuzzle.words, selectedPuzzle.level);
-
-} else {
-  alert('Invalid Game ID. Puzzle not found.');
+  const container = document.getElementById("grid");
+  puzzle.grid.forEach((rowArr, rowIdx) => {
+    rowArr.forEach((letter, colIdx) => {
+      const row = container.children[rowIdx];
+      const cell = row.children[colIdx];
+      if (letter !== "") {
+        cell.value = letter.toUpperCase();
+        cell.disabled = true;
+        cell.classList.add("prefilled");
+      }
+    });
+  });
 }
+
+// Wire up the search box
+document.getElementById("gameIdForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const id = document.getElementById("gameIdInput").value.trim();
+  if (id) {
+    loadPuzzleById(id);
+  }
+});
+
+// Load default puzzle
+loadPuzzleById("B-001");
