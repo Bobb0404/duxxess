@@ -1,0 +1,42 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1em;
+  background: #f0f0f0;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.controls {
+  margin-top: 0.5em;
+}
+#grid-container {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(7, 2.25em);
+  grid-template-rows: repeat(7, 2.25em);
+  width: 75%;
+  max-width: 500px;
+  border: 2px solid black;
+}
+.cell {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  text-transform: uppercase;
+}
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 1.1em;
+}
+.shaded {
+  background: #ccc;
+}
