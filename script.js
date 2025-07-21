@@ -34,3 +34,18 @@ function renderGrid() {
 }
 
 renderGrid();
+// Example: Load puzzle with ID 'DS0001B'
+const gameId = 'DS0001B';
+
+if (puzzles.hasOwnProperty(gameId)) {
+  const selectedPuzzle = puzzles[gameId];
+
+  console.log('Loaded Puzzle:', selectedPuzzle);
+  
+  // Example of what you can do:
+  // fillGrid(selectedPuzzle.gridType, selectedPuzzle.clues);
+  // or startPuzzle(selectedPuzzle.words, selectedPuzzle.level);
+
+} else {
+  alert('Invalid Game ID. Puzzle not found.');
+}
