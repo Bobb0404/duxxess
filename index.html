@@ -1,96 +1,21 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duxxess Square</title>
-  <style>
-    body {
-      background: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
-    }
-    table {
-      border-collapse: collapse;
-      margin-bottom: 1rem;
-    }
-    td {
-      width: 45px;
-      height: 45px;
-      text-align: center;
-      vertical-align: middle;
-      padding: 0;
-      border: 1px solid black;
-    }
-    input {
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      border: none;
-      outline: none;
-      font-weight: bold;
-      font-size: 0.75em;
-      background: transparent;
-    }
-    .editable {
-      background-color: #FFD700; /* Deep yellow */
-    }
-    .clue {
-      background-color: #FFFFE0; /* Light yellow */
-    }
-    .shaded {
-      background-color: royalblue;
-    }
-    .tile {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      border: 1px solid black;
-      font-size: 0.75em;
-      width: 100%;
-      height: 100%;
-      box-shadow: inset 0 0 3px #00000022, 2px 2px 3px #cccccc;
-      transition: background 0.3s ease;
-      border-radius: 4px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duxxess</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Duxxess Square</h1>
-  <table id="grid"></table>
-  <script>
-    const gridSize = 7;
-    const table = document.getElementById('grid');for (let row = 0; row < gridSize; row++) {
-  const tr = document.createElement('tr');
-  for (let col = 0; col < gridSize; col++) {
-    const td = document.createElement('td');
-
-    const isShaded = row % 2 === 1 && col % 2 === 1;
-    const isClue = (row === 0 || col === 0); // placeholder logic
-    const input = document.createElement('input');
-    input.maxLength = 1;
-    input.classList.add('tile');
-
-    if (isShaded) {
-      input.disabled = true;
-      td.classList.add('shaded');
-    } else if (isClue) {
-      input.disabled = true;
-      td.classList.add('clue');
-    } else {
-      td.classList.add('editable');
-    }
-
-    td.appendChild(input);
-    tr.appendChild(td);
-  }
-  table.appendChild(tr);
-}
-
-  </script>
+  <div class="game-container">
+    <h1>Duxxess Square</h1>
+    <div class="search-box">
+      <input type="text" id="gameIdInput" placeholder="Enter Puzzle ID..." />
+      <button onclick="loadPuzzleById()">Load</button>
+    </div>
+    <div id="grid-container"></div>
+    <div id="word-list"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-<script src="data/puzzles.js"></script>
