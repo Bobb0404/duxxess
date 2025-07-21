@@ -1,21 +1,27 @@
-const puzzles = {
-  "DS0001B": {
+const puzzles = [
+  {
     id: "DS0001B",
     size: 3,
-    clues: {
-      across: ["CAT", "TOP"],
-      down: ["CUT", "TAP"]
-    },
-    words: ["CAT", "TOP", "CUT", "TAP"]
+    grid: [
+      ["C", "", "T"],
+      ["", "", ""],
+      ["T", "", "P"]
+    ],
+    across: ["CAT", "TOP"],
+    down: ["CUT", "TAP"]
   },
-
-  "DS0002M": {
-    id: "DS0002M",
-    size: 7,
-    clues: {
-      across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
-      down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
-    },
-    words: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS", "GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
+  {
+    id: "DS0002R",
+    size: 5,
+    grid: [
+      ["G", "", "", "", "D"],
+      ["", "", "", "", ""],
+      ["M", "", "", "", "E"],
+      ["", "", "", "", ""],
+      ["D", "", "", "", "S"]
+    ],
+    across: ["GRIMACE", "UNMASKS"],
+    down: ["GOURMET"]
   }
-};
+  // Add more puzzles with same structure
+];
