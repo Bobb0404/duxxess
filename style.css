@@ -1,64 +1,59 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f8f9fa;
-  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fdfdfd;
+  margin: 0;
   padding: 20px;
+  text-align: center;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2.4rem;
   margin-bottom: 10px;
-  color: #333;
+  color: #2d3436;
 }
 
-.controls {
-  margin-bottom: 20px;
+#searchBox {
+  padding: 10px;
+  width: 240px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
-input[type="text"] {
-  padding: 8px;
-  font-size: 1em;
-  width: 220px;
-  margin-right: 10px;
-}
-
-button {
-  padding: 8px 12px;
-  font-size: 1em;
+#loadButton {
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
-}
-
-#gridContainer {
-  display: inline-block;
-  margin-top: 20px;
+  background-color: #dfe6e9;
+  border: 1px solid #b2bec3;
+  border-radius: 6px;
+  margin-bottom: 20px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(7, 50px);
-  grid-template-rows: repeat(7, 50px);
-  gap: 2px;
+  justify-content: center;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  width: fit-content;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
-  font-size: 1.2em;
+  width: 40px;
+  height: 40px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
   text-align: center;
-  line-height: 50px;
+  vertical-align: middle;
   border: 1px solid #ccc;
-  background: #fff;
-}
-
-.cell input {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 1.2em;
-  border: none;
   outline: none;
 }
 
+.editable {
+  background-color: #f0f8ff; /* soft blue */
+}
+
 .shaded {
-  background: #ccc;
+  background-color: #ffeaa7; /* soft yellow/gold */
 }
