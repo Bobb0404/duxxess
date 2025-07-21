@@ -2,52 +2,36 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
+  background-color: #f4f4f4;
 }
 
 h1 {
-  font-size: 2em;
   margin-bottom: 20px;
 }
 
-input[type="text"] {
-  padding: 8px;
-  font-size: 16px;
-  width: 200px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  grid-template-rows: repeat(7, 50px);
+  gap: 2px;
+  justify-content: center;
+  margin: auto;
 }
 
-button {
-  padding: 8px 12px;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-#gridContainer {
-  display: inline-block;
-  margin-top: 20px;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-td {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #000;
+.cell {
+  width: 50px;
+  height: 50px;
   font-size: 20px;
-}
-
-input.grid-cell {
-  width: 100%;
-  height: 100%;
   text-transform: uppercase;
   text-align: center;
-  border: none;
-  font-size: 18px;
+  vertical-align: middle;
+  border: 1px solid #999;
 }
 
-.even-even {
+.cell.editable {
+  background-color: #fff;
+}
+
+.cell.shaded {
   background-color: #ccc;
 }
