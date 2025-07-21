@@ -1,82 +1,65 @@
 body {
-  font-family: sans-serif;
-  background: #f0f0f0;
-  text-align: center;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
   margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 header {
-  padding: 20px 10px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #333;
+  color: white;
+  padding: 1rem;
 }
 
 h1 {
-  margin: 10px 0 0 0;
-  font-size: 28px;
+  margin: 0;
 }
 
-.logo {
-  width: 80px;
-  height: auto;
+.puzzle-controls {
+  margin-top: 0.5rem;
 }
 
-#controls {
-  margin: 15px auto;
-}
-
-#puzzle-id-input {
-  padding: 8px;
-  font-size: 16px;
-  width: 250px;
-  text-transform: uppercase;
+#puzzleIdInput {
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 button {
-  padding: 8px 14px;
-  font-size: 16px;
-  margin-left: 6px;
-  background-color: #0057b7;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-left: 0.5rem;
 }
 
-button:hover {
-  background-color: #004199;
-}
-
-#puzzle-id-label {
-  margin: 12px auto;
+.puzzle-id {
+  display: block;
+  margin-top: 0.5rem;
   font-weight: bold;
-  font-size: 18px;
+  color: #ffd700;
 }
 
-#grid-container {
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.grid {
   display: grid;
   gap: 2px;
-  justify-content: center;
-  margin: 20px auto;
 }
 
 .cell {
   width: 40px;
   height: 40px;
-  font-size: 24px;
-  text-align: center;
   text-transform: uppercase;
-  box-sizing: border-box;
-  outline: none;
-  border: 1px solid #bbb;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
 }
 
-.editable {
-  background: #ffffff;
-}
-
-.shaded {
-  background: #cccccc;
-  pointer-events: none;
+.cell:disabled {
+  background-color: #d0d0d0;
+  color: #555;
 }
