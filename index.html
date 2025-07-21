@@ -7,8 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Duxxess Square</h1>
-  <div id="grid-container"></div>
+  <div class="container">
+    <header>
+      <h1>Duxxess Square</h1>
+      <div class="notification-bell">🔔</div>
+    </header>
+
+    <div class="controls">
+      <input type="text" id="searchBox" placeholder="Search Puzzle..." />
+      <button id="loadPuzzleBtn">Load Puzzle</button>
+    </div>
+
+    <div id="grid" class="grid"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
