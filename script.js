@@ -1,41 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const gridContainer = document.getElementById("grid");
-  const gridSizeSelector = document.getElementById("grid-size");
+const gridSize = 7; // 7x7 grid
 
-  function createGrid(size) {
-    gridContainer.innerHTML = "";
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+function isEditable(row, col) {
+  // Editable cells: odd rows and odd columns
+  return row % 2 !== 0 && col % 2 !== 0;
+}
 
-    for (let row = 1; row <= size; row++) {
-      for (let col = 1; col <= size; col++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
+function createGrid() {
+  const container = document.getElementById('gridContainer');
+  container.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'grid';
 
-        // Sacred Duxxess shading logic:
-        // Editable if row OR column is odd
-        // Shaded (non-editable) only if both row AND col are even
-        if (row % 2 === 0 && col % 2 === 0) {
-          cell.classList.add("shaded");
-        } else {
-          const input = document.createElement("input");
-          input.setAttribute("maxlength", "1");
-          input.setAttribute("autocomplete", "off");
-          input.classList.add("cell-input");
-          cell.appendChild(input);
-        }
+  for (let row = 1; row <= gridSize; row++) {
+    for (let col = 1; col <= gridSize; col++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
 
-        gridContainer.appendChild(cell);
+      if (row % 2 === 0 && col % 2 === 0) {
+        cell.classList.add('shaded'); // Sacred: even-even = shaded
+      } else if (isEditable(row, col)) {
+        const input = document.createElement('input');
+        input.maxLength = 1;
+        input.dataset.row = row;
+        input.dataset.col = col;
+        cell.appendChild(input);
       }
+      grid.appendChild(cell);
     }
   }
 
-  // Initial grid on page load
-  createGrid(parseInt(gridSizeSelector.value));
+  container.appendChild(grid);
+}
 
-  // Change grid when new size selected
-  gridSizeSelector.addEventListener("change", () => {
-    const newSize = parseInt(gridSizeSelector.value);
-    createGrid(newSize);
-  });
-});
+function loadPuzzle() {
+  // Placeholder function — to be expanded later
+  alert('Load function is not yet connected to puzzle bank.');
+}
+
+window.onload = createGrid;
