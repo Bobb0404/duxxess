@@ -102,3 +102,9 @@ h1 {
     font-size: 1em;
   }
 }
+#grid {
+  background-color: red !important;
+}
+.cell {
+  outline: 2px solid blue !important;
+}
