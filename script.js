@@ -1,84 +1,82 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const gridContainer = document.getElementById("grid");
-  const puzzleTitle = document.getElementById("puzzle-title");
-  const puzzleSelect = document.getElementById("puzzle-select");
-
-  const puzzles = {
-    DS0001B: {
-      title: "DS0001B - Beginner",
-      size: 3,
-      words: {
-        across: ["CAT", "TOP"],
-        down: ["CUT", "TAP"]
-      }
-    },
-    DS0002R: {
-      title: "DS0002R - Rookie",
-      size: 5,
-      words: {
-        across: ["GRIMACE", "UNMASKS"],
-        down: ["GOURMET"]
-      }
-    },
-    DS0003E: {
-      title: "DS0003E - Elite",
-      size: 7,
-      words: {
-        across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
-        down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
-      }
-    }
-    // Add more puzzles here...
-  };
-
-  function isShadedCell(row, col) {
-    return row % 2 === 0 && col % 2 === 0;
+// Define all puzzle data here
+const puzzles = {
+  DS0001B: {
+    title: "DS0001B – Beginner",
+    grid: [
+      ["G", "", "", "", "", "", "E"],
+      ["", "", "", "", "", "", ""],
+      ["M", "", "", "", "", "", "S"],
+      ["", "", "", "", "", "", ""],
+      ["D", "", "", "", "", "", "R"],
+      ["", "", "", "", "", "", ""],
+      ["G", "", "", "", "", "", "S"],
+    ],
+    words: ["GRIMACE", "UNMASKS", "GOURMET", "RUNNERS", "MASTERS", "MARKERS", "GAMERSS", "GROOMED"]
+  },
+  DS0002R: {
+    title: "DS0002R – Rookie",
+    grid: [
+      ["G", "", "", "", "", "", "S"],
+      ["", "", "", "", "", "", ""],
+      ["R", "", "", "", "", "", "E"],
+      ["", "", "", "", "", "", ""],
+      ["A", "", "", "", "", "", "S"],
+      ["", "", "", "", "", "", ""],
+      ["D", "", "", "", "", "", "S"],
+    ],
+    words: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS", "GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
   }
+};
 
-  function createGrid(size) {
-    gridContainer.innerHTML = "";
-    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+// Get DOM references
+const gridContainer = document.getElementById("grid");
+const puzzleSelector = document.getElementById("puzzle-selector");
+const puzzleTitle = document.getElementById("puzzle-title");
 
-    for (let row = 1; row <= size; row++) {
-      for (let col = 1; col <= size; col++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-
-        if (isShadedCell(row, col)) {
-          cell.classList.add("shaded");
-        } else {
-          const input = document.createElement("input");
-          input.setAttribute("maxlength", "1");
-          input.classList.add("letter");
-          cell.appendChild(input);
-        }
-
-        gridContainer.appendChild(cell);
-      }
-    }
-  }
-
-  function loadPuzzle(id) {
-    const puzzle = puzzles[id];
-    if (!puzzle) return;
-
-    puzzleTitle.textContent = puzzle.title;
-    createGrid(puzzle.size);
-  }
-
-  puzzleSelect.addEventListener("change", (e) => {
-    loadPuzzle(e.target.value);
-  });
-
-  // Populate the dropdown
-  for (const key in puzzles) {
-    const option = document.createElement("option");
-    option.value = key;
-    option.textContent = puzzles[key].title;
-    puzzleSelect.appendChild(option);
-  }
-
-  // Load default puzzle
-  loadPuzzle(puzzleSelect.value);
+// Fill selector dropdown
+Object.keys(puzzles).forEach(key => {
+  const option = document.createElement("option");
+  option.value = key;
+  option.textContent = key;
+  puzzleSelector.appendChild(option);
 });
+
+// Load a puzzle
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  puzzleTitle.textContent = puzzle.title;
+  gridContainer.innerHTML = "";
+
+  const table = document.createElement("table");
+  table.className = "dux-grid";
+
+  for (let row = 0; row < 7; row++) {
+    const tr = document.createElement("tr");
+    for (let col = 0; col < 7; col++) {
+      const td = document.createElement("td");
+      const isEditable = row % 2 === 0 && col % 2 === 0;
+      const cellValue = puzzle.grid[row][col];
+
+      if (isEditable) {
+        const input = document.createElement("input");
+        input.maxLength = 1;
+        input.className = "cell";
+        input.value = cellValue;
+        td.appendChild(input);
+      } else {
+        td.className = "shaded";
+      }
+
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+
+  gridContainer.appendChild(table);
+}
+
+// Load default puzzle
+puzzleSelector.addEventListener("change", () => {
+  loadPuzzle(puzzleSelector.value);
+});
+loadPuzzle("DS0001B");
