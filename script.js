@@ -1,40 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const gridSize = 7;
-  const table = document.createElement("table");
-  table.classList.add("duxxess-grid");
+  const gridContainer = document.getElementById("grid");
 
-  for (let row = 1; row <= gridSize; row++) {
-    const tr = document.createElement("tr");
+  function createGrid(size) {
+    const table = document.createElement("table");
+    table.classList.add("duxxess-grid");
 
-    for (let col = 1; col <= gridSize; col++) {
-      const td = document.createElement("td");
+    for (let row = 1; row <= size; row++) {
+      const tr = document.createElement("tr");
 
-      const isEvenRow = row % 2 === 0;
-      const isEvenCol = col % 2 === 0;
+      for (let col = 1; col <= size; col++) {
+        const td = document.createElement("td");
 
-      if (isEvenRow && isEvenCol) {
-        // Royal blue, non-editable
-        td.classList.add("blue-cell");
-        td.textContent = ""; // Optional placeholder
-      } else {
-        // Light yellow, editable
-        const input = document.createElement("input");
-        input.type = "text";
-        input.maxLength = 1;
-        input.classList.add("yellow-input");
-        input.addEventListener("input", (e) => {
-          e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g, '');
-        });
-        td.appendChild(input);
+        // Sacred shading rule:
+        // Shaded (non-editable) only where both row and column are even-numbered
+        const isEvenRow = row % 2 === 0;
+        const isEvenCol = col % 2 === 0;
+
+        if (isEvenRow && isEvenCol) {
+          td.classList.add("shaded");
+        } else {
+          const input = document.createElement("input");
+          input.setAttribute("maxlength", "1");
+          input.setAttribute("type", "text");
+          input.classList.add("cell-input");
+          td.appendChild(input);
+        }
+
+        tr.appendChild(td);
       }
 
-      tr.appendChild(td);
+      table.appendChild(tr);
     }
 
-    table.appendChild(tr);
+    return table;
   }
 
-  const container = document.getElementById("grid-container");
-  container.innerHTML = "";
-  container.appendChild(table);
+  const grid = createGrid(gridSize);
+  gridContainer.appendChild(grid);
 });
