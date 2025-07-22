@@ -1,56 +1,51 @@
 body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
   margin: 0;
   padding: 20px;
-  font-family: Arial, sans-serif;
   text-align: center;
 }
 
-h1 { margin-bottom: 10px; }
-#controls { margin-bottom: 10px; }
-#search-box, #load-btn { padding: 6px 8px; font-size: 16px; }
-#puzzle-id { margin-bottom: 10px; font-weight: bold; }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-#dux-grid {
+table#duxxess-grid {
   border-collapse: collapse;
-  margin: 0 auto;
-  width: 60%;
   table-layout: fixed;
+  width: 420px;
+  height: 420px;
 }
 
-#dux-grid td {
-  border: 1px solid black;
-  width: 14.2857%;
-  height: 0; /* allows aspect-ratio to work */
-  padding: 0;
-  position: relative;
-}
-
-#dux-grid td:before {
-  content: '';
-  display: block;
-  padding-top: 100%;
-}
-
-#dux-grid input {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  border: none;
-  background-color: #fffacd; /* editable light yellow */
-  font-size: 1.2rem;
+table#duxxess-grid td {
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
   text-align: center;
-  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 24px;
   font-weight: bold;
+  text-transform: uppercase;
+}
+
+table#duxxess-grid td input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
   color: black;
-  box-sizing: border-box;
+  background-color: yellow;
 }
 
-#dux-grid td.shaded input {
-  background-color: royalblue;
-  color: white;
-  cursor: not-allowed;
+table#duxxess-grid td.shaded {
+  background-color: #3b82f6;
 }
 
-#dux-grid td.shaded {
-  background-color: royalblue;
+table#duxxess-grid td input:focus {
+  outline: none;
 }

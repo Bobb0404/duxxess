@@ -3,33 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duxxess Square</title>
+  <title>Duxxess Grid</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Duxxess Square</h1>
-  <div id="controls">
-    <input type="text" id="search-box" placeholder="Enter Puzzle ID (e.g., DS0001B)" />
-    <button id="load-btn">Load</button>
+  <div class="container">
+    <table id="duxxess-grid">
+      <!-- Generate 7x7 grid -->
+      <tbody>
+        <!-- Rows -->
+        <!-- Will be filled by script.js or static below -->
+        <script src="script.js"></script>
+      </tbody>
+    </table>
   </div>
-  <div id="puzzle-id">Puzzle ID: DS0001B</div>
-
-  <table id="dux-grid">
-    <tbody>
-      <!-- Manually-coded until JS restored -->
-      ${[...Array(7)].map((_, r) => `
-      <tr>
-        ${[...Array(7)].map((_, c) => {
-          const isShaded = (r+1)%2===0 && (c+1)%2===0;
-          return `<td class="${isShaded?'shaded':'editable'}">
-            <input type="text" maxlength="1" ${isShaded?'disabled':''}/>
-           </td>`;
-        }).join('')}
-      </tr>
-      `).join('')}
-    </tbody>
-  </table>
-
-  <script src="script.js"></script>
 </body>
 </html>
