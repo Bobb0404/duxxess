@@ -1,21 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duxxess Grid</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duxxess Square</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <table id="duxxess-grid">
-      <!-- Generate 7x7 grid -->
-      <tbody>
-        <!-- Rows -->
-        <!-- Will be filled by script.js or static below -->
-        <script src="script.js"></script>
-      </tbody>
-    </table>
+  <header>
+    <img src="logo.png" alt="Duxxess Logo" class="logo" />
+    <h1>Duxxess Square</h1>
+    <div class="notification-bell">🔔</div>
+  </header>
+  <div class="search-container">
+    <input type="text" placeholder="Search Puzzle ID..." />
   </div>
+  <main>
+    <table id="duxxess-grid"></table>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
