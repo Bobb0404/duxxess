@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duxxess Puzzle</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duxxess Square</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <h1>Duxxess Square</h1>
-    <div id="puzzle-id">Puzzle ID: DS0001B</div>
-    <div class="controls">
-      <input type="text" id="search-box" placeholder="Enter Puzzle ID" />
-      <button onclick="loadPuzzle()">Load</button>
-    </div>
-  </header>
-  <main>
-    <div id="grid-container"></div>
-  </main>
+  <h1>Duxxess Square</h1>
+  <div id="puzzle-id">Puzzle ID: DS0001B</div>
+
+  <div id="grid"></div>
+
+  <input type="text" id="search-box" placeholder="Enter Puzzle ID (e.g. DS0001B)" />
+  <button id="load-btn">Load</button>
+
   <script src="script.js"></script>
 </body>
 </html>
