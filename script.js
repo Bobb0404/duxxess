@@ -1,87 +1,84 @@
-<script>
-  // Puzzle data format
-  const puzzles = [
-    {
-      id: "DS0001B",
-      size: 3,
-      level: "Beginner",
-      across: ["CAT", "TOP"],
-      down: ["CUT", "TAP"],
-    },
-    {
-      id: "DS0002R",
-      size: 5,
-      level: "Rookie",
-      across: ["GRIMACE", "UNMASKS"],
-      down: ["GOURMET"],
-    },
-    {
-      id: "DS0003E",
-      size: 7,
-      level: "Elite",
-      across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
-      down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"],
-    },
-    // Add more puzzles here
-  ];
+document.addEventListener("DOMContentLoaded", () => {
+  const gridContainer = document.getElementById("grid");
+  const puzzleTitle = document.getElementById("puzzle-title");
+  const puzzleSelect = document.getElementById("puzzle-select");
 
-  let currentPuzzleIndex = 0;
+  const puzzles = {
+    DS0001B: {
+      title: "DS0001B - Beginner",
+      size: 3,
+      words: {
+        across: ["CAT", "TOP"],
+        down: ["CUT", "TAP"]
+      }
+    },
+    DS0002R: {
+      title: "DS0002R - Rookie",
+      size: 5,
+      words: {
+        across: ["GRIMACE", "UNMASKS"],
+        down: ["GOURMET"]
+      }
+    },
+    DS0003E: {
+      title: "DS0003E - Elite",
+      size: 7,
+      words: {
+        across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
+        down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"]
+      }
+    }
+    // Add more puzzles here...
+  };
+
+  function isShadedCell(row, col) {
+    return row % 2 === 0 && col % 2 === 0;
+  }
 
   function createGrid(size) {
-    const gridContainer = document.getElementById("grid");
     gridContainer.innerHTML = "";
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
 
-    for (let r = 1; r <= size; r++) {
-      for (let c = 1; c <= size; c++) {
-        const cell = document.createElement("input");
-        cell.maxLength = 1;
-        cell.className = "cell";
+    for (let row = 1; row <= size; row++) {
+      for (let col = 1; col <= size; col++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
 
-        // Apply sacred shading: shaded only where both row & col are even
-        if (r % 2 === 0 && c % 2 === 0) {
+        if (isShadedCell(row, col)) {
           cell.classList.add("shaded");
-          cell.disabled = true;
+        } else {
+          const input = document.createElement("input");
+          input.setAttribute("maxlength", "1");
+          input.classList.add("letter");
+          cell.appendChild(input);
         }
 
-        cell.dataset.row = r;
-        cell.dataset.col = c;
         gridContainer.appendChild(cell);
       }
     }
   }
 
-  function displayPuzzle(puzzle) {
-    document.getElementById("puzzle-id").innerText = puzzle.id;
-    document.getElementById("puzzle-level").innerText = puzzle.level;
+  function loadPuzzle(id) {
+    const puzzle = puzzles[id];
+    if (!puzzle) return;
 
-    const acrossList = document.getElementById("across-list");
-    acrossList.innerHTML = "";
-    puzzle.across?.forEach(word => {
-      const li = document.createElement("li");
-      li.textContent = word;
-      acrossList.appendChild(li);
-    });
-
-    const downList = document.getElementById("down-list");
-    downList.innerHTML = "";
-    puzzle.down?.forEach(word => {
-      const li = document.createElement("li");
-      li.textContent = word;
-      downList.appendChild(li);
-    });
-
+    puzzleTitle.textContent = puzzle.title;
     createGrid(puzzle.size);
   }
 
-  function loadNextPuzzle() {
-    currentPuzzleIndex = (currentPuzzleIndex + 1) % puzzles.length;
-    displayPuzzle(puzzles[currentPuzzleIndex]);
+  puzzleSelect.addEventListener("change", (e) => {
+    loadPuzzle(e.target.value);
+  });
+
+  // Populate the dropdown
+  for (const key in puzzles) {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = puzzles[key].title;
+    puzzleSelect.appendChild(option);
   }
 
-  window.onload = function () {
-    displayPuzzle(puzzles[currentPuzzleIndex]);
-    document.getElementById("next-btn").onclick = loadNextPuzzle;
-  };
-</script>
+  // Load default puzzle
+  loadPuzzle(puzzleSelect.value);
+});
