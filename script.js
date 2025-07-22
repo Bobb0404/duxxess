@@ -104,3 +104,4 @@ window.onload = () => {
   createGrid(7);          // Prepare blank 7x7 grid
   loadPuzzle("DS0001B");  // Automatically load first puzzle
 };
+generateGrid(); // This must run on page load
