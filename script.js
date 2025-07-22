@@ -1,76 +1,87 @@
 <script>
-  const puzzles = {
-    DS0001B: {
+  // Puzzle data format
+  const puzzles = [
+    {
+      id: "DS0001B",
       size: 3,
-      words: ['CAT', 'TOP', 'CUT', 'TAP'],
-      layout: [
-        ['C', '', 'T'],
-        ['', '', ''],
-        ['T', '', 'P']
-      ]
+      level: "Beginner",
+      across: ["CAT", "TOP"],
+      down: ["CUT", "TAP"],
     },
-    DS0002R: {
+    {
+      id: "DS0002R",
       size: 5,
-      words: ['GLOWN', 'RAINS', 'OVERT', 'WHEAT', 'NEEDY', 'GROWN', 'RODEO', 'SWEPT'],
-      layout: [
-        ['G', '', 'O', '', 'N'],
-        ['', '', '', '', ''],
-        ['O', '', 'E', '', 'T'],
-        ['', '', '', '', ''],
-        ['N', '', 'T', '', 'Y']
-      ]
+      level: "Rookie",
+      across: ["GRIMACE", "UNMASKS"],
+      down: ["GOURMET"],
     },
-    DS0003M: {
+    {
+      id: "DS0003E",
       size: 7,
-      words: ['GARLAND', 'ORBITED', 'MACAQUE', 'DANGERS', 'GROOMED', 'RUBICON', 'ANTIQUE', 'DODGERS'],
-      layout: [
-        ['G', '', 'R', '', 'L', '', 'D'],
-        ['', '', '', '', '', '', ''],
-        ['M', '', 'C', '', 'Q', '', 'E'],
-        ['', '', '', '', '', '', ''],
-        ['D', '', 'N', '', 'R', '', 'S'],
-        ['', '', '', '', '', '', ''],
-        ['D', '', 'G', '', 'R', '', 'S']
-      ]
-    }
-  };
+      level: "Elite",
+      across: ["GARLAND", "ORBITED", "MACAQUE", "DANGERS"],
+      down: ["GROOMED", "RUBICON", "ANTIQUE", "DODGERS"],
+    },
+    // Add more puzzles here
+  ];
 
-  const gridContainer = document.getElementById("grid");
-  const puzzleSelect = document.getElementById("puzzleSelect");
+  let currentPuzzleIndex = 0;
 
-  function createGrid(puzzleId) {
-    const puzzle = puzzles[puzzleId];
+  function createGrid(size) {
+    const gridContainer = document.getElementById("grid");
     gridContainer.innerHTML = "";
-    gridContainer.style.gridTemplateColumns = `repeat(${puzzle.size}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-    for (let row = 0; row < puzzle.size; row++) {
-      for (let col = 0; col < puzzle.size; col++) {
+    for (let r = 1; r <= size; r++) {
+      for (let c = 1; c <= size; c++) {
         const cell = document.createElement("input");
         cell.maxLength = 1;
-        cell.classList.add("grid-cell");
+        cell.className = "cell";
 
-        const isEven = (row % 2 === 0 && col % 2 === 0);
-        const letter = puzzle.layout[row][col];
-
-        if (isEven) {
+        // Apply sacred shading: shaded only where both row & col are even
+        if (r % 2 === 0 && c % 2 === 0) {
           cell.classList.add("shaded");
           cell.disabled = true;
-        } else if (letter) {
-          cell.value = letter;
         }
 
+        cell.dataset.row = r;
+        cell.dataset.col = c;
         gridContainer.appendChild(cell);
       }
     }
   }
 
-  // Load selected puzzle
-  puzzleSelect.addEventListener("change", () => {
-    createGrid(puzzleSelect.value);
-  });
+  function displayPuzzle(puzzle) {
+    document.getElementById("puzzle-id").innerText = puzzle.id;
+    document.getElementById("puzzle-level").innerText = puzzle.level;
 
-  // Load initial puzzle
-  window.onload = () => {
-    createGrid(puzzleSelect.value);
+    const acrossList = document.getElementById("across-list");
+    acrossList.innerHTML = "";
+    puzzle.across?.forEach(word => {
+      const li = document.createElement("li");
+      li.textContent = word;
+      acrossList.appendChild(li);
+    });
+
+    const downList = document.getElementById("down-list");
+    downList.innerHTML = "";
+    puzzle.down?.forEach(word => {
+      const li = document.createElement("li");
+      li.textContent = word;
+      downList.appendChild(li);
+    });
+
+    createGrid(puzzle.size);
+  }
+
+  function loadNextPuzzle() {
+    currentPuzzleIndex = (currentPuzzleIndex + 1) % puzzles.length;
+    displayPuzzle(puzzles[currentPuzzleIndex]);
+  }
+
+  window.onload = function () {
+    displayPuzzle(puzzles[currentPuzzleIndex]);
+    document.getElementById("next-btn").onclick = loadNextPuzzle;
   };
 </script>
