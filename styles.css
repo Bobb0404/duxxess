@@ -1,70 +1,37 @@
-/* General Layout */
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
-  background-color: #f2f2f2;
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-
-#search-bar {
-  margin: 20px 0;
-}
-
-input[type="text"] {
-  padding: 8px;
-  width: 200px;
-}
-
-button {
-  padding: 8px 12px;
-  margin-left: 8px;
-}
-
-/* Grid Styling */
-#puzzle-container {
-  display: inline-block;
-  margin-top: 20px;
-  transform: scale(0.75); /* 75% size */
-  transform-origin: top center;
-}
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(7, 40px);
-  grid-template-rows: repeat(7, 40px);
-  gap: 1px;
-  background-color: #333;
-  padding: 5px;
-  border: 2px solid #444;
+  grid-template-columns: repeat(7, 1fr);
+  width: 75%;
+  max-width: 400px;
+  margin: auto;
+  border: 2px solid black;
+  border-collapse: collapse;
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: bold;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #000;
   text-align: center;
-  line-height: 40px;
-  border: 1px solid #999;
-  box-sizing: border-box;
-}
-
-/* Non-editable shaded cells (sacred rule) */
-.cell.shaded {
-  background-color: #c4c4c4;
-  pointer-events: none;
-}
-
-/* Puzzle ID Styling */
-#puzzle-id {
-  margin-top: 10px;
+  font-size: 1.5em;
   font-weight: bold;
-  font-size: 18px;
-  color: #444;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.cell.shaded {
+  background-color: #ccc; /* light grey shading */
+}
+
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: transparent;
 }
