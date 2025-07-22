@@ -1,38 +1,44 @@
-/* Duxxess Grid Layout */
+/* Ensure box model works as expected */
+* {
+  box-sizing: border-box;
+}
+
+/* Centered Grid Container */
 .grid-container {
-  display: table;
-  margin: 0 auto;
-  width: 60%;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.grid-row {
-  display: table-row;
-}
-
-.grid-cell {
-  display: table-cell;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 20px;
-  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  grid-template-rows: repeat(7, 40px);
+  gap: 0;
+  margin: 20px auto;
+  width: fit-content;
   border: 1px solid black;
 }
 
+/* Each Cell */
+.grid-cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+/* Editable Cells */
 .grid-cell input {
   width: 100%;
   height: 100%;
-  text-align: center;
+  border: none;
+  background-color: #fff9c4; /* Light Yellow */
   font-size: 20px;
   font-weight: bold;
-  border: none;
-  background-color: #fffbe6; /* Light yellow */
   color: black;
+  text-align: center;
+  text-transform: uppercase;
 }
 
+/* Shaded Uneditable Cells */
 .grid-cell input:disabled {
   background-color: royalblue;
   color: white;
