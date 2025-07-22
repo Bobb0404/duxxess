@@ -1,22 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Duxxess Square</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-    <img src="logo.png" alt="Duxxess Logo" class="logo">
+  <header>
+    <img src="logo.png" alt="Duxxess Logo" id="logo">
     <h1>Duxxess Square</h1>
-    <div class="notification">🔔</div>
-  </div>
-  <div class="search-box">
-    <input type="text" placeholder="Search puzzles..." />
-  </div>
-  <div id="grid-container"></div>
+    <div id="notification-bell">🔔</div>
+  </header>
+
+  <section class="puzzle-meta">
+    <span><strong>ID:</strong> <span id="puzzle-id"></span></span>
+    <span><strong>Level:</strong> <span id="puzzle-level"></span></span>
+  </section>
+
+  <section id="grid" class="grid"></section>
+
+  <section class="clues">
+    <div>
+      <h3>Across</h3>
+      <ul id="across-list"></ul>
+    </div>
+    <div>
+      <h3>Down</h3>
+      <ul id="down-list"></ul>
+    </div>
+  </section>
+
+  <button id="next-btn">Next Puzzle</button>
+
   <script src="script.js"></script>
 </body>
 </html>
