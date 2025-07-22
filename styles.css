@@ -1,51 +1,85 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f0f0f0;
-  margin: 0;
-  padding: 20px;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
 }
 
-.container {
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+#logo {
+  height: 40px;
+}
+
+#notification-bell {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.puzzle-meta {
+  margin: 15px 0;
+  font-size: 1.1em;
+}
+
+.grid {
+  display: grid;
+  gap: 4px;
+  max-width: 90vw;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #999;
+  outline: none;
+}
+
+.cell:focus {
+  border-color: #333;
+}
+
+.shaded {
+  background: #ccc;
+  pointer-events: none;
+}
+
+.clues {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+  text-align: left;
 }
 
-table#duxxess-grid {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 420px;
-  height: 420px;
-}
-
-table#duxxess-grid td {
-  width: 60px;
-  height: 60px;
-  border: 2px solid black;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-table#duxxess-grid td input {
-  width: 100%;
-  height: 100%;
+button {
+  margin: 30px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  background: #444;
+  color: white;
   border: none;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: black;
-  background-color: yellow;
+  border-radius: 5px;
 }
 
-table#duxxess-grid td.shaded {
-  background-color: #3b82f6;
-}
-
-table#duxxess-grid td input:focus {
-  outline: none;
+button:hover {
+  background: #222;
 }
