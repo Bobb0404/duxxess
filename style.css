@@ -1,36 +1,49 @@
+
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background: #f4f4f4;
+  text-align: center;
+}
+header {
+  background: #222;
+  color: white;
+  padding: 1em 0;
+  position: relative;
 }
 .logo {
-  height: 50px;
-}
-.notification-bell {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 10px;
+  height: 40px;
 }
-#grid-container {
+.notifications {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+}
+.grid {
   display: grid;
   grid-template-columns: repeat(7, 40px);
   grid-template-rows: repeat(7, 40px);
-  gap: 4px;
+  gap: 2px;
   justify-content: center;
-  margin-top: 40px;
+  margin: 20px auto;
 }
 .cell {
   width: 40px;
   height: 40px;
-  text-align: center;
-  font-weight: bold;
   text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #aaa;
 }
-.cell.shaded {
-  background-color: #ccc;
+.shaded {
+  background: #ccc;
 }
-.cell.editable {
-  background-color: white;
-  border: 1px solid #999;
+input.cell {
+  background: #fff;
+  border: 1px solid #000;
 }

@@ -1,18 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Duxxess</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="assets/logo.png" alt="Duxxess Logo" class="logo"/>
-    <div class="notification-bell">🔔</div>
+    <img src="logo.png" alt="Duxxess Logo" class="logo" />
+    <div class="notifications">🔔</div>
     <h1>Duxxess Puzzle</h1>
   </header>
-  <main id="grid-container"></main>
+
+  <div class="puzzle-controls">
+    <label for="puzzleSelector">Choose Puzzle:</label>
+    <select id="puzzleSelector">
+      <option value="DS0001B">DS0001B</option>
+      <option value="DS0002R">DS0002R</option>
+      <option value="DS0003E">DS0003E</option>
+    </select>
+  </div>
+
+  <div id="grid" class="grid"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
