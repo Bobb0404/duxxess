@@ -12,32 +12,28 @@ document.addEventListener("DOMContentLoaded", () => {
         down: ["Groomed", "Rubicon", "Antique", "Dodgers"]
       }
     }
-    // Add more puzzles here later
   };
 
   function buildGrid(puzzle) {
-    gridContainer.innerHTML = "";
-
     const size = puzzle.size;
-    gridContainer.style.display = "grid";
-    gridContainer.style.gridTemplateColumns = `repeat(${size}, 40px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${size}, 40px)`;
-    gridContainer.style.gap = "2px";
+    gridContainer.innerHTML = "";
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 42px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 42px)`;
 
-    for (let row = 1; row <= size; row++) {
-      for (let col = 1; col <= size; col++) {
+    for (let r = 1; r <= size; r++) {
+      for (let c = 1; c <= size; c++) {
         const cell = document.createElement("input");
 
-        if (row % 2 === 0 && col % 2 === 0) {
+        cell.classList.add("grid-cell");
+
+        if (r % 2 === 0 && c % 2 === 0) {
           cell.classList.add("shaded");
           cell.disabled = true;
         } else {
           cell.classList.add("editable");
           cell.maxLength = 1;
-          cell.autocomplete = "off";
         }
 
-        cell.classList.add("grid-cell");
         gridContainer.appendChild(cell);
       }
     }
@@ -51,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Load first puzzle by default
+  // Load initial puzzle
   puzzleSelector.value = "DS0001B";
   title.textContent = puzzles["DS0001B"].title;
   buildGrid(puzzles["DS0001B"]);
