@@ -1,49 +1,30 @@
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f4f4f4;
-  text-align: center;
-}
-header {
-  background: #222;
-  color: white;
-  padding: 1em 0;
-  position: relative;
-}
-.logo {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  height: 40px;
-}
-.notifications {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 24px;
-}
-.grid {
+#grid-container {
   display: grid;
-  grid-template-columns: repeat(7, 40px);
-  grid-template-rows: repeat(7, 40px);
+  grid-template-columns: repeat(7, 50px);
+  grid-template-rows: repeat(7, 50px);
   gap: 2px;
   justify-content: center;
-  margin: 20px auto;
+  align-items: center;
+  margin-top: 20px;
 }
-.cell {
-  width: 40px;
-  height: 40px;
+
+.grid-cell {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
   text-transform: uppercase;
   text-align: center;
-  font-size: 18px;
-  border: 1px solid #aaa;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
+
 .shaded {
-  background: #ccc;
+  background-color: #d3d3d3;
+  pointer-events: none;
 }
-input.cell {
-  background: #fff;
-  border: 1px solid #000;
+
+input.grid-cell {
+  border: 1px solid #666;
+  font-weight: bold;
 }
