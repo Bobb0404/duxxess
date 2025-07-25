@@ -1,8 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  background-color: #f2f2f2;
   padding: 20px;
-  background: #f7f7f7;
   text-align: center;
 }
 
@@ -10,33 +9,39 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  padding: 0 20px;
+}
+
+#puzzleTitle {
+  font-size: 1.5rem;
+  color: #333;
 }
 
 #gridContainer {
   display: grid;
   justify-content: center;
   margin: 0 auto;
-  background-color: #ddd;
-  padding: 5px;
+  background-color: #ccc;
+  padding: 6px;
   border-radius: 8px;
 }
 
 .grid-cell {
-  width: 40px;
-  height: 40px;
-  text-transform: uppercase;
+  width: 42px;
+  height: 42px;
   text-align: center;
-  font-size: 18px;
-  border: 1px solid #999;
+  font-size: 20px;
+  text-transform: uppercase;
+  border: 1px solid #aaa;
   box-sizing: border-box;
 }
 
 .grid-cell.editable {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .grid-cell.shaded {
-  background-color: #333;
+  background-color: #333333;
   border: none;
 }
