@@ -1,42 +1,25 @@
-/* Duxxess Sacred Grid Styles */
-
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  background: #f7f7f7;
   text-align: center;
 }
 
-header {
+#header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #003366;
-  color: white;
-  padding: 10px 20px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-#notification-bell {
-  font-size: 1.5rem;
-}
-
-#puzzleSelector {
-  padding: 5px;
-  font-size: 1rem;
+  margin-bottom: 20px;
 }
 
 #gridContainer {
   display: grid;
   justify-content: center;
-  margin: 20px auto;
-  width: fit-content;
-  grid-auto-rows: 40px;  /* ✅ Ensures square shape */
+  margin: 0 auto;
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 .grid-cell {
@@ -44,15 +27,16 @@ h1 {
   height: 40px;
   text-transform: uppercase;
   text-align: center;
-  font-size: 1.2rem;
-  border: 1px solid #ccc;
+  font-size: 18px;
+  border: 1px solid #999;
   box-sizing: border-box;
 }
 
-.editable {
-  background-color: #ffffff;
+.grid-cell.editable {
+  background-color: white;
 }
 
-.shaded {
-  background-color: #c0c0c0;
+.grid-cell.shaded {
+  background-color: #333;
+  border: none;
 }
