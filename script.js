@@ -16,7 +16,10 @@ function buildGrid(puzzleId) {
   if (!puzzle) return;
 
   const size = puzzle.size;
+
+  // Set both rows and columns to 40px each (ensures square grid)
   gridContainer.style.gridTemplateColumns = `repeat(${size}, 40px)`;
+  gridContainer.style.gridTemplateRows = `repeat(${size}, 40px)`;
 
   for (let row = 0; row < size; row++) {
     for (let col = 0; col < size; col++) {
@@ -39,6 +42,7 @@ function buildGrid(puzzleId) {
   }
 }
 
+// Rebuild grid on puzzle selection change
 document.getElementById("puzzleSelector").addEventListener("change", (e) => {
   buildGrid(e.target.value);
 });
