@@ -1,55 +1,54 @@
 body {
+  background-color: white;
   margin: 0;
   padding: 0;
-  background-color: white;
-  font-family: sans-serif;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: start;
-  height: 100vh;
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
-.title {
-  margin: 20px 0 10px;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-#grid {
+.grid-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
   gap: 2px;
-  width: 90vmin; /* ensures square */
+  width: 90vmin;
   height: 90vmin;
-  max-width: 90vw;
-  max-height: 90vw;
   box-sizing: border-box;
-  border: 2px solid black;
+  border: 3px solid black;
 }
 
 .cell {
-  border: 1px solid black;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  padding: 0;
+  align-items: center;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 }
 
-/* Editable (odd row OR odd column) */
-.cell.editable {
-  background-color: #fffacd; /* Light Yellow */
+.editable {
+  background-color: #fffacd; /* light yellow */
   color: black;
 }
 
-/* Shaded (uneditable: even row AND even column) */
-.cell.shaded {
+.editable input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+}
+
+.shaded {
   background-color: royalblue;
   color: white;
+  pointer-events: none;
 }
