@@ -1,43 +1,34 @@
 body {
   margin: 0;
   padding: 0;
-  background: #f2f2f2;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.title {
-  font-size: 2rem;
-  margin: 20px 0 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: bold;
+  background-color: white;
+  font-family: sans-serif;
 }
 
 #grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  width: min(90vmin, 90vw);
-  aspect-ratio: 1 / 1;
-  gap: 2px;
-  box-sizing: border-box;
+  width: 90vmin;
+  height: 90vmin;
+  margin: 30px auto;
+  border: 2px solid black;
 }
 
 .cell {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 1;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  background-color: #fff;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.cell.editable {
+  background-color: #fffacd; /* light yellow */
+  color: black;
 }
 
 .cell.shaded {
-  background-color: #bcbcbc;
+  background-color: royalblue;
+  color: white;
 }
