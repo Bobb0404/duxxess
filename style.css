@@ -21,13 +21,17 @@ body {
   justify-content: center;
   font-weight: bold;
   font-size: 1.5em;
+  text-transform: uppercase;
+  box-sizing: border-box;
 }
 
+/* Editable cells (odd row, odd col) */
 .cell.editable {
-  background-color: #fffacd; /* light yellow */
+  background-color: #fffacd; /* Light Yellow */
   color: black;
 }
 
+/* Shaded uneditable cells (even, even) */
 .cell.shaded {
   background-color: royalblue;
   color: white;
