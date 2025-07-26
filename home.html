@@ -1,63 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Duxxess Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Duxxess Square Grid Sample</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #F4F7FA;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #003B73;
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 50px);
+      grid-template-rows: repeat(7, 50px);
+      gap: 2px;
+      border: 3px solid #1E3A5F;
+      background-color: #1E3A5F;
+      padding: 3px;
+    }
+
+    .cell {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      border: none;
+      outline: none;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .editable {
+      background-color: #FFFFFF;
+    }
+
+    .shaded {
+      background-color: #D4E1E7;
+    }
+
+    .cell:focus {
+      background-color: #F9DC5C;
+    }
+
+    .puzzle-id {
+      background-color: #1D7874;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .bell {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 22px;
+      color: #FF6F61;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎓 Welcome to Duxxess</h1>
-  <p>Select your role to begin:</p>
+  <div class="bell">🔔</div>
+  <div class="puzzle-id">Puzzle: DS0001B</div>
+  <h1>Duxxess Square</h1>
 
-  <div class="menu">
-    <a href="player.html" class="button">▶️ Player</a>
-    <a href="admin.html" class="button">🛠️ Admin</a>
-    <a href="leaderboard.html" class="button">🏆 Hall of Fame</a>
-    <a href="community.html" class="button">💬 Community</a>
-    <a href="help.html" class="button">📖 Help / Rules</a>
-    <a href="advertiser.html" class="button">📢 Advertiser</a>
+  <div class="grid">
+    <!-- R1 -->
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+
+    <!-- R2 -->
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+
+    <!-- R3 -->
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+
+    <!-- R4 -->
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+
+    <!-- R5 -->
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+
+    <!-- R6 -->
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+    <div class="cell shaded"></div>
+    <input class="cell editable" maxlength="1">
+
+    <!-- R7 -->
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
+    <input class="cell editable" maxlength="1">
   </div>
-  <script>
-  fetch("puzzles.json")
-    .then((res) => res.json())
-    .then((data) => {
-      const total = data.length;
-      const seen = parseInt(localStorage.getItem("puzzlesSeen") || "0");
-
-      if (total > seen) {
-        const banner = document.createElement("div");
-        banner.innerHTML = `
-          <a href="player.html" style="color: black; text-decoration: none;">
-            🔔 New puzzle available! Click to play now.
-          </a>
-          <span id="close-banner" style="
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-weight: normal;
-            font-size: 16px;
-            cursor: pointer;
-            color: #000;
-          ">&times;</span>
-        `;
-
-        banner.style.background = "#ffeb3b";
-        banner.style.padding = "12px 16px";
-        banner.style.fontWeight = "bold";
-        banner.style.margin = "10px auto";
-        banner.style.maxWidth = "400px";
-        banner.style.borderRadius = "6px";
-        banner.style.position = "relative";
-
-        document.body.insertBefore(banner, document.body.firstChild);
-
-        document.getElementById("close-banner").onclick = function (e) {
-          e.stopPropagation();
-          banner.style.display = "none";
-        };
-      }
-    });
-</script>
 </body>
 </html>
