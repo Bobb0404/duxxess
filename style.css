@@ -1,53 +1,69 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
+  background: #f9f9f9;
   padding: 1rem;
-  background-color: #f4f4f4;
+  margin: 0;
   text-align: center;
 }
 
-.header {
-  margin-bottom: 1rem;
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
-.controls {
-  margin-top: 0.5rem;
+#puzzle-selector {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 #grid-container {
-  display: grid;
-  margin: 1rem auto;
-  gap: 2px;
-  border: 2px solid #222;
+  display: inline-block;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 
-/* Cell styling */
+table {
+  border-spacing: 0;
+  border: 2px solid #333;
+}
+
+td {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #999;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+}
+
 .grid-cell {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  font-size: 1.5rem;
+  height: 100%;
+  border: none;
+  outline: none;
   text-align: center;
-  border: 1px solid #aaa;
-  box-sizing: border-box;
+  font-size: 1.6rem;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  background: transparent;
 }
 
-/* Non-editable cells: shaded if both row and column are even */
-.shaded {
+td.shaded {
   background-color: #ccc;
 }
 
-/* Puzzle size rules */
-.grid-3x3 {
-  width: 40%;
-  grid-template-columns: repeat(3, 1fr);
+button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid #444;
+  cursor: pointer;
 }
 
-.grid-5x5 {
-  width: 50%;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.grid-7x7 {
-  width: 60%;
-  grid-template-columns: repeat(7, 1fr);
+button:hover {
+  background-color: #e0e0e0;
 }
