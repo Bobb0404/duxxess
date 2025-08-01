@@ -1,65 +1,63 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('puzzle-id-input');
-  const select = document.getElementById('puzzle-id-select');
-  const container = document.getElementById('grid-container');
-  const wrapper = document.querySelector('.grid-wrapper');
-
-  const puzzleList = ['DS0002B'];
-
-  input.addEventListener('input', () => {
-    const q = input.value.toUpperCase().trim();
-    select.innerHTML = '';
-    puzzleList.filter(id => id.includes(q))
-      .forEach(id => {
-        const opt = document.createElement('option');
-        opt.value = id;
-        opt.text = id;
-        select.appendChild(opt);
-      });
-    if (select.options.length > 0) {
-      select.selectedIndex = 0;
-      loadPuzzleGrid(select.value);
-    } else {
-      container.innerHTML = '';
-    }
-  });
-
-  select.addEventListener('change', () => {
-    const id = select.value;
-    if (id) loadPuzzleGrid(id);
-  });
-
-  function loadPuzzleGrid(id) {
-    container.innerHTML = '';
-
-    let size = 3; // Default 3x3 for DS0002B
-    wrapper.style.width = '40%';
-
-    const table = document.createElement('table');
-    table.className = 'grid-table';
-
-    for (let r = 1; r <= size; r++) {
-      const row = document.createElement('tr');
-      for (let c = 1; c <= size; c++) {
-        const td = document.createElement('td');
-        const isShaded = (r % 2 === 0 && c % 2 === 0);
-        td.className = isShaded ? 'shaded-cell' : 'editable-cell';
-
-        if (!isShaded) {
-          const inp = document.createElement('input');
-          inp.type = 'text';
-          inp.maxLength = 1;
-          td.appendChild(inp);
-        }
-
-        row.appendChild(td);
-      }
-      table.appendChild(row);
-    }
-
-    container.appendChild(table);
+const puzzles = {
+  DS0001B: {
+    size: 3,
+    grid: [
+      ["B", "A", "D"],
+      ["", "", ""],
+      ["E", "N", "D"]
+    ],
+    clues: ["BAD", "END", "BYE", "DAD"]
+  },
+  DS0002B: {
+    size: 3,
+    grid: [
+      ["B", "Y", "E"],
+      ["", "", ""],
+      ["D", "A", "D"]
+    ],
+    clues: ["BYE", "DAD", "BED", "YAD"]
   }
+};
 
-  // Optional: auto-load DS0002B when page loads
-  loadPuzzleGrid('DS0002B');
+const gridElement = document.getElementById("grid");
+const container = document.getElementById("grid-container");
+const dropdown = document.getElementById("puzzleDropdown");
+
+function isEditable(row, col) {
+  // Kamili rule: editable if either row or col is odd (1-based)
+  return (row % 2 !== 0 || col % 2 !== 0);
+}
+
+function createGrid(puzzle) {
+  const { grid, size } = puzzle;
+
+  // Clear old grid
+  gridElement.innerHTML = "";
+  container.className = `grid-${size}x${size}`;
+
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      const cell = document.createElement("input");
+      cell.classList.add("cell");
+
+      if (!isEditable(row + 1, col + 1)) {
+        cell.disabled = true;
+      }
+
+      const val = grid[row][col];
+      if (val) cell.value = val;
+
+      gridElement.appendChild(cell);
+    }
+  }
+}
+
+// Load selected puzzle
+dropdown.addEventListener("change", () => {
+  const selected = dropdown.value;
+  const puzzle = puzzles[selected];
+  if (puzzle) createGrid(puzzle);
 });
+
+// Initial load
+createGrid(puzzles["DS0001B"]);
