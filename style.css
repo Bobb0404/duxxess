@@ -1,89 +1,70 @@
-/* General body styling */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   background-color: #f5f5f5;
-  padding: 20px;
   margin: 0;
+  padding: 20px;
 }
 
-/* Puzzle header & controls */
 h1 {
   margin-bottom: 10px;
 }
 
-#puzzle-id {
-  font-weight: bold;
-  margin-bottom: 15px;
+label, input, select {
+  font-size: 16px;
+  margin: 5px;
 }
 
-/* Grid container */
 .grid-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 20px;
 }
 
-/* Grid table */
 .grid-table {
   border-collapse: collapse;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Grid cells */
 .grid-table td,
 .grid-table th {
   width: 40px;
   height: 40px;
+  border: 1px solid #333; /* ✅ grid lines */
   text-align: center;
   vertical-align: middle;
-  font-size: 18px;
-  border: 1px solid #333; /* ✅ Grid lines added here */
   box-sizing: border-box;
+  padding: 0;
 }
 
-/* Editable cells (odd rows & odd columns only) */
+/* Editable cells */
 .editable-cell {
   background-color: white;
-  color: #000;
 }
 
-/* Shaded cells (where both row & column are even) */
+/* Sacred shaded cells (even row AND even column) */
 .shaded-cell {
   background-color: #d3d3d3;
 }
 
-/* Input fields inside cells */
+/* Text input styling */
 .grid-table input[type="text"] {
   width: 100%;
   height: 100%;
   border: none;
+  background: transparent;
   text-align: center;
   font-size: 18px;
-  background: transparent;
   outline: none;
 }
 
-/* Highlight focused cell */
 .grid-table input[type="text"]:focus {
-  background-color: #f0f8ff;
+  background-color: #e0f7ff;
   outline: 2px solid #4a90e2;
 }
 
-/* Button styling */
-button {
-  margin-top: 20px;
-  padding: 10px 18px;
-  font-size: 16px;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 600px) {
   .grid-table td,
   .grid-table th {
