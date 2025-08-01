@@ -22,16 +22,13 @@ function renderGrid(size) {
     for (let c = 1; c <= size; c++) {
       const cell = row.insertCell();
 
+      // Sacred Kamili rule: even×even = shaded
       if (r % 2 === 0 && c % 2 === 0) {
         cell.className = "shaded";
         cell.textContent = "";
       } else {
         const input = document.createElement("input");
         input.maxLength = 1;
-        input.style.width = "100%";
-        input.style.height = "100%";
-        input.style.border = "none";
-        input.style.textAlign = "center";
         cell.appendChild(input);
       }
     }
