@@ -1,106 +1,92 @@
 const puzzles = {
-  DS0001B: {
-    size: 3,
-    solutionWords: ['BAD', 'END', 'BYE', 'DAD'],
-    gridData: [
-      ['B', '', 'D'],
-      ['', '', ''],
-      ['Y', '', 'E']
-    ]
+  "DS0001B": {
+    gridSize: 3,
+    clues: {
+      "0,0": "B", "0,1": "A", "0,2": "D",
+      "1,0": "Y", "1,1": "",  "1,2": "E",
+      "2,0": "D", "2,1": "E", "2,2": "D",
+    },
+    solutionWords: ["BAD", "END", "BYE", "DAD"]
   },
-  DS0002B: {
-    size: 3,
-    solutionWords: ['BAD', 'END', 'BYE', 'DAD'],
-    gridData: [
-      ['B', '', 'D'],
-      ['', '', ''],
-      ['Y', '', 'E']
-    ]
+  "DS0002B": {
+    gridSize: 3,
+    clues: {
+      "0,0": "B", "0,1": "A", "0,2": "D",
+      "1,0": "Y", "1,1": "",  "1,2": "E",
+      "2,0": "D", "2,1": "A", "2,2": "D",
+    },
+    solutionWords: ["BAD", "END", "BYE", "DAD"]
   }
 };
 
-let currentPuzzleId = 'DS0001B';
+let currentPuzzleIndex = 0;
+const puzzleIDs = Object.keys(puzzles);
 
-function renderGrid(size, preset = []) {
-  const gridContainer = document.getElementById('gridContainer');
-  gridContainer.innerHTML = '';
-  gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
+function loadPuzzle(puzzleID) {
+  const puzzle = puzzles[puzzleID];
+  const gridContainer = document.getElementById("gridContainer");
+  const gridSize = puzzle.gridSize;
+  const clues = puzzle.clues;
 
-  for (let row = 1; row <= size; row++) {
-    for (let col = 1; col <= size; col++) {
-      const cell = document.createElement('input');
-      cell.maxLength = 1;
-      cell.classList.add('grid-cell');
+  // Clear and set grid layout
+  gridContainer.innerHTML = "";
+  gridContainer.className = `grid size-${gridSize}x${gridSize}`;
 
-      const isEditable = row % 2 === 1 || col % 2 === 1;
-      const isShaded = row % 2 === 0 && col % 2 === 0;
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const key = `${row},${col}`;
+      const cell = document.createElement("input");
 
-      if (isShaded) {
+      const isEditable = (row % 2 === 0 && col % 2 === 0) || (row % 2 === 0 && col % 2 === 1) || (row % 2 === 1 && col % 2 === 0);
+
+      if (!isEditable) {
+        cell.classList.add("shaded");
         cell.disabled = true;
+      } else {
+        cell.classList.add("editable");
       }
 
-      if (preset[row - 1] && preset[row - 1][col - 1]) {
-        cell.value = preset[row - 1][col - 1];
+      if (clues[key]) {
+        cell.value = clues[key];
       }
 
       gridContainer.appendChild(cell);
     }
   }
+
+  document.getElementById("puzzleIDDisplay").textContent = `Puzzle ID: ${puzzleID}`;
+  document.getElementById("puzzleSelector").value = puzzleID;
 }
 
-function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId];
-  if (!puzzle) {
-    alert('Puzzle not found.');
-    return;
-  }
-
-  currentPuzzleId = puzzleId;
-  renderGrid(puzzle.size, puzzle.gridData);
-  displayWordList(puzzle.solutionWords);
+function loadNextPuzzle() {
+  currentPuzzleIndex = (currentPuzzleIndex + 1) % puzzleIDs.length;
+  loadPuzzle(puzzleIDs[currentPuzzleIndex]);
 }
 
-function displayWordList(words) {
-  const list = document.getElementById('wordListItems');
-  list.innerHTML = '';
-  words.forEach(word => {
-    const li = document.createElement('li');
-    li.textContent = word;
-    list.appendChild(li);
+function populateSelector() {
+  const selector = document.getElementById("puzzleSelector");
+  selector.innerHTML = "";
+  puzzleIDs.forEach(id => {
+    const option = document.createElement("option");
+    option.value = id;
+    option.textContent = id;
+    selector.appendChild(option);
   });
 }
 
-function getNextPuzzleId(currentId) {
-  const keys = Object.keys(puzzles);
-  const index = keys.indexOf(currentId);
-  return index >= 0 && index < keys.length - 1 ? keys[index + 1] : keys[0];
-}
-
-document.getElementById('nextPuzzleBtn').addEventListener('click', () => {
-  const nextId = getNextPuzzleId(currentPuzzleId);
-  document.getElementById('puzzleSelector').value = nextId;
-  loadPuzzle(nextId);
-});
-
-document.getElementById('puzzleSelector').addEventListener('change', (e) => {
+document.getElementById("nextPuzzle").addEventListener("click", loadNextPuzzle);
+document.getElementById("puzzleSelector").addEventListener("change", (e) => {
+  currentPuzzleIndex = puzzleIDs.indexOf(e.target.value);
   loadPuzzle(e.target.value);
 });
-
-document.getElementById('searchBox').addEventListener('input', (e) => {
-  const id = e.target.value.toUpperCase();
-  if (puzzles[id]) {
-    loadPuzzle(id);
+document.getElementById("puzzleSearch").addEventListener("input", (e) => {
+  const query = e.target.value.trim().toUpperCase();
+  if (puzzles[query]) {
+    currentPuzzleIndex = puzzleIDs.indexOf(query);
+    loadPuzzle(query);
   }
 });
 
-window.onload = () => {
-  const selector = document.getElementById('puzzleSelector');
-  for (const id of Object.keys(puzzles)) {
-    const opt = document.createElement('option');
-    opt.value = id;
-    opt.textContent = id;
-    selector.appendChild(opt);
-  }
-  selector.value = currentPuzzleId;
-  loadPuzzle(currentPuzzleId);
-};
+// Initial Load
+populateSelector();
+loadPuzzle(puzzleIDs[0]);
