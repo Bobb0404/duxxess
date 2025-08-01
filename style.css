@@ -12,7 +12,8 @@ body {
 
 .top-bar h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
+  color: #333;
 }
 
 #notification-bell {
@@ -30,6 +31,7 @@ body {
 
 table {
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 td {
@@ -38,8 +40,17 @@ td {
   text-align: center;
   vertical-align: middle;
   border: 1px solid #ccc;
+  padding: 0;
 }
 
 .shaded {
   background-color: #d0d0d0;
+}
+
+input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 16px;
 }
