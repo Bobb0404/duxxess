@@ -1,17 +1,19 @@
-const gridSize = 7;
-const grid = document.getElementById("grid");
+const grid = document.querySelector('.grid');
 
-// Sacred rule: Shaded only when both row & column are even-numbered (1-based)
-for (let row = 1; row <= gridSize; row++) {
-  for (let col = 1; col <= gridSize; col++) {
-    const cell = document.createElement("input");
-    cell.type = "text";
-    cell.maxLength = 1;
-    cell.classList.add("cell");
+for (let row = 1; row <= 7; row++) {
+  for (let col = 1; col <= 7; col++) {
+    const cell = document.createElement('input');
+    cell.setAttribute('maxlength', '1');
+    cell.classList.add('cell');
 
-    if (row % 2 === 0 && col % 2 === 0) {
-      cell.classList.add("shaded");
-      cell.disabled = true;
+    const isRowEven = row % 2 === 0;
+    const isColEven = col % 2 === 0;
+
+    if (isRowEven && isColEven) {
+      cell.classList.add('shaded');
+      cell.setAttribute('disabled', 'true');
+    } else {
+      cell.classList.add('editable');
     }
 
     grid.appendChild(cell);
