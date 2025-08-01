@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess Puzzle Loader</title>
+  <title>Kamili Milestone - Duxxess</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="puzzle-header">
+  <header class="top-bar">
+    <h1>Kamili Milestone</h1>
+    <div id="notification-bell">🔔</div>
+  </header>
+
+  <section class="puzzle-loader">
     <label for="puzzle-id">Puzzle ID:</label>
     <input type="text" id="puzzle-id" placeholder="e.g. DS0001B" />
     <button onclick="loadPuzzleById()">Load Puzzle</button>
-  </div>
+  </section>
 
   <div id="kamili-milestone-grid">
-    <!-- Kamili grid will be generated here -->
     <table id="grid"></table>
   </div>
 
