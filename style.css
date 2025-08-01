@@ -1,79 +1,70 @@
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
-  padding: 0;
-  background-color: #f7f7f7;
+  background: #f7f7f7;
+  text-align: center;
 }
 
 header {
-  background-color: #222;
+  background: #333;
   color: white;
   padding: 1rem;
 }
 
-h1 {
-  margin: 0.5rem;
+header h1 {
+  margin: 0 0 0.5rem;
   font-size: 2rem;
 }
 
-input, select, button {
-  padding: 0.5rem;
+header input, header select, header button {
   margin: 0.5rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 4px;
   border: none;
 }
 
 main {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 1rem;
 }
 
 .grid {
   display: grid;
   gap: 2px;
-  margin: 1rem 0;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  justify-content: center;
+  margin: 1rem auto;
 }
 
 .grid input {
-  width: 50px;
-  height: 50px;
-  text-transform: uppercase;
+  width: 60px;
+  height: 60px;
   font-size: 1.8rem;
   font-weight: bold;
+  text-transform: uppercase;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #888;
   background-color: white;
+  box-sizing: border-box;
 }
 
-.grid .shaded {
+.grid input.disabled {
   background-color: #ccc;
-  pointer-events: none;
 }
 
 #puzzleIDDisplay {
-  font-size: 1.2rem;
   margin-top: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
-@media (min-width: 600px) {
-  .grid.size-3x3 {
-    width: 40%;
-    grid-template-columns: repeat(3, 1fr);
-  }
+.grid.size-3x3 {
+  grid-template-columns: repeat(3, 60px);
+}
 
-  .grid.size-5x5 {
-    width: 50%;
-    grid-template-columns: repeat(5, 1fr);
-  }
+.grid.size-5x5 {
+  grid-template-columns: repeat(5, 60px);
+}
 
-  .grid.size-7x7 {
-    width: 60%;
-    grid-template-columns: repeat(7, 1fr);
-  }
+.grid.size-7x7 {
+  grid-template-columns: repeat(7, 60px);
 }
