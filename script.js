@@ -1,63 +1,53 @@
 const puzzles = {
   DS0001B: {
     size: 3,
-    grid: [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""]
-    ]
+    clues: {
+      "0,0": "B", "0,1": "A", "0,2": "D",
+      "1,0": "Y", "2,0": "E", "1,1": "", "1,2": "",
+      "2,1": "", "2,2": ""
+    }
   },
   DS0002B: {
     size: 3,
-    grid: [
-      ["B", "A", "D"],
-      ["", "", ""],
-      ["B", "Y", "E"]
-    ]
+    clues: {
+      "0,0": "E", "0,1": "N", "0,2": "D",
+      "1,0": "D", "2,0": "Y", "1,1": "", "1,2": "",
+      "2,1": "", "2,2": ""
+    }
   }
 };
 
-const puzzleSelect = document.getElementById("puzzle-select");
-const gridContainer = document.getElementById("grid-container");
-
-puzzleSelect.addEventListener("change", () => {
-  const selectedId = puzzleSelect.value;
-  if (selectedId && puzzles[selectedId]) {
-    loadPuzzle(selectedId);
-  }
-});
-
-function loadPuzzle(puzzleId) {
-  const { size, grid } = puzzles[puzzleId];
-
-  document.body.setAttribute("data-size", size.toString());
-  gridContainer.innerHTML = "";
-  gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+function createGrid(size, clues) {
+  const container = document.getElementById("grid-container");
+  container.innerHTML = "";
+  container.className = `grid-${size}x${size}`;
 
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
-      const cellValue = grid[r][c];
-      const isEditable = r % 2 === 0 && c % 2 === 0; // even-indexed positions = odd-numbered grid (1-based)
-      const isShaded = r % 2 === 1 && c % 2 === 1; // shaded where both even-numbered (1-based)
-
-      const cell = document.createElement(isEditable ? "input" : "div");
+      const cell = document.createElement("input");
       cell.classList.add("grid-cell");
 
-      if (isShaded) {
+      // Kamili shading: shade if both row and col are even-numbered (index starts from 0)
+      if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
         cell.classList.add("shaded");
-        cell.textContent = "";
-      } else if (!isEditable) {
-        cell.readOnly = true;
-        cell.value = cellValue || "";
+        cell.disabled = true;
+        cell.value = "";
+      } else {
+        const key = `${r},${c}`;
+        if (clues[key]) {
+          cell.value = clues[key];
+        }
       }
 
-      if (isEditable) {
-        cell.type = "text";
-        cell.maxLength = 1;
-        if (cellValue) cell.value = cellValue;
-      }
-
-      gridContainer.appendChild(cell);
+      container.appendChild(cell);
     }
   }
 }
+
+document.getElementById("puzzle-select").addEventListener("change", function () {
+  const puzzleId = this.value;
+  if (puzzleId && puzzles[puzzleId]) {
+    const { size, clues } = puzzles[puzzleId];
+    createGrid(size, clues);
+  }
+});
