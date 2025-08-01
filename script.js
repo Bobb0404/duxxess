@@ -1,52 +1,63 @@
 const puzzles = {
-  "DS0001B": {
+  DS0001B: {
     size: 3,
-    across: ["BAD", "END"],
-    down: ["BYE", "DAD"]
+    grid: [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""]
+    ]
   },
-  "DS0002B": {
+  DS0002B: {
     size: 3,
-    across: ["MAN", "ICE"],
-    down: ["MIX", "ACE"]
+    grid: [
+      ["B", "A", "D"],
+      ["", "", ""],
+      ["B", "Y", "E"]
+    ]
   }
 };
 
-const gridElement = document.getElementById('grid');
-const selector = document.getElementById('puzzleSelector');
+const puzzleSelect = document.getElementById("puzzle-select");
+const gridContainer = document.getElementById("grid-container");
 
-selector.addEventListener('change', () => {
-  const puzzleId = selector.value;
-  if (puzzleId && puzzles[puzzleId]) {
-    loadPuzzle(puzzleId);
+puzzleSelect.addEventListener("change", () => {
+  const selectedId = puzzleSelect.value;
+  if (selectedId && puzzles[selectedId]) {
+    loadPuzzle(selectedId);
   }
 });
 
 function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId];
-  const size = puzzle.size;
-  gridElement.innerHTML = "";
+  const { size, grid } = puzzles[puzzleId];
 
-  // Set grid size class
-  gridElement.className = `grid-${size}x${size}`;
+  document.body.setAttribute("data-size", size.toString());
+  gridContainer.innerHTML = "";
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
 
-  for (let row = 1; row <= size; row++) {
-    for (let col = 1; col <= size; col++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      const cellValue = grid[r][c];
+      const isEditable = r % 2 === 0 && c % 2 === 0; // even-indexed positions = odd-numbered grid (1-based)
+      const isShaded = r % 2 === 1 && c % 2 === 1; // shaded where both even-numbered (1-based)
 
-      // Kamili milestone rules
-      const isEditable = row % 2 === 1 && col % 2 === 1;
-      const isShaded = row % 2 === 0 && col % 2 === 0;
+      const cell = document.createElement(isEditable ? "input" : "div");
+      cell.classList.add("grid-cell");
 
       if (isShaded) {
-        cell.classList.add('shaded');
-      } else if (isEditable) {
-        const input = document.createElement('input');
-        input.maxLength = 1;
-        cell.appendChild(input);
+        cell.classList.add("shaded");
+        cell.textContent = "";
+      } else if (!isEditable) {
+        cell.readOnly = true;
+        cell.value = cellValue || "";
       }
 
-      gridElement.appendChild(cell);
+      if (isEditable) {
+        cell.type = "text";
+        cell.maxLength = 1;
+        if (cellValue) cell.value = cellValue;
+      }
+
+      gridContainer.appendChild(cell);
     }
   }
 }
