@@ -8,13 +8,17 @@
 <body>
   <h1>Duxxess Square</h1>
 
-  <div>
-    <label for="puzzle-id-input">Puzzle ID:</label>
-    <input type="text" id="puzzle-id-input" placeholder="Type to search…" />
-    <select id="puzzle-id-select"></select>
+  <div id="puzzle-selector">
+    <label for="puzzleDropdown">Select Puzzle: </label>
+    <select id="puzzleDropdown">
+      <option value="DS0001B">DS0001B</option>
+      <option value="DS0002B">DS0002B</option>
+    </select>
   </div>
 
-  <div class="grid-container" id="grid-container"></div>
+  <div id="grid-container" class="grid-3x3">
+    <div id="grid"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
