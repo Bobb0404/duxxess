@@ -1,63 +1,52 @@
 const puzzles = {
-  DS0001B: {
+  "DS0001B": {
     size: 3,
-    grid: [
-      ["B", "A", "D"],
-      ["", "", ""],
-      ["E", "N", "D"]
-    ],
-    clues: ["BAD", "END", "BYE", "DAD"]
+    across: ["BAD", "END"],
+    down: ["BYE", "DAD"]
   },
-  DS0002B: {
+  "DS0002B": {
     size: 3,
-    grid: [
-      ["B", "Y", "E"],
-      ["", "", ""],
-      ["D", "A", "D"]
-    ],
-    clues: ["BYE", "DAD", "BED", "YAD"]
+    across: ["MAN", "ICE"],
+    down: ["MIX", "ACE"]
   }
 };
 
-const gridElement = document.getElementById("grid");
-const container = document.getElementById("grid-container");
-const dropdown = document.getElementById("puzzleDropdown");
+const gridElement = document.getElementById('grid');
+const selector = document.getElementById('puzzleSelector');
 
-function isEditable(row, col) {
-  // Kamili rule: editable if either row or col is odd (1-based)
-  return (row % 2 !== 0 || col % 2 !== 0);
-}
+selector.addEventListener('change', () => {
+  const puzzleId = selector.value;
+  if (puzzleId && puzzles[puzzleId]) {
+    loadPuzzle(puzzleId);
+  }
+});
 
-function createGrid(puzzle) {
-  const { grid, size } = puzzle;
-
-  // Clear old grid
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  const size = puzzle.size;
   gridElement.innerHTML = "";
-  container.className = `grid-${size}x${size}`;
 
-  for (let row = 0; row < size; row++) {
-    for (let col = 0; col < size; col++) {
-      const cell = document.createElement("input");
-      cell.classList.add("cell");
+  // Set grid size class
+  gridElement.className = `grid-${size}x${size}`;
 
-      if (!isEditable(row + 1, col + 1)) {
-        cell.disabled = true;
+  for (let row = 1; row <= size; row++) {
+    for (let col = 1; col <= size; col++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+
+      // Kamili milestone rules
+      const isEditable = row % 2 === 1 && col % 2 === 1;
+      const isShaded = row % 2 === 0 && col % 2 === 0;
+
+      if (isShaded) {
+        cell.classList.add('shaded');
+      } else if (isEditable) {
+        const input = document.createElement('input');
+        input.maxLength = 1;
+        cell.appendChild(input);
       }
-
-      const val = grid[row][col];
-      if (val) cell.value = val;
 
       gridElement.appendChild(cell);
     }
   }
 }
-
-// Load selected puzzle
-dropdown.addEventListener("change", () => {
-  const selected = dropdown.value;
-  const puzzle = puzzles[selected];
-  if (puzzle) createGrid(puzzle);
-});
-
-// Initial load
-createGrid(puzzles["DS0001B"]);
