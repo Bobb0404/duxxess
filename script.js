@@ -1,78 +1,106 @@
 const puzzles = {
-  DS0001B: { size: 3, clues: {/* your DS0001B clues */} },
-  DS0002B: { size: 3, clues: {/* DS0002B clues */} },
-  // Add more puzzles as needed...
+  DS0001B: {
+    size: 3,
+    solutionWords: ['BAD', 'END', 'BYE', 'DAD'],
+    gridData: [
+      ['B', '', 'D'],
+      ['', '', ''],
+      ['Y', '', 'E']
+    ]
+  },
+  DS0002B: {
+    size: 3,
+    solutionWords: ['BAD', 'END', 'BYE', 'DAD'],
+    gridData: [
+      ['B', '', 'D'],
+      ['', '', ''],
+      ['Y', '', 'E']
+    ]
+  }
 };
 
-const selectEl = document.getElementById("puzzle-select");
-const gridContainer = document.getElementById("grid-container");
-const nextBtn = document.getElementById("next-btn");
-let currentPuzzleId = null;
+let currentPuzzleId = 'DS0001B';
 
-Object.keys(puzzles).forEach(id => {
-  const opt = document.createElement("option");
-  opt.value = id;
-  opt.textContent = id;
-  selectEl.appendChild(opt);
-});
+function renderGrid(size, preset = []) {
+  const gridContainer = document.getElementById('gridContainer');
+  gridContainer.innerHTML = '';
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
 
-selectEl.addEventListener("change", () => {
-  const pid = selectEl.value;
-  if (pid) loadPuzzle(pid);
-});
+  for (let row = 1; row <= size; row++) {
+    for (let col = 1; col <= size; col++) {
+      const cell = document.createElement('input');
+      cell.maxLength = 1;
+      cell.classList.add('grid-cell');
 
-nextBtn.addEventListener("click", () => {
-  if (currentPuzzleId) tryLoadNextPuzzle(currentPuzzleId);
-});
+      const isEditable = row % 2 === 1 || col % 2 === 1;
+      const isShaded = row % 2 === 0 && col % 2 === 0;
 
-function getNextPuzzleId(curr) {
-  const m = curr.match(/DS(\d+)([A-Z])/);
-  if (!m) return null;
-  const num = String(parseInt(m[1],10)+1).padStart(4,"0");
-  return `DS${num}${m[2]}`;
-}
-
-function tryLoadNextPuzzle(curr) {
-  const nextId = getNextPuzzleId(curr);
-  if (puzzles[nextId]) {
-    selectEl.value = nextId;
-    loadPuzzle(nextId);
-  } else {
-    alert("No more puzzles available 🧩");
-  }
-}
-
-function loadPuzzle(pid) {
-  currentPuzzleId = pid;
-  const p = puzzles[pid];
-  const size = p.size;
-  gridContainer.innerHTML = "";
-  gridContainer.className = `grid-${size}x${size}`;
-
-  for (let r = 1; r <= size; r++) {
-    for (let c = 1; c <= size; c++) {
-      const div = document.createElement("div");
-      div.classList.add("grid-cell");
-      const isShaded = r % 2 === 0 && c % 2 === 0;
       if (isShaded) {
-        div.classList.add("shaded");
-      } else {
-        const inp = document.createElement("input");
-        inp.maxLength = 1;
-        const val = p.clues[`${r-1},${c-1}`];
-        if (val) inp.value = val;
-        div.appendChild(inp);
+        cell.disabled = true;
       }
-      gridContainer.appendChild(div);
+
+      if (preset[row - 1] && preset[row - 1][col - 1]) {
+        cell.value = preset[row - 1][col - 1];
+      }
+
+      gridContainer.appendChild(cell);
     }
   }
 }
 
-// Optional: detect completion (simple example)
-function checkSolved() {
-  // custom logic to verify if puzzle is solved
-  return false;
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  if (!puzzle) {
+    alert('Puzzle not found.');
+    return;
+  }
+
+  currentPuzzleId = puzzleId;
+  renderGrid(puzzle.size, puzzle.gridData);
+  displayWordList(puzzle.solutionWords);
 }
 
-// If completion detection is added later, trigger:
-// if (checkSolved()) setTimeout(() => tryLoadNextPuzzle(currentPuzzleId), 800);
+function displayWordList(words) {
+  const list = document.getElementById('wordListItems');
+  list.innerHTML = '';
+  words.forEach(word => {
+    const li = document.createElement('li');
+    li.textContent = word;
+    list.appendChild(li);
+  });
+}
+
+function getNextPuzzleId(currentId) {
+  const keys = Object.keys(puzzles);
+  const index = keys.indexOf(currentId);
+  return index >= 0 && index < keys.length - 1 ? keys[index + 1] : keys[0];
+}
+
+document.getElementById('nextPuzzleBtn').addEventListener('click', () => {
+  const nextId = getNextPuzzleId(currentPuzzleId);
+  document.getElementById('puzzleSelector').value = nextId;
+  loadPuzzle(nextId);
+});
+
+document.getElementById('puzzleSelector').addEventListener('change', (e) => {
+  loadPuzzle(e.target.value);
+});
+
+document.getElementById('searchBox').addEventListener('input', (e) => {
+  const id = e.target.value.toUpperCase();
+  if (puzzles[id]) {
+    loadPuzzle(id);
+  }
+});
+
+window.onload = () => {
+  const selector = document.getElementById('puzzleSelector');
+  for (const id of Object.keys(puzzles)) {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = id;
+    selector.appendChild(opt);
+  }
+  selector.value = currentPuzzleId;
+  loadPuzzle(currentPuzzleId);
+};
