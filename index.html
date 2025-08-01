@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess Square</title>
+  <title>Duxxess Puzzle Loader</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="top-bar">
-    <span class="title">Duxxess Square</span>
-    <span class="notification-bell">🔔</span>
+  <div class="puzzle-header">
+    <label for="puzzle-id">Puzzle ID:</label>
+    <input type="text" id="puzzle-id" placeholder="e.g. DS0001B" />
+    <button onclick="loadPuzzleById()">Load Puzzle</button>
   </div>
-  <div class="grid-container">
-    <div class="grid">
-      <!-- JavaScript will populate the grid -->
-    </div>
+
+  <div id="kamili-milestone-grid">
+    <!-- Kamili grid will be generated here -->
+    <table id="grid"></table>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
