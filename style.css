@@ -1,15 +1,14 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  background: #f8f9fa;
-  color: #333;
   text-align: center;
 }
 
 .header {
-  background: #343a40;
-  color: #fff;
+  background-color: #333;
+  color: white;
   padding: 1rem 0;
 }
 
@@ -21,21 +20,18 @@ body {
   padding: 8px 12px;
   margin: 5px;
   font-size: 1rem;
-  border: 1px solid #ccc;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 #gridContainer {
-  margin: 20px auto;
   display: grid;
+  margin: 30px auto;
   gap: 2px;
-  justify-content: center;
+  width: max-content;
 }
 
-.grid-row {
-  display: flex;
-}
-
+/* Default grid cell style */
 .grid-cell {
   width: 48px;
   height: 48px;
@@ -44,18 +40,25 @@ body {
   font-size: 20px;
   text-align: center;
   border: 1px solid #888;
+}
+
+/* Editable cells: white background */
+.grid-cell:enabled {
   background-color: #fff;
 }
 
+/* Non-editable cells: gray shaded */
 .grid-cell:disabled {
-  background-color: #ccc;
+  background-color: #bbb;
+  border: 1px solid #999;
 }
 
 #wordList {
-  margin: 30px;
+  margin: 30px auto;
+  max-width: 300px;
 }
 
-#wordList ul {
+#wordListItems {
   list-style: none;
   padding: 0;
 }
