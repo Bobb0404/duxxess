@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('puzzle-id-input');
   const select = document.getElementById('puzzle-id-select');
   const container = document.getElementById('grid-container');
+  const wrapper = document.querySelector('.grid-wrapper');
 
-  const puzzleList = ['DS0001B', 'DS0002B'];
+  const puzzleList = ['DS0002B'];
 
   input.addEventListener('input', () => {
     const q = input.value.toUpperCase().trim();
@@ -29,11 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function loadPuzzleGrid(id) {
-    const wrapper = document.querySelector('.grid-wrapper');
     container.innerHTML = '';
-    let size = 3;
-    if (id === 'DS0002B') size = 3; // Add logic for different IDs if needed
-    wrapper.style.width = {3: '40%', 5: '50%', 7: '60%'}[size] || '40%';
+
+    let size = 3; // Default 3x3 for DS0002B
+    wrapper.style.width = '40%';
 
     const table = document.createElement('table');
     table.className = 'grid-table';
@@ -44,12 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const td = document.createElement('td');
         const isShaded = (r % 2 === 0 && c % 2 === 0);
         td.className = isShaded ? 'shaded-cell' : 'editable-cell';
+
         if (!isShaded) {
           const inp = document.createElement('input');
           inp.type = 'text';
           inp.maxLength = 1;
           td.appendChild(inp);
         }
+
         row.appendChild(td);
       }
       table.appendChild(row);
@@ -57,4 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.appendChild(table);
   }
+
+  // Optional: auto-load DS0002B when page loads
+  loadPuzzleGrid('DS0002B');
 });
