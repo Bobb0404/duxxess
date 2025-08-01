@@ -1,46 +1,65 @@
-function loadPuzzleById() {
-  const id = document.getElementById("puzzle-id").value.toUpperCase();
-  let gridSize = 3;
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('puzzle-id-input');
+  const select = document.getElementById('puzzle-id-select');
+  const container = document.getElementById('grid-container');
 
-  if (id === "DS0001B") {
-    renderGrid(3, [
-      ["C", "A", "T"],
-      ["P", "A", "T"],
-      ["", "", ""]
-    ]);
-    return;
-  }
+  // Sample puzzle IDs
+  const puzzleList = ['DS0001B', 'DS0002R', 'DS0003M'];
 
-  if (id.endsWith("B")) gridSize = 3;
-  else if (id.endsWith("R") || id.endsWith("I")) gridSize = 5;
-  else if (id.endsWith("E") || id.endsWith("M")) gridSize = 7;
-  else {
-    alert("Invalid Puzzle ID format");
-    return;
-  }
+  // Typing puzzle ID filters the dropdown
+  input.addEventListener('input', () => {
+    const q = input.value.toUpperCase().trim();
+    select.innerHTML = '';
+    puzzleList
+      .filter(id => id.includes(q))
+      .forEach(id => {
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.text = id;
+        select.appendChild(opt);
+      });
+  });
 
-  renderGrid(gridSize);
-}
+  // On selection, load corresponding puzzle size
+  select.addEventListener('change', () => {
+    const id = select.value;
+    loadPuzzleGrid(id);
+  });
 
-function renderGrid(size, preset = null) {
-  const table = document.getElementById("grid");
-  table.innerHTML = "";
+  // Build puzzle grid based on size and Kamili rules
+  function loadPuzzleGrid(id) {
+    container.innerHTML = '';
+    let size = 3;
+    if (id.endsWith('R') || id.endsWith('I')) size = 5;
+    else if (id.endsWith('E') || id.endsWith('M')) size = 7;
 
-  for (let r = 1; r <= size; r++) {
-    const row = table.insertRow();
-    for (let c = 1; c <= size; c++) {
-      const cell = row.insertCell();
+    const table = document.createElement('table');
+    table.className = 'grid-table';
 
-      if (r % 2 === 0 && c % 2 === 0) {
-        cell.className = "shaded";
-      } else {
-        const input = document.createElement("input");
-        input.maxLength = 1;
-        if (preset && preset[r - 1] && preset[r - 1][c - 1]) {
-          input.value = preset[r - 1][c - 1];
+    for (let r = 1; r <= size; r++) {
+      const row = document.createElement('tr');
+
+      for (let c = 1; c <= size; c++) {
+        const td = document.createElement('td');
+
+        // Sacred Kamili Rule: shaded if row AND column are even
+        const isShaded = (r % 2 === 0) && (c % 2 === 0);
+        td.className = isShaded ? 'shaded-cell' : 'editable-cell';
+
+        // Only editable cells get input fields
+        if (!isShaded) {
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          td.appendChild(input);
         }
-        cell.appendChild(input);
+
+        row.appendChild(td);
       }
+
+      table.appendChild(row);
     }
+
+    container.appendChild(table);
   }
-}
+});
