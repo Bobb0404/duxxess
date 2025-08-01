@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('puzzle-id-select');
   const container = document.getElementById('grid-container');
 
-  // Sample puzzle IDs
-  const puzzleList = ['DS0001B', 'DS0002R', 'DS0003M'];
+  // ✅ Updated puzzle list
+  const puzzleList = ['DS0001B', 'DS0002B'];
 
-  // Typing puzzle ID filters the dropdown
+  // ✅ Show matching IDs in dropdown
   input.addEventListener('input', () => {
     const q = input.value.toUpperCase().trim();
     select.innerHTML = '';
@@ -18,15 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.text = id;
         select.appendChild(opt);
       });
+
+    // ✅ Auto-select first result if available
+    if (select.options.length > 0) {
+      select.selectedIndex = 0;
+      loadPuzzleGrid(select.value);
+    } else {
+      container.innerHTML = ''; // Clear grid if no match
+    }
   });
 
-  // On selection, load corresponding puzzle size
+  // ✅ Allow manual selection to trigger load
   select.addEventListener('change', () => {
     const id = select.value;
-    loadPuzzleGrid(id);
+    if (id) loadPuzzleGrid(id);
   });
 
-  // Build puzzle grid based on size and Kamili rules
+  // ✅ Load grid with Kamili sacred rules
   function loadPuzzleGrid(id) {
     container.innerHTML = '';
     let size = 3;
@@ -41,12 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       for (let c = 1; c <= size; c++) {
         const td = document.createElement('td');
-
-        // Sacred Kamili Rule: shaded if row AND column are even
-        const isShaded = (r % 2 === 0) && (c % 2 === 0);
+        const isShaded = (r % 2 === 0) && (c % 2 === 0); // Kamili rule
         td.className = isShaded ? 'shaded-cell' : 'editable-cell';
 
-        // Only editable cells get input fields
         if (!isShaded) {
           const input = document.createElement('input');
           input.type = 'text';
