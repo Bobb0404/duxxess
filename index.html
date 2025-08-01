@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Duxxess Square</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top-bar">
-    <h1>Duxxess Square</h1>
-    <div id="notification-bell">🔔</div>
-  </header>
+  <h1>Duxxess Square</h1>
 
-  <section class="puzzle-loader">
-    <label for="puzzle-id">Puzzle ID:</label>
-    <input type="text" id="puzzle-id" placeholder="e.g. DS0001B" value="DS0001B" />
-    <button onclick="loadPuzzleById()">Load Puzzle</button>
-  </section>
-
-  <div id="kamili-milestone-grid">
-    <table id="grid"></table>
+  <div>
+    <label for="puzzle-id-input">Puzzle ID:</label>
+    <input type="text" id="puzzle-id-input" placeholder="Type to search…" />
+    <select id="puzzle-id-select"></select>
   </div>
+
+  <div class="grid-container" id="grid-container"></div>
 
   <script src="script.js"></script>
 </body>
