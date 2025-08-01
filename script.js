@@ -68,35 +68,3 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(table);
   }
 });
-
-function renderGrid(size) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-
-  // Remove previous size class
-  grid.classList.remove("grid-3x3", "grid-5x5", "grid-7x7");
-
-  // Apply correct grid class
-  if (size === 3) grid.classList.add("grid-3x3");
-  else if (size === 5) grid.classList.add("grid-5x5");
-  else if (size === 7) grid.classList.add("grid-7x7");
-
-  for (let r = 0; r < size; r++) {
-    for (let c = 0; c < size; c++) {
-      const cell = document.createElement("div");
-      cell.className = "cell";
-
-      // Kamili shading rule: shade where both row and column are even-numbered (starting from 1)
-      if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
-        cell.classList.add("shaded");
-        cell.textContent = "";
-      } else {
-        const input = document.createElement("input");
-        input.maxLength = 1;
-        cell.appendChild(input);
-      }
-
-      grid.appendChild(cell);
-    }
-  }
-}
