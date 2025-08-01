@@ -1,57 +1,94 @@
+/* General body styling */
 body {
-  font-family: sans-serif;
-  margin: 20px;
-  background: #f4f4f4;
-}
-
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.top-bar h1 {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f5f5f5;
+  padding: 20px;
   margin: 0;
-  font-size: 28px;
-  color: #333;
 }
 
-#notification-bell {
-  font-size: 24px;
-  cursor: pointer;
+/* Puzzle header & controls */
+h1 {
+  margin-bottom: 10px;
 }
 
-.puzzle-loader {
-  margin: 20px 0;
+#puzzle-id {
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-#kamili-milestone-grid {
-  margin-top: 10px;
+/* Grid container */
+.grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-table {
+/* Grid table */
+.grid-table {
   border-collapse: collapse;
-  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-td {
+/* Grid cells */
+.grid-table td,
+.grid-table th {
   width: 40px;
   height: 40px;
   text-align: center;
   vertical-align: middle;
-  border: 1px solid #ccc;
-  padding: 0;
+  font-size: 18px;
+  border: 1px solid #333; /* ✅ Grid lines added here */
+  box-sizing: border-box;
 }
 
-.shaded {
-  background-color: #d0d0d0;
+/* Editable cells (odd rows & odd columns only) */
+.editable-cell {
+  background-color: white;
+  color: #000;
 }
 
-input {
+/* Shaded cells (where both row & column are even) */
+.shaded-cell {
+  background-color: #d3d3d3;
+}
+
+/* Input fields inside cells */
+.grid-table input[type="text"] {
   width: 100%;
   height: 100%;
   border: none;
   text-align: center;
+  font-size: 18px;
+  background: transparent;
+  outline: none;
+}
+
+/* Highlight focused cell */
+.grid-table input[type="text"]:focus {
+  background-color: #f0f8ff;
+  outline: 2px solid #4a90e2;
+}
+
+/* Button styling */
+button {
+  margin-top: 20px;
+  padding: 10px 18px;
   font-size: 16px;
-  text-transform: uppercase;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .grid-table td,
+  .grid-table th {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
 }
