@@ -1,10 +1,9 @@
 let puzzles = {};
 
 fetch('puzzles.json')
-  .then(res => res.json())
-  .then(data => {
-    puzzles = data;
-  });
+  .then(response => response.json())
+  .then(data => puzzles = data)
+  .catch(err => console.error('Puzzle loading error:', err));
 
 function loadPuzzle() {
   const id = document.getElementById('puzzle-id-input').value.trim().toUpperCase();
