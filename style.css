@@ -1,70 +1,74 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f7f7f7;
   text-align: center;
+  background: #f5f5f5;
 }
 
 header {
-  background: #333;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: #4a90e2;
   color: white;
-  padding: 1rem;
 }
 
-header h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2rem;
+#notification-bell {
+  cursor: pointer;
 }
 
-header input, header select, header button {
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: none;
+.controls {
+  margin: 1em 0;
 }
 
-main {
-  margin: 1rem;
+input {
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+button {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+#grid-container {
+  display: inline-block;
+  margin-top: 1em;
 }
 
 .grid {
   display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(5, 60px);
   gap: 2px;
-  justify-content: center;
-  margin: 1rem auto;
 }
 
-.grid input {
+.cell {
   width: 60px;
   height: 60px;
-  font-size: 1.8rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-size: 24px;
   text-align: center;
-  border: 1px solid #888;
+  vertical-align: middle;
+  line-height: 60px;
+  border: 1px solid #ccc;
   background-color: white;
-  box-sizing: border-box;
 }
 
-.grid input.disabled {
+.cell input {
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  text-align: center;
+  border: none;
+  background: transparent;
+}
+
+.cell.shaded {
   background-color: #ccc;
 }
 
-#puzzleIDDisplay {
-  margin-top: 1rem;
-  font-size: 1.2rem;
+#status {
+  margin-top: 1em;
   font-weight: bold;
-}
-
-.grid.size-3x3 {
-  grid-template-columns: repeat(3, 60px);
-}
-
-.grid.size-5x5 {
-  grid-template-columns: repeat(5, 60px);
-}
-
-.grid.size-7x7 {
-  grid-template-columns: repeat(7, 60px);
 }
