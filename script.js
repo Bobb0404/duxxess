@@ -1,86 +1,50 @@
-const puzzles = {
-  DS0001B: {
-    gridSize: 3,
-    clues: {
-      "0,0": "B", "0,1": "A", "0,2": "D",
-      "1,0": "",  "1,1": "",  "1,2": "",
-      "2,0": "E", "2,1": "N", "2,2": "D",
-    },
-    solutionWords: ["BAD", "END", "BEN", "AND"]
-  },
-  DS0002B: {
-    gridSize: 3,
-    clues: {
-      "0,0": "C", "0,1": "A", "0,2": "T",
-      "1,0": "",  "1,1": "",  "1,2": "",
-      "2,0": "C", "2,1": "O", "2,2": "G",
-    },
-    solutionWords: ["CAT", "COG", "TOG", "TAG"]
-  }
-};
+let puzzles;
 
-let currentIndex = 0;
-const ids = Object.keys(puzzles);
+fetch('puzzles.json')
+  .then(res => res.json())
+  .then(data => {
+    puzzles = data;
+  });
 
-function renderGrid(id) {
+function loadPuzzle() {
+  const id = document.getElementById('puzzle-id-input').value.trim().toUpperCase();
   const puzzle = puzzles[id];
-  const size = puzzle.gridSize;
-  const clues = puzzle.clues;
 
-  const container = document.getElementById("gridContainer");
-  container.innerHTML = "";
-  container.className = `grid size-${size}x${size}`;
+  const container = document.getElementById('grid-container');
+  const status = document.getElementById('status');
+  container.innerHTML = '';
+  status.textContent = '';
 
-  for (let r = 0; r < size; r++) {
-    for (let c = 0; c < size; c++) {
-      const cell = document.createElement("input");
-      const key = `${r},${c}`;
-      const isShaded = (r+1) % 2 === 0 && (c+1) % 2 === 0;
+  if (!puzzle) {
+    status.textContent = 'Puzzle not found.';
+    return;
+  }
 
-      if (isShaded) {
-        cell.disabled = true;
-        cell.classList.add("disabled");
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+
+  for (let r = 0; r < 5; r++) {
+    for (let c = 0; c < 5; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      // Kamili shading rule: shaded if both row and column are even-numbered (1-based)
+      const row = r + 1;
+      const col = c + 1;
+      if (row % 2 === 0 && col % 2 === 0) {
+        cell.classList.add('shaded');
+        cell.textContent = '';
+      } else {
+        const value = puzzle.grid[r][c];
+        const input = document.createElement('input');
+        input.maxLength = 1;
+        input.value = value || '';
+        cell.appendChild(input);
       }
 
-      if (clues[key]) cell.value = clues[key];
-      container.appendChild(cell);
+      grid.appendChild(cell);
     }
   }
 
-  document.getElementById("puzzleSelector").value = id;
-  document.getElementById("puzzleIDDisplay").textContent = `Puzzle ID: ${id}`;
+  container.appendChild(grid);
 }
-
-function loadNextPuzzle() {
-  currentIndex = (currentIndex + 1) % ids.length;
-  renderGrid(ids[currentIndex]);
-}
-
-function populateSelector() {
-  const sel = document.getElementById("puzzleSelector");
-  ids.forEach((id, idx) => {
-    const opt = document.createElement("option");
-    opt.value = id;
-    opt.textContent = id;
-    sel.appendChild(opt);
-  });
-}
-
-document.getElementById("nextPuzzle").addEventListener("click", loadNextPuzzle);
-
-document.getElementById("puzzleSelector").addEventListener("change", (e) => {
-  currentIndex = ids.indexOf(e.target.value);
-  renderGrid(e.target.value);
-});
-
-document.getElementById("puzzleSearch").addEventListener("input", (e) => {
-  const val = e.target.value.trim().toUpperCase();
-  if (ids.includes(val)) {
-    currentIndex = ids.indexOf(val);
-    renderGrid(val);
-  }
-});
-
-// INIT
-populateSelector();
-renderGrid(ids[currentIndex]);
