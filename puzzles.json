@@ -1,27 +1,54 @@
 const puzzles = [
   {
-    id: "DS0001B",
-    size: 3,
-    grid: [
-      ["C", "", "T"],
-      ["", "", ""],
-      ["T", "", "P"]
-    ],
-    across: ["CAT", "TOP"],
-    down: ["CUT", "TAP"]
+    id: "DS0001R",
+    size: 5,
+    difficulty: "R",
+    clues: [
+      { type: "across", row: 1, word: "CREEP" },
+      { type: "across", row: 3, word: "NORMS" },
+      { type: "across", row: 5, word: "ETHER" },
+      { type: "down", col: 1, word: "CANOE" },
+      { type: "down", col: 3, word: "EARTH" },
+      { type: "down", col: 5, word: "POSER" }
+    ]
   },
   {
-    id: "DS0002R",
+    id: "DS0002I",
     size: 5,
-    grid: [
-      ["G", "", "", "", "D"],
-      ["", "", "", "", ""],
-      ["M", "", "", "", "E"],
-      ["", "", "", "", ""],
-      ["D", "", "", "", "S"]
-    ],
-    across: ["GRIMACE", "UNMASKS"],
-    down: ["GOURMET"]
+    difficulty: "I",
+    clues: [
+      { type: "across", row: 1, word: "QUEEN" },
+      { type: "across", row: 3, word: "INCUR" },
+      { type: "across", row: 5, word: "TELLS" },
+      { type: "down", col: 1, word: "QUIET" },
+      { type: "down", col: 3, word: "EXCEL" },
+      { type: "down", col: 5, word: "NERDS" }
+    ]
+  },
+  {
+    id: "DS0003R",
+    size: 5,
+    difficulty: "R",
+    clues: [
+      { type: "across", row: 1, word: "FACET" },
+      { type: "across", row: 3, word: "DIALS" },
+      { type: "across", row: 5, word: "DUELS" },
+      { type: "down", col: 1, word: "FADED" },
+      { type: "down", col: 3, word: "CRAVE" },
+      { type: "down", col: 5, word: "TESTS" }
+    ]
+  },
+  {
+    id: "DS0004I",
+    size: 5,
+    difficulty: "I",
+    clues: [
+      { type: "across", row: 1, word: "POUCH" },
+      { type: "across", row: 3, word: "AFTER" },
+      { type: "across", row: 5, word: "SUEDE" },
+      { type: "down", col: 1, word: "PEARS" },
+      { type: "down", col: 3, word: "UNTIE" },
+      { type: "down", col: 5, word: "HORSE" }
+    ]
   }
-  // Add more puzzles with same structure
 ];
