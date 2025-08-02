@@ -1,54 +1,42 @@
-const puzzles = [
-  {
-    id: "DS0001R",
-    size: 5,
-    difficulty: "R",
-    clues: [
-      { type: "across", row: 1, word: "CREEP" },
-      { type: "across", row: 3, word: "NORMS" },
-      { type: "across", row: 5, word: "ETHER" },
-      { type: "down", col: 1, word: "CANOE" },
-      { type: "down", col: 3, word: "EARTH" },
-      { type: "down", col: 5, word: "POSER" }
-    ]
+{
+  "DS0002R": {
+    "grid": [
+      ["B", "A", "D", "", "E"],
+      ["", "", "", "", ""],
+      ["B", "Y", "E", "", "N"],
+      ["", "", "", "", ""],
+      ["D", "A", "D", "", "D"]
+    ],
+    "words": ["BAD", "END", "BYE", "DAD", "BEN", "BED", "DEN", "AND"]
   },
-  {
-    id: "DS0002I",
-    size: 5,
-    difficulty: "I",
-    clues: [
-      { type: "across", row: 1, word: "QUEEN" },
-      { type: "across", row: 3, word: "INCUR" },
-      { type: "across", row: 5, word: "TELLS" },
-      { type: "down", col: 1, word: "QUIET" },
-      { type: "down", col: 3, word: "EXCEL" },
-      { type: "down", col: 5, word: "NERDS" }
-    ]
+  "DS0003R": {
+    "grid": [
+      ["H", "O", "P", "", "S"],
+      ["", "", "", "", ""],
+      ["H", "A", "T", "", "E"],
+      ["", "", "", "", ""],
+      ["H", "E", "N", "", "D"]
+    ],
+    "words": ["HOP", "HAT", "HEN", "HOE", "PEN", "END", "SET", "SHED"]
   },
-  {
-    id: "DS0003R",
-    size: 5,
-    difficulty: "R",
-    clues: [
-      { type: "across", row: 1, word: "FACET" },
-      { type: "across", row: 3, word: "DIALS" },
-      { type: "across", row: 5, word: "DUELS" },
-      { type: "down", col: 1, word: "FADED" },
-      { type: "down", col: 3, word: "CRAVE" },
-      { type: "down", col: 5, word: "TESTS" }
-    ]
+  "DS0004R": {
+    "grid": [
+      ["C", "A", "T", "", "S"],
+      ["", "", "", "", ""],
+      ["D", "O", "G", "", "E"],
+      ["", "", "", "", ""],
+      ["R", "A", "T", "", "E"]
+    ],
+    "words": ["CAT", "DOG", "RAT", "CODE", "TOE", "SAT", "SAGE", "EGO"]
   },
-  {
-    id: "DS0004I",
-    size: 5,
-    difficulty: "I",
-    clues: [
-      { type: "across", row: 1, word: "POUCH" },
-      { type: "across", row: 3, word: "AFTER" },
-      { type: "across", row: 5, word: "SUEDE" },
-      { type: "down", col: 1, word: "PEARS" },
-      { type: "down", col: 3, word: "UNTIE" },
-      { type: "down", col: 5, word: "HORSE" }
-    ]
+  "DS0005R": {
+    "grid": [
+      ["M", "A", "N", "", "O"],
+      ["", "", "", "", ""],
+      ["R", "U", "N", "", "E"],
+      ["", "", "", "", ""],
+      ["P", "I", "N", "", "K"]
+    ],
+    "words": ["MAN", "RUN", "PIN", "MAKE", "INK", "ONE", "NEON", "RANK"]
   }
-];
+}
