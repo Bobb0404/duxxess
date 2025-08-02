@@ -1,4 +1,4 @@
-let puzzles;
+let puzzles = {};
 
 fetch('puzzles.json')
   .then(res => res.json())
@@ -28,17 +28,18 @@ function loadPuzzle() {
       const cell = document.createElement('div');
       cell.className = 'cell';
 
-      // Kamili shading rule: shaded if both row and column are even-numbered (1-based)
       const row = r + 1;
       const col = c + 1;
-      if (row % 2 === 0 && col % 2 === 0) {
+      const value = puzzle.grid[r][c];
+
+      const isShaded = row % 2 === 0 && col % 2 === 0;
+
+      if (isShaded) {
         cell.classList.add('shaded');
-        cell.textContent = '';
       } else {
-        const value = puzzle.grid[r][c];
         const input = document.createElement('input');
         input.maxLength = 1;
-        input.value = value || '';
+        if (value) input.value = value;
         cell.appendChild(input);
       }
 
