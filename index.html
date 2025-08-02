@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess Square</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Duxxess</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
-<header>
-  <h1>Duxxess Square</h1>
-  <input id="puzzleSearch" type="text" placeholder="Search Puzzle ID" />
-  <select id="puzzleSelector"></select>
-  <button id="nextPuzzle">Next Puzzle ⏭️</button>
-</header>
-
-<main>
-  <div id="gridContainer" class="grid"></div>
-  <div id="puzzleIDDisplay"></div>
-</main>
-
-<script src="script.js"></script>
+  <header>
+    <h1>Duxxess</h1>
+    <div id="notification-bell">🔔</div>
+  </header>
+  <main>
+    <div class="controls">
+      <input type="text" id="puzzle-id-input" placeholder="Enter Puzzle ID (e.g., DS0002R)">
+      <button onclick="loadPuzzle()">Load Puzzle</button>
+    </div>
+    <div id="grid-container"></div>
+    <div id="status"></div>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
