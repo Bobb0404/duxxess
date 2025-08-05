@@ -2,10 +2,15 @@
   "id": "DS0001B",
   "size": 3,
   "difficulty": "B",
-  "grid": [
-    ["B", "A", "D"],
-    ["", "", ""],
-    ["E", "N", "D"]
+  "clues": [
+    { "row": 1, "col": 1, "letter": "B" },
+    { "row": 1, "col": 2, "letter": "A" },
+    { "row": 1, "col": 3, "letter": "D" },
+    { "row": 2, "col": 1, "letter": "Y" },
+    { "row": 2, "col": 3, "letter": "A" },
+    { "row": 3, "col": 1, "letter": "E" },
+    { "row": 3, "col": 2, "letter": "N" },
+    { "row": 3, "col": 3, "letter": "D" }
   ],
-  "words": ["BAD", "END", "BYE", "DAD"]
+  "solution": ["BAD", "END", "BYE", "DAD"]
 }
