@@ -1,45 +1,37 @@
-const puzzleId = "DS0001B";
+let puzzles = {};
 
-const targetWords = ["BAD", "END", "BYE", "DAD"];
-
-const gridData = [
-  ["B", "A", "D"],
-  ["", "", ""],
-  ["E", "N", "D"]
-];
-
-function isEditable(row, col) {
-  // Editable if row and col are both odd-numbered (1-based)
-  return (row % 2 === 1) && (col % 2 === 1);
+async function loadPuzzles() {
+  const response = await fetch('puzzles.json');
+  puzzles = await response.json();
+  loadPuzzle("DS0001B");
 }
 
-function renderGrid(grid) {
+function isEven(n) {
+  return n % 2 === 0;
+}
+
+function renderGrid(gridData) {
   const gridContainer = document.getElementById("grid");
   gridContainer.innerHTML = "";
 
-  for (let row = 0; row < 3; row++) {
-    for (let col = 0; col < 3; col++) {
-      const cell = document.createElement("div");
-      cell.classList.add("grid-cell");
+  const size = gridData.gridSize;
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 40px)`;
 
-      const isEvenRow = (row + 1) % 2 === 0;
-      const isEvenCol = (col + 1) % 2 === 0;
-      const shaded = isEvenRow && isEvenCol;
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      const cell = document.createElement("input");
+      cell.classList.add("cell");
 
-      if (shaded) {
+      // Kamili rule: shaded if both row and col are even-numbered (1-based)
+      if (isEven(row + 1) && isEven(col + 1)) {
         cell.classList.add("shaded");
-        cell.textContent = "";
-      } else {
-        const val = grid[row][col];
-        const input = document.createElement("input");
-        input.maxLength = 1;
+        cell.disabled = true;
+      }
 
-        if (val) {
-          input.value = val;
-          input.disabled = true;
-        }
-
-        cell.appendChild(input);
+      const letter = gridData.grid?.[row]?.[col] || "";
+      if (letter) {
+        cell.value = letter;
+        cell.disabled = true;
       }
 
       gridContainer.appendChild(cell);
@@ -47,6 +39,18 @@ function renderGrid(grid) {
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  renderGrid(gridData);
-});
+function loadPuzzle(id) {
+  const puzzle = puzzles[id];
+  if (puzzle) {
+    renderGrid(puzzle);
+  } else {
+    alert("Puzzle ID not found!");
+  }
+}
+
+function loadPuzzleFromInput() {
+  const input = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
+  loadPuzzle(input);
+}
+
+window.onload = loadPuzzles;
