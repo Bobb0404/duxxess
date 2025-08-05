@@ -1,56 +1,56 @@
 let puzzles = {};
 
-async function loadPuzzles() {
-  const response = await fetch('puzzles.json');
-  puzzles = await response.json();
-  loadPuzzle("DS0001B");
-}
+async function loadPuzzle() {
+  const puzzleId = document.getElementById('puzzleIdInput').value.trim().toUpperCase();
+  if (!puzzleId || !puzzles[puzzleId]) {
+    alert("Puzzle ID not found");
+    return;
+  }
 
-function isEven(n) {
-  return n % 2 === 0;
-}
-
-function renderGrid(gridData) {
-  const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = "";
-
-  const size = gridData.gridSize;
-  gridContainer.style.gridTemplateColumns = `repeat(${size}, 40px)`;
+  const puzzle = puzzles[puzzleId];
+  const gridElement = document.getElementById("grid");
+  const size = puzzle.size;
+  const clues = puzzle.clues || {};
+  gridElement.innerHTML = "";
+  gridElement.dataset.size = size;
 
   for (let row = 0; row < size; row++) {
     for (let col = 0; col < size; col++) {
-      const cell = document.createElement("input");
+      const cell = document.createElement("div");
       cell.classList.add("cell");
 
-      // Kamili rule: shaded if both row and col are even-numbered (1-based)
-      if (isEven(row + 1) && isEven(col + 1)) {
+      // Kamili rule: shade only when both row and col are even (1-based)
+      const isEvenRow = (row + 1) % 2 === 0;
+      const isEvenCol = (col + 1) % 2 === 0;
+      const key = `${row},${col}`;
+      const hasClue = clues.hasOwnProperty(key);
+
+      if (isEvenRow && isEvenCol && !hasClue) {
         cell.classList.add("shaded");
-        cell.disabled = true;
       }
 
-      const letter = gridData.grid?.[row]?.[col] || "";
-      if (letter) {
-        cell.value = letter;
-        cell.disabled = true;
+      const input = document.createElement("input");
+      input.maxLength = 1;
+
+      if (hasClue) {
+        input.value = clues[key].toUpperCase();
       }
 
-      gridContainer.appendChild(cell);
+      cell.appendChild(input);
+      gridElement.appendChild(cell);
     }
   }
 }
 
-function loadPuzzle(id) {
-  const puzzle = puzzles[id];
-  if (puzzle) {
-    renderGrid(puzzle);
-  } else {
-    alert("Puzzle ID not found!");
+async function fetchPuzzles() {
+  const res = await fetch('puzzles.json');
+  puzzles = await res.json();
+
+  // Auto-load default puzzle if exists
+  if (puzzles['DS0001B']) {
+    document.getElementById("puzzleIdInput").value = "DS0001B";
+    loadPuzzle();
   }
 }
 
-function loadPuzzleFromInput() {
-  const input = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
-  loadPuzzle(input);
-}
-
-window.onload = loadPuzzles;
+fetchPuzzles();
