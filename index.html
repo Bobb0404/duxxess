@@ -1,13 +1,18 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duxxess - DS0001B</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Duxxess Square</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Duxxess Puzzle: DS0001B</h1>
-  <div id="grid" class="grid-container"></div>
+  <div class="game-container">
+    <h1>Duxxess Square</h1>
+    <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g. DS0001B)" />
+    <button onclick="loadPuzzleFromInput()">Load Puzzle</button>
+    <div id="grid" class="grid"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
