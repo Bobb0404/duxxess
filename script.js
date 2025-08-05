@@ -1,50 +1,52 @@
-let puzzles = {};
+const puzzleId = "DS0001B";
 
-fetch('puzzles.json')
-  .then(response => response.json())
-  .then(data => puzzles = data)
-  .catch(err => console.error('Puzzle loading error:', err));
+const targetWords = ["BAD", "END", "BYE", "DAD"];
 
-function loadPuzzle() {
-  const id = document.getElementById('puzzle-id-input').value.trim().toUpperCase();
-  const puzzle = puzzles[id];
+const gridData = [
+  ["B", "A", "D"],
+  ["", "", ""],
+  ["E", "N", "D"]
+];
 
-  const container = document.getElementById('grid-container');
-  const status = document.getElementById('status');
-  container.innerHTML = '';
-  status.textContent = '';
+function isEditable(row, col) {
+  // Editable if row and col are both odd-numbered (1-based)
+  return (row % 2 === 1) && (col % 2 === 1);
+}
 
-  if (!puzzle) {
-    status.textContent = 'Puzzle not found.';
-    return;
-  }
+function renderGrid(grid) {
+  const gridContainer = document.getElementById("grid");
+  gridContainer.innerHTML = "";
 
-  const grid = document.createElement('div');
-  grid.className = 'grid';
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
+      const cell = document.createElement("div");
+      cell.classList.add("grid-cell");
 
-  for (let r = 0; r < 5; r++) {
-    for (let c = 0; c < 5; c++) {
-      const cell = document.createElement('div');
-      cell.className = 'cell';
+      const isEvenRow = (row + 1) % 2 === 0;
+      const isEvenCol = (col + 1) % 2 === 0;
+      const shaded = isEvenRow && isEvenCol;
 
-      const row = r + 1;
-      const col = c + 1;
-      const value = puzzle.grid[r][c];
-
-      const isShaded = row % 2 === 0 && col % 2 === 0;
-
-      if (isShaded) {
-        cell.classList.add('shaded');
+      if (shaded) {
+        cell.classList.add("shaded");
+        cell.textContent = "";
       } else {
-        const input = document.createElement('input');
+        const val = grid[row][col];
+        const input = document.createElement("input");
         input.maxLength = 1;
-        if (value) input.value = value;
+
+        if (val) {
+          input.value = val;
+          input.disabled = true;
+        }
+
         cell.appendChild(input);
       }
 
-      grid.appendChild(cell);
+      gridContainer.appendChild(cell);
     }
   }
-
-  container.appendChild(grid);
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderGrid(gridData);
+});
