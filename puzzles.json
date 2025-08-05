@@ -1,30 +1,26 @@
-[
-  {
+{
+  "DS0001B": {
     "id": "DS0001B",
-    "size": 3,
-    "difficulty": "B",
+    "gridSize": 3,
+    "grid": [
+      ["B", "", "D"],
+      ["", "", ""],
+      ["E", "", "D"]
+    ],
     "across": ["BAD", "END"],
-    "down": ["BYE", "DAD"],
-    "prefill": [
-      {"row": 0, "col": 0, "letter": "B"},
-      {"row": 0, "col": 2, "letter": "D"},
-      {"row": 2, "col": 0, "letter": "E"},
-      {"row": 2, "col": 2, "letter": "D"}
-    ]
+    "down": ["BYE", "DAD"]
   },
-  {
+  "DS0001R": {
     "id": "DS0001R",
-    "size": 5,
-    "difficulty": "R",
+    "gridSize": 5,
+    "grid": [
+      ["C", "R", "E", "E", "P"],
+      ["", "", "", "", ""],
+      ["E", "T", "H", "E", "R"],
+      ["", "", "", "", ""],
+      ["P", "O", "S", "E", "R"]
+    ],
     "across": ["CREEP", "NORMS", "ETHER"],
-    "down": ["CANOE", "EARTH", "POSER"],
-    "prefill": [
-      {"row": 0, "col": 0, "letter": "C"},
-      {"row": 0, "col": 4, "letter": "P"},
-      {"row": 2, "col": 0, "letter": "E"},
-      {"row": 2, "col": 4, "letter": "R"},
-      {"row": 4, "col": 0, "letter": "P"},
-      {"row": 4, "col": 4, "letter": "R"}
-    ]
+    "down": ["CANOE", "EARTH", "POSER"]
   }
-]
+}
