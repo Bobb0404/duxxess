@@ -1,56 +1,32 @@
-let puzzles = {};
+function createGrid(gridSize, clues = {}) {
+  const gridContainer = document.getElementById("grid");
+  gridContainer.innerHTML = ""; // Clear previous grid
 
-async function loadPuzzle() {
-  const puzzleId = document.getElementById('puzzleIdInput').value.trim().toUpperCase();
-  if (!puzzleId || !puzzles[puzzleId]) {
-    alert("Puzzle ID not found");
-    return;
-  }
+  for (let row = 1; row <= gridSize; row++) {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "grid-row";
 
-  const puzzle = puzzles[puzzleId];
-  const gridElement = document.getElementById("grid");
-  const size = puzzle.size;
-  const clues = puzzle.clues || {};
-  gridElement.innerHTML = "";
-  gridElement.dataset.size = size;
+    for (let col = 1; col <= gridSize; col++) {
+      const cell = document.createElement("input");
+      const cellId = `R${row}C${col}`;
+      const clueLetter = clues[cellId] || "";
+      const isEvenRow = row % 2 === 0;
+      const isEvenCol = col % 2 === 0;
 
-  for (let row = 0; row < size; row++) {
-    for (let col = 0; col < size; col++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
+      cell.maxLength = 1;
 
-      // Kamili rule: shade only when both row and col are even (1-based)
-      const isEvenRow = (row + 1) % 2 === 0;
-      const isEvenCol = (col + 1) % 2 === 0;
-      const key = `${row},${col}`;
-      const hasClue = clues.hasOwnProperty(key);
-
-      if (isEvenRow && isEvenCol && !hasClue) {
-        cell.classList.add("shaded");
+      if (isEvenRow && isEvenCol) {
+        // Kamili shading: shaded if both row and column are even
+        cell.disabled = true;
+        cell.className = "cell shaded";
+      } else {
+        cell.className = "cell editable";
+        if (clueLetter) cell.value = clueLetter;
       }
 
-      const input = document.createElement("input");
-      input.maxLength = 1;
-
-      if (hasClue) {
-        input.value = clues[key].toUpperCase();
-      }
-
-      cell.appendChild(input);
-      gridElement.appendChild(cell);
+      rowDiv.appendChild(cell);
     }
+
+    gridContainer.appendChild(rowDiv);
   }
 }
-
-async function fetchPuzzles() {
-  const res = await fetch('puzzles.json');
-  puzzles = await res.json();
-
-  // Auto-load default puzzle if exists
-  if (puzzles['DS0001B']) {
-    document.getElementById("puzzleIdInput").value = "DS0001B";
-    loadPuzzle();
-  }
-}
-
-fetchPuzzles();
