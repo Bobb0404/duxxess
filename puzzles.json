@@ -1,37 +1,21 @@
 const puzzles = {
-  "DS0001R": {
-    id: "DS0001R",
-    size: 5,
-    difficulty: "R",
-    clues: [
-      { row: 1, col: 1, letter: "H" },
-      { row: 1, col: 3, letter: "O" },
-      { row: 1, col: 5, letter: "P" },
-      { row: 3, col: 1, letter: "E" },
-      { row: 3, col: 3, letter: "R" },
-      { row: 3, col: 5, letter: "A" },
-      { row: 5, col: 1, letter: "D" },
-      { row: 5, col: 3, letter: "O" },
-      { row: 5, col: 5, letter: "G" }
-    ],
-    words: ["HOPE", "OPERA", "DOG", "HERO", "PAD", "GOD", "READ", "ROD"]
-  },
-
-  "DS0002R": {
-    id: "DS0002R",
-    size: 5,
-    difficulty: "R",
-    clues: [
-      { row: 1, col: 1, letter: "C" },
-      { row: 1, col: 3, letter: "O" },
-      { row: 1, col: 5, letter: "D" },
-      { row: 3, col: 1, letter: "A" },
-      { row: 3, col: 3, letter: "R" },
-      { row: 3, col: 5, letter: "T" },
-      { row: 5, col: 1, letter: "E" },
-      { row: 5, col: 3, letter: "L" },
-      { row: 5, col: 5, letter: "Y" }
-    ],
-    words: ["COLD", "ARTY", "DEAL", "YARD", "LAD", "TOY", "COY", "RED"]
-  }
+  // Example placeholder
+  // "DS0001B": {
+  //   size: 3,
+  //   clues: {
+  //     "r0c0": "C",
+  //     "r0c1": "A",
+  //     "r0c2": "T"
+  //   }
+  // }
 };
+
+function loadPuzzle() {
+  const id = document.getElementById("puzzle-id").value.trim().toUpperCase();
+  const puzzle = puzzles[id];
+  if (puzzle) {
+    renderGrid(puzzle.size, puzzle.clues);
+  } else {
+    alert("Puzzle ID not found!");
+  }
+}
