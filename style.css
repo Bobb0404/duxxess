@@ -1,33 +1,42 @@
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   padding: 20px;
   text-align: center;
 }
 
-.grid-container {
-  display: inline-block;
+input {
+  margin: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
   margin-top: 20px;
+  gap: 2px;
 }
 
-.grid-row {
-  display: flex;
-}
-
-.cell {
+.grid input {
   width: 40px;
   height: 40px;
-  text-align: center;
-  font-size: 1.2em;
-  margin: 1px;
   text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #aaa;
+  box-sizing: border-box;
 }
 
 .editable {
-  background-color: #fff;
-  border: 1px solid #999;
+  background-color: white;
 }
 
 .shaded {
   background-color: #ccc;
-  border: 1px solid #999;
+  border: none;
+}
+
+.clue {
+  background-color: #e0f7fa;
+  font-weight: bold;
 }
