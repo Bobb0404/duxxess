@@ -1,73 +1,110 @@
-function createGrid(size) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-  grid.style.gridTemplateColumns = `repeat(${size},1fr)`;
-  grid.style.gridTemplateRows = `repeat(${size},1fr)`;
-
-  for (let r = 1; r <= size; r++) {
-    for (let c = 1; c <= size; c++) {
-      const cell = document.createElement("input");
-      cell.maxLength = 1;
-      cell.dataset.r = r;
-      cell.dataset.c = c;
-
-      const evenR = r % 2 === 0;
-      const evenC = c % 2 === 0;
-      if (evenR && evenC) {
-        cell.className = "shaded";
-        cell.disabled = true;
-      } else {
-        cell.className = "editable";
-      }
-
-      grid.appendChild(cell);
-    }
+const puzzles = {
+  DS0001B: {
+    id: "DS0001B",
+    size: 3,
+    across: ["BAD", "END"],
+    down: ["BYE", "DAD"]
+  },
+  DS0002R: {
+    id: "DS0002R",
+    size: 5,
+    across: ["TREND", "ROAST", "EXCEL"],
+    down: ["THREE", "RAISE", "NEEDS"]
+  },
+  DS0003E: {
+    id: "DS0003E",
+    size: 7,
+    across: ["PROJECT", "RUNWAY", "EXPERT", "TACTILE"],
+    down: ["PRINTER", "ROCKET", "OUTPUT", "JEWELRY"]
   }
-}
+};
 
-function placeClues(puzzle) {
-  const size = puzzle.size;
-  const acrossRows = [1,3,5,7];
-  const downCols = [1,3,5,7];
+const defaultPuzzleId = "DS0001B";
 
-  puzzle.across.forEach((word,i) => {
-    const row = acrossRows[i];
-    if (!row || word.length > size) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("puzzle-id-input");
+  const button = document.getElementById("load-puzzle");
 
-    for (let j=0; j<word.length; j++) {
-      const ch = word[j];
-      if (ch === ch.toUpperCase()) {
-        const sel = `input[data-r='${row}'][data-c='${j+1}']`;
-        const cell = document.querySelector(sel);
-        if (cell) cell.value = ch, cell.disabled = true;
-      }
-    }
+  button.addEventListener("click", () => {
+    const puzzleId = input.value.trim().toUpperCase();
+    loadPuzzle(puzzleId);
   });
 
-  puzzle.down.forEach((word,i) => {
-    const col = downCols[i];
-    if (!col || word.length > size) return;
+  loadPuzzle(defaultPuzzleId); // Auto-load DS0001B
+});
 
-    for (let j=0; j<word.length; j++) {
-      const ch = word[j];
-      if (ch === ch.toUpperCase()) {
-        const sel = `input[data-r='${j+1}'][data-c='${col}']`;
-        const cell = document.querySelector(sel);
-        if (cell) cell.value = ch, cell.disabled = true;
-      }
-    }
-  });
-}
-
-function loadPuzzle() {
-  const id = document.getElementById("puzzleIdInput").value.trim().toUpperCase() || "DS0001B";
-  const p = puzzles[id];
-  if (!p) {
-    alert("Puzzle not found: " + id);
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  if (!puzzle) {
+    alert("Puzzle ID not found.");
     return;
   }
-  createGrid(p.size);
-  placeClues(p);
+  renderGrid(puzzle);
 }
 
-window.onload = loadPuzzle;
+function renderGrid(puzzle) {
+  const { size, across, down } = puzzle;
+  const gridElement = document.getElementById("grid");
+  gridElement.innerHTML = "";
+  gridElement.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+  // Apply grid size class
+  gridElement.classList.remove("grid-3x3", "grid-5x5", "grid-7x7");
+  if (size === 3) gridElement.classList.add("grid-3x3");
+  else if (size === 5) gridElement.classList.add("grid-5x5");
+  else if (size === 7) gridElement.classList.add("grid-7x7");
+
+  const cells = [];
+
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      const cell = document.createElement("input");
+      cell.type = "text";
+      cell.maxLength = 1;
+      cell.classList.add("grid-cell");
+
+      // Kamili Shading Rule: shaded only if both row & col are even (1-based)
+      if ((row + 1) % 2 === 0 && (col + 1) % 2 === 0) {
+        cell.classList.add("shaded");
+        cell.disabled = true;
+      }
+
+      cells.push(cell);
+      gridElement.appendChild(cell);
+    }
+  }
+
+  // Prefill Across Clues
+  const acrossRows = [0, 2, 4, 6];
+  across.forEach((word, i) => {
+    const row = acrossRows[i];
+    if (row >= size) return;
+    for (let col = 0; col < Math.min(word.length, size); col++) {
+      const index = row * size + col;
+      const char = word[col];
+      if (char === char.toUpperCase()) {
+        const cell = cells[index];
+        cell.value = char;
+        cell.classList.add("prefilled");
+        cell.disabled = true;
+      }
+    }
+  });
+
+  // Prefill Down Clues
+  const downCols = [0, 2, 4, 6];
+  down.forEach((word, i) => {
+    const col = downCols[i];
+    if (col >= size) return;
+    for (let row = 0; row < Math.min(word.length, size); row++) {
+      const index = row * size + col;
+      const char = word[row];
+      if (char === char.toUpperCase()) {
+        const cell = cells[index];
+        cell.value = char;
+        cell.classList.add("prefilled");
+        cell.disabled = true;
+      }
+    }
+  });
+}
