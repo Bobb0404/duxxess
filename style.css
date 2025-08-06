@@ -1,38 +1,27 @@
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f2f2f2;
+  font-family: sans-serif;
   text-align: center;
+  padding: 20px;
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
-#grid-container {
-  margin: 20px auto;
-  display: grid;
-  gap: 2px;
-  max-width: 90vw;
-}
-
-input, button {
-  padding: 8px;
-  font-size: 1em;
-  margin: 5px;
+.grid-row {
+  display: flex;
+  justify-content: center;
 }
 
 .cell {
   width: 40px;
   height: 40px;
-  font-size: 1.2em;
-  text-transform: uppercase;
   text-align: center;
-  vertical-align: middle;
-  border: 1px solid #aaa;
+  font-size: 24px;
+  margin: 1px;
+  text-transform: uppercase;
 }
 
 .shaded {
-  background-color: #ccc;
+  background-color: #888;
+}
+
+.editable {
+  background-color: #fff;
 }
