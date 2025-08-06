@@ -1,17 +1,37 @@
 const puzzles = {
-  DS0003R: {
+  "DS0001R": {
+    id: "DS0001R",
     size: 5,
-    clues: {
-      "R1C1": "W", "R1C3": "A", "R1C5": "T",
-      "R3C1": "A", "R3C3": "R", "R3C5": "E",
-      "R5C1": "B", "R5C3": "O", "R5C5": "X"
-    }
+    difficulty: "R",
+    clues: [
+      { row: 1, col: 1, letter: "H" },
+      { row: 1, col: 3, letter: "O" },
+      { row: 1, col: 5, letter: "P" },
+      { row: 3, col: 1, letter: "E" },
+      { row: 3, col: 3, letter: "R" },
+      { row: 3, col: 5, letter: "A" },
+      { row: 5, col: 1, letter: "D" },
+      { row: 5, col: 3, letter: "O" },
+      { row: 5, col: 5, letter: "G" }
+    ],
+    words: ["HOPE", "OPERA", "DOG", "HERO", "PAD", "GOD", "READ", "ROD"]
+  },
+
+  "DS0002R": {
+    id: "DS0002R",
+    size: 5,
+    difficulty: "R",
+    clues: [
+      { row: 1, col: 1, letter: "C" },
+      { row: 1, col: 3, letter: "O" },
+      { row: 1, col: 5, letter: "D" },
+      { row: 3, col: 1, letter: "A" },
+      { row: 3, col: 3, letter: "R" },
+      { row: 3, col: 5, letter: "T" },
+      { row: 5, col: 1, letter: "E" },
+      { row: 5, col: 3, letter: "L" },
+      { row: 5, col: 5, letter: "Y" }
+    ],
+    words: ["COLD", "ARTY", "DEAL", "YARD", "LAD", "TOY", "COY", "RED"]
   }
 };
-
-function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId];
-  if (!puzzle) return alert("Puzzle not found");
-
-  createGrid(puzzle.size, puzzle.clues);
-}
