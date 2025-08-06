@@ -1,52 +1,86 @@
-function loadPuzzle() {
-  const input = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
-  const puzzle = puzzles[input];
-  if (!puzzle) {
-    alert("Puzzle not found.");
-    return;
-  }
+function createGrid(size) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-  const size = puzzle.size;
-  const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = "";
-  gridContainer.style.gridTemplateColumns = `repeat(${size}, 40px)`;
-  gridContainer.style.gridTemplateRows = `repeat(${size}, 40px)`;
-  gridContainer.className = "grid";
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      const cell = document.createElement('input');
+      cell.type = 'text';
+      cell.maxLength = 1;
+      cell.className = 'cell';
 
-  const cells = [];
-
-  for (let row = 0; row < size; row++) {
-    cells[row] = [];
-    for (let col = 0; col < size; col++) {
-      const cell = document.createElement("input");
-      cell.setAttribute("maxlength", "1");
-
-      const isEditable = row % 2 === 0 || col % 2 === 0;
-      const isShaded = row % 2 === 1 && col % 2 === 1;
-
-      if (isShaded) {
+      if ((r % 2 === 1) && (c % 2 === 1)) {
+        cell.classList.add('editable');
+      } else if ((r % 2 === 0) && (c % 2 === 0)) {
+        cell.classList.add('shaded');
         cell.disabled = true;
-        cell.className = "shaded";
       } else {
-        cell.className = "editable";
+        cell.disabled = true;
       }
 
-      cell.dataset.row = row;
-      cell.dataset.col = col;
-      gridContainer.appendChild(cell);
-      cells[row][col] = cell;
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      grid.appendChild(cell);
     }
   }
+}
 
-  // Place clues (both across and down)
-  ['across', 'down'].forEach(direction => {
-    puzzle.clues[direction].forEach(([row, col, letter]) => {
-      const cell = cells[row][col];
-      if (cell && !cell.disabled) {
-        cell.value = letter;
-        cell.disabled = true;
-        cell.classList.add("clue");
+function fillClues(puzzle) {
+  const size = puzzle.size;
+  const acrossRows = [0, 2, 4, 6];
+  const downCols = [0, 2, 4, 6];
+
+  puzzle.across.forEach((word, i) => {
+    if (i < acrossRows.length) {
+      const row = acrossRows[i];
+      for (let j = 0; j < word.length && j < size; j++) {
+        const ch = word[j];
+        if (ch === ch.toUpperCase()) {
+          const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${j}']`);
+          if (cell) {
+            cell.value = ch;
+            cell.disabled = true;
+          }
+        }
       }
-    });
+    }
+  });
+
+  puzzle.down.forEach((word, i) => {
+    if (i < downCols.length) {
+      const col = downCols[i];
+      for (let j = 0; j < word.length && j < size; j++) {
+        const ch = word[j];
+        if (ch === ch.toUpperCase()) {
+          const cell = document.querySelector(`.cell[data-row='${j}'][data-col='${col}']`);
+          if (cell) {
+            cell.value = ch;
+            cell.disabled = true;
+          }
+        }
+      }
+    }
   });
 }
+
+function loadPuzzleFromInput() {
+  const id = document.getElementById('puzzleIdInput').value.trim().toUpperCase();
+  loadPuzzle(id);
+}
+
+function loadPuzzle(id) {
+  const puzzle = puzzles.find(p => p.id === id);
+  if (!puzzle) {
+    alert('Puzzle not found.');
+    return;
+  }
+  createGrid(puzzle.size);
+  fillClues(puzzle);
+}
+
+// Load default puzzle on page load
+window.onload = () => {
+  loadPuzzle('DS0001B');
+};
