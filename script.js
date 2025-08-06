@@ -1,6 +1,6 @@
 function createGrid(gridSize, clues = {}) {
   const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = ""; // Clear previous grid
+  gridContainer.innerHTML = "";
 
   for (let row = 1; row <= gridSize; row++) {
     const rowDiv = document.createElement("div");
@@ -10,18 +10,21 @@ function createGrid(gridSize, clues = {}) {
       const cell = document.createElement("input");
       const cellId = `R${row}C${col}`;
       const clueLetter = clues[cellId] || "";
-      const isEvenRow = row % 2 === 0;
-      const isEvenCol = col % 2 === 0;
 
       cell.maxLength = 1;
 
-      if (isEvenRow && isEvenCol) {
-        // Kamili shading: shaded if both row and column are even
+      const isEvenRow = row % 2 === 0;
+      const isEvenCol = col % 2 === 0;
+      const isShaded = isEvenRow && isEvenCol;
+
+      if (isShaded) {
         cell.disabled = true;
         cell.className = "cell shaded";
       } else {
         cell.className = "cell editable";
-        if (clueLetter) cell.value = clueLetter;
+        if (clueLetter) {
+          cell.value = clueLetter;
+        }
       }
 
       rowDiv.appendChild(cell);
@@ -30,3 +33,29 @@ function createGrid(gridSize, clues = {}) {
     gridContainer.appendChild(rowDiv);
   }
 }
+
+// Example puzzle
+const puzzles = {
+  DS0003R: {
+    size: 5,
+    clues: {
+      "R1C1": "W", "R1C3": "A", "R1C5": "T",
+      "R3C1": "A", "R3C3": "R", "R3C5": "E",
+      "R5C1": "B", "R5C3": "O", "R5C5": "X"
+    }
+  }
+};
+
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  if (!puzzle) {
+    alert("Puzzle not found");
+    return;
+  }
+
+  createGrid(puzzle.size, puzzle.clues);
+}
+
+window.onload = () => {
+  loadPuzzle("DS0003R");
+};
