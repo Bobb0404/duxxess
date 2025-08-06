@@ -8,11 +8,16 @@
 </head>
 <body>
   <h1>Duxxess</h1>
-  <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g., DS0001B)">
-  <button onclick="loadFromInput()">Load Puzzle</button>
-  <div id="gridContainer"></div>
+  <label for="puzzleSelect">Choose a Puzzle:</label>
+  <select id="puzzleSelect">
+    <option value="">-- Select Puzzle --</option>
+    <option value="DS0001B">DS0001B (3×3 Beginner)</option>
+    <option value="DS0001R">DS0001R (5×5 Rookie)</option>
+    <option value="DS0001E">DS0001E (7×7 Elite)</option>
+  </select>
 
-  <!-- Ensure puzzles.js loads BEFORE script.js -->
+  <div id="grid" class="grid-container"></div>
+
   <script src="puzzles.js"></script>
   <script src="script.js"></script>
 </body>
