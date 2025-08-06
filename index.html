@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Duxxess Square</title>
+  <title>Duxxess</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>The Duxxess Square</h1>
+  <h1>Duxxess</h1>
+  <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g., DS0001B)">
+  <button onclick="loadFromInput()">Load Puzzle</button>
+  <div id="gridContainer"></div>
 
-  <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g. DS0001B)" />
-  <button onclick="handleLoad()">Load Puzzle</button>
-
-  <div id="grid"></div>
-
+  <!-- Ensure puzzles.js loads BEFORE script.js -->
   <script src="puzzles.js"></script>
   <script src="script.js"></script>
 </body>
