@@ -1,86 +1,73 @@
 function createGrid(size) {
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  grid.style.gridTemplateColumns = `repeat(${size},1fr)`;
+  grid.style.gridTemplateRows = `repeat(${size},1fr)`;
 
-  for (let r = 0; r < size; r++) {
-    for (let c = 0; c < size; c++) {
-      const cell = document.createElement('input');
-      cell.type = 'text';
+  for (let r = 1; r <= size; r++) {
+    for (let c = 1; c <= size; c++) {
+      const cell = document.createElement("input");
       cell.maxLength = 1;
-      cell.className = 'cell';
+      cell.dataset.r = r;
+      cell.dataset.c = c;
 
-      if ((r % 2 === 1) && (c % 2 === 1)) {
-        cell.classList.add('editable');
-      } else if ((r % 2 === 0) && (c % 2 === 0)) {
-        cell.classList.add('shaded');
+      const evenR = r % 2 === 0;
+      const evenC = c % 2 === 0;
+      if (evenR && evenC) {
+        cell.className = "shaded";
         cell.disabled = true;
       } else {
-        cell.disabled = true;
+        cell.className = "editable";
       }
 
-      cell.dataset.row = r;
-      cell.dataset.col = c;
       grid.appendChild(cell);
     }
   }
 }
 
-function fillClues(puzzle) {
+function placeClues(puzzle) {
   const size = puzzle.size;
-  const acrossRows = [0, 2, 4, 6];
-  const downCols = [0, 2, 4, 6];
+  const acrossRows = [1,3,5,7];
+  const downCols = [1,3,5,7];
 
-  puzzle.across.forEach((word, i) => {
-    if (i < acrossRows.length) {
-      const row = acrossRows[i];
-      for (let j = 0; j < word.length && j < size; j++) {
-        const ch = word[j];
-        if (ch === ch.toUpperCase()) {
-          const cell = document.querySelector(`.cell[data-row='${row}'][data-col='${j}']`);
-          if (cell) {
-            cell.value = ch;
-            cell.disabled = true;
-          }
-        }
+  puzzle.across.forEach((word,i) => {
+    const row = acrossRows[i];
+    if (!row || word.length > size) return;
+
+    for (let j=0; j<word.length; j++) {
+      const ch = word[j];
+      if (ch === ch.toUpperCase()) {
+        const sel = `input[data-r='${row}'][data-c='${j+1}']`;
+        const cell = document.querySelector(sel);
+        if (cell) cell.value = ch, cell.disabled = true;
       }
     }
   });
 
-  puzzle.down.forEach((word, i) => {
-    if (i < downCols.length) {
-      const col = downCols[i];
-      for (let j = 0; j < word.length && j < size; j++) {
-        const ch = word[j];
-        if (ch === ch.toUpperCase()) {
-          const cell = document.querySelector(`.cell[data-row='${j}'][data-col='${col}']`);
-          if (cell) {
-            cell.value = ch;
-            cell.disabled = true;
-          }
-        }
+  puzzle.down.forEach((word,i) => {
+    const col = downCols[i];
+    if (!col || word.length > size) return;
+
+    for (let j=0; j<word.length; j++) {
+      const ch = word[j];
+      if (ch === ch.toUpperCase()) {
+        const sel = `input[data-r='${j+1}'][data-c='${col}']`;
+        const cell = document.querySelector(sel);
+        if (cell) cell.value = ch, cell.disabled = true;
       }
     }
   });
 }
 
-function loadPuzzleFromInput() {
-  const id = document.getElementById('puzzleIdInput').value.trim().toUpperCase();
-  loadPuzzle(id);
-}
-
-function loadPuzzle(id) {
-  const puzzle = puzzles.find(p => p.id === id);
-  if (!puzzle) {
-    alert('Puzzle not found.');
+function loadPuzzle() {
+  const id = document.getElementById("puzzleIdInput").value.trim().toUpperCase() || "DS0001B";
+  const p = puzzles[id];
+  if (!p) {
+    alert("Puzzle not found: " + id);
     return;
   }
-  createGrid(puzzle.size);
-  fillClues(puzzle);
+  createGrid(p.size);
+  placeClues(p);
 }
 
-// Load default puzzle on page load
-window.onload = () => {
-  loadPuzzle('DS0001B');
-};
+window.onload = loadPuzzle;
