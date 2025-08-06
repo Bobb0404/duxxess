@@ -1,53 +1,20 @@
-const puzzles = {
-  DS0001B: {
+const puzzles = [
+  {
+    id: "DS0001B",
     size: 3,
-    clues: {
-      // Format: [row, col, letter]
-      across: [
-        [0, 0, 'B'], [0, 1, 'A'], [0, 2, 'D'],
-        [1, 0, 'E'], [1, 1, 'N'], [1, 2, 'D'],
-      ],
-      down: [
-        [0, 0, 'B'], [1, 0, 'Y'], [2, 0, 'E'],
-        [0, 1, 'D'], [1, 1, 'A'], [2, 1, 'D'],
-      ]
-    },
-    solutionWords: ['BAD', 'END', 'BYE', 'DAD']
+    across: ["bAd", "eNd", "cAt"],
+    down: ["ByE", "dAd", "nOt"]
   },
-
-  DS0001R: {
+  {
+    id: "DS0001R",
     size: 5,
-    clues: {
-      across: [
-        [0, 0, 'C'], [0, 1, 'R'], [0, 2, 'E'], [0, 3, 'E'], [0, 4, 'P'],
-        [1, 0, 'N'], [1, 1, 'O'], [1, 2, 'R'], [1, 3, 'M'],
-        [2, 0, 'E'], [2, 1, 'T'], [2, 2, 'H'], [2, 3, 'E'], [2, 4, 'R'],
-      ],
-      down: [
-        [0, 0, 'C'], [1, 0, 'A'], [2, 0, 'N'], [3, 0, 'O'], [4, 0, 'E'],
-        [0, 1, 'E'], [1, 1, 'A'], [2, 1, 'R'], [3, 1, 'T'], [4, 1, 'H'],
-        [0, 2, 'P'], [1, 2, 'O'], [2, 2, 'S'], [3, 2, 'E'], [4, 2, 'R'],
-      ]
-    },
-    solutionWords: ['CREEP', 'NORM', 'ETHER', 'CANOE', 'EARTH', 'POSER']
+    across: ["CRANE", "apple", "GRILL", "eager", "LATCH"],
+    down: ["CAGED", "RAISE", "Aroma", "Nylon", "EVERY"]
   },
-
-  DS0001E: {
+  {
+    id: "DS0001E",
     size: 7,
-    clues: {
-      across: [
-        [0, 0, 'M'], [0, 1, 'I'], [0, 2, 'S'], [0, 3, 'T'], [0, 4, 'A'], [0, 5, 'K'], [0, 6, 'E'],
-        [1, 0, 'T'], [1, 1, 'A'], [1, 2, 'M'], [1, 3, 'P'], [1, 4, 'E'], [1, 5, 'R'], [1, 6, 'S'],
-        [2, 0, 'H'], [2, 1, 'A'], [2, 2, 'L'], [2, 3, 'O'], [2, 4, 'G'], [2, 5, 'E'], [2, 6, 'N'],
-        [3, 0, 'R'], [3, 1, 'E'], [3, 2, 'S'], [3, 3, 'I'], [3, 4, 'D'], [3, 5, 'U'], [3, 6, 'E'],
-      ],
-      down: [
-        [0, 0, 'M'], [1, 0, 'A'], [2, 0, 'T'], [3, 0, 'C'], [4, 0, 'H'], [5, 0, 'E'], [6, 0, 'R'],
-        [0, 1, 'S'], [1, 1, 'A'], [2, 1, 'M'], [3, 1, 'P'], [4, 1, 'L'], [5, 1, 'E'], [6, 1, 'S'],
-        [0, 2, 'A'], [1, 2, 'V'], [2, 2, 'E'], [3, 2, 'N'], [4, 2, 'G'], [5, 2, 'E'], [6, 2, 'D'],
-        [0, 3, 'E'], [1, 3, 'S'], [2, 3, 'S'], [3, 3, 'E'], [4, 3, 'N'], [5, 3, 'C'], [6, 3, 'E'],
-      ]
-    },
-    solutionWords: ['MISTAKE', 'TAMPERS', 'HALOGEN', 'RESIDUE', 'MATCHER', 'SAMPLES', 'AVENGED', 'ESSENCE']
+    across: ["MApLEs", "origin", "sToRER", "elders", "tInkER", "sorrow", "FALTER"],
+    down: ["Mothers", "Arisen", "pRodERs", "LLDERRR", "Enlist", "sneers", "STEWED"]
   }
-};
+];
