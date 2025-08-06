@@ -9,14 +9,12 @@
 <body>
   <h1>The Duxxess Square</h1>
 
-  <div id="puzzle-loader">
-    <input type="text" id="puzzle-id" placeholder="Enter Puzzle ID (e.g., DS0001B)" />
-    <button onclick="loadPuzzle()">Load Puzzle</button>
-  </div>
+  <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g. DS0001B)" />
+  <button onclick="handleLoad()">Load Puzzle</button>
 
-  <div id="grid-container"></div>
+  <div id="grid"></div>
 
   <script src="puzzles.js"></script>
-  <script src="gridRenderer.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
