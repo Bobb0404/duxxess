@@ -1,36 +1,17 @@
-{
-  "DS0001B": {
-    "size": 3,
-    "clues": {
-      "0,0": "B",
-      "0,1": "A",
-      "0,2": "D",
-      "1,0": "Y",
-      "2,0": "E"
-    }
-  },
-  "DS0001R": {
-    "size": 5,
-    "clues": {
-      "0,0": "C",
-      "0,1": "R",
-      "0,2": "E",
-      "0,3": "E",
-      "0,4": "P",
-      "1,0": "N",
-      "1,4": "S",
-      "2,0": "E",
-      "2,4": "R",
-      "0,0": "C",
-      "1,0": "N",
-      "2,0": "E",
-      "3,0": "O",
-      "4,0": "E",
-      "0,1": "R",
-      "1,1": "O",
-      "2,1": "T",
-      "3,1": "T",
-      "4,1": "A"
+const puzzles = {
+  DS0003R: {
+    size: 5,
+    clues: {
+      "R1C1": "W", "R1C3": "A", "R1C5": "T",
+      "R3C1": "A", "R3C3": "R", "R3C5": "E",
+      "R5C1": "B", "R5C3": "O", "R5C5": "X"
     }
   }
+};
+
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  if (!puzzle) return alert("Puzzle not found");
+
+  createGrid(puzzle.size, puzzle.clues);
 }
