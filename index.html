@@ -3,20 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Duxxess</title>
+  <title>The Duxxess Square</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Duxxess</h1>
-  <label for="puzzleSelect">Choose a Puzzle:</label>
-  <select id="puzzleSelect">
-    <option value="">-- Select Puzzle --</option>
-    <option value="DS0001B">DS0001B (3×3 Beginner)</option>
-    <option value="DS0001R">DS0001R (5×5 Rookie)</option>
-    <option value="DS0001E">DS0001E (7×7 Elite)</option>
-  </select>
-
-  <div id="grid" class="grid-container"></div>
+  <h1>The Duxxess Square</h1>
+  <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID (e.g. DS0001B)" />
+  <button onclick="loadPuzzle()">Load Puzzle</button>
+  <div id="grid"></div>
 
   <script src="puzzles.js"></script>
   <script src="script.js"></script>
