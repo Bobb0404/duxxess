@@ -1,55 +1,51 @@
-function createGrid(gridSize, clues = {}) {
-  const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = "";
+function createGrid(size, clues = {}) {
+  const container = document.getElementById("gridContainer");
+  container.innerHTML = "";
 
-  for (let row = 1; row <= gridSize; row++) {
-    const rowDiv = document.createElement("div");
-    rowDiv.className = "grid-row";
+  const table = document.createElement("table");
+  for (let r = 1; r <= size; r++) {
+    const row = document.createElement("tr");
+    for (let c = 1; c <= size; c++) {
+      const cell = document.createElement("td");
 
-    for (let col = 1; col <= gridSize; col++) {
-      const cell = document.createElement("input");
-      const cellId = `R${row}C${col}`;
-      const clueLetter = clues[cellId] || "";
-
-      cell.maxLength = 1;
-
-      const isEvenRow = row % 2 === 0;
-      const isEvenCol = col % 2 === 0;
-      const isShaded = isEvenRow && isEvenCol;
-
+      const isShaded = r % 2 === 0 && c % 2 === 0;
       if (isShaded) {
-        cell.disabled = true;
-        cell.className = "cell shaded";
+        cell.classList.add("shaded");
       } else {
-        cell.className = "cell editable";
-        if (clueLetter) {
-          cell.value = clueLetter.toUpperCase();
+        const input = document.createElement("input");
+        input.maxLength = 1;
+
+        const key = `R${r}C${c}`;
+        if (clues[key]) {
+          input.value = clues[key];
+          input.readOnly = true;
+          input.classList.add("clue");
         }
+
+        cell.appendChild(input);
       }
 
-      rowDiv.appendChild(cell);
+      row.appendChild(cell);
     }
-
-    gridContainer.appendChild(rowDiv);
+    table.appendChild(row);
   }
+  container.appendChild(table);
 }
 
-function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId];
+function loadPuzzle(id) {
+  const puzzle = puzzles[id];
   if (!puzzle) {
-    alert("Puzzle not found");
+    alert(`Puzzle ID "${id}" not found.`);
     return;
   }
-
   createGrid(puzzle.size, puzzle.clues);
 }
 
-function handleLoad() {
-  const puzzleId = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
-  loadPuzzle(puzzleId);
+function loadFromInput() {
+  const input = document.getElementById("puzzleIdInput").value.trim().toUpperCase();
+  loadPuzzle(input);
 }
 
-// Auto-load DS0001B on first visit
 window.onload = () => {
   loadPuzzle("DS0001B");
 };
