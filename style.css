@@ -1,63 +1,15 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #222;
-}
-
-header h1 {
-  margin-bottom: 15px;
-}
-
-#puzzle-selector {
-  margin-bottom: 15px;
-}
-
-#puzzleIdInput {
-  padding: 5px;
-  font-size: 16px;
-  width: 150px;
-  margin-right: 8px;
-}
-
-#loadPuzzleBtn {
-  padding: 6px 12px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  border: 1px solid #666;
-  background: none;
-  color: #222;
-}
-
-#loadPuzzleBtn:hover {
-  background-color: #eee;
-}
-
-#errorMessage {
-  color: red;
-  margin-top: 8px;
-}
-
-.hidden {
-  display: none;
-}
-
-/* THE GRID CONTAINER: background is line color, gap is line width */
 .duxxess-grid {
   display: grid;
-  grid-gap: 2px;               /* gap between cells is the grid line */
-  background-color: #444;      /* color of the grid lines */
-  border: 2px solid #444;      /* outer border same as grid lines */
-  margin-bottom: 20px;
-  justify-content: start;
+  grid-template-columns: repeat(var(--grid-size), 48px);
+  grid-template-rows: repeat(var(--grid-size), 48px);
+  gap: 1px;                        /* 1px grid lines for crispness */
+  background-color: #444;          /* grid line color */
+  border: 2px solid #444;          /* outer border */
   width: max-content;
-  grid-template-columns: repeat(auto-fit, 48px);
+  margin-bottom: 20px;
 }
 
-/* CELLS have no border, fill area only */
+/* Cells: no borders, just background and size */
 .cell {
   width: 48px;
   height: 48px;
@@ -73,9 +25,9 @@ header h1 {
   box-sizing: border-box;
 }
 
-/* SHADED CELLS have fill color, no border */
+/* Shaded cells with fill */
 .cell.shaded {
-  background-color: #ddd;  /* light gray fill */
+  background-color: #ddd;
   pointer-events: none;
   color: transparent;
 }
@@ -110,6 +62,10 @@ header h1 {
 }
 
 @media (max-width: 600px) {
+  .duxxess-grid {
+    grid-template-columns: repeat(var(--grid-size), 36px);
+    grid-template-rows: repeat(var(--grid-size), 36px);
+  }
   .cell {
     width: 36px;
     height: 36px;
@@ -118,24 +74,4 @@ header h1 {
   .cell input {
     font-size: 16px;
   }
-}
-
-#clues {
-  width: 350px;
-  max-width: 90vw;
-}
-
-#clues h2 {
-  margin-bottom: 6px;
-}
-
-#clues ul {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 15px;
-}
-
-#clues li {
-  padding: 2px 0;
-  font-size: 16px;
 }
