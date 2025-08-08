@@ -31,30 +31,5 @@ const puzzles = {
       "LiD",
       "GiG"
     ]
-  },
-
-  "DS0001R": {
-    size: 5,
-    letters: [
-      "C", "R", "E", "E", "P",
-      "N", "O", "R", "E", "D",
-      "S", "I", "L", "E", "N",
-      "T", "L", "A", "N", "E",
-      "R", "O", "A", "S", "T"
-    ],
-    across: [
-      "CREEP",
-      "NORED",
-      "SILEN",
-      "TLANE",
-      "ROAST"
-    ],
-    down: [
-      "CNSTR",
-      "RIOLA",
-      "ELLAO",
-      "EENAN",
-      "PDNTE"
-    ]
   }
 };
