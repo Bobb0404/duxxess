@@ -1,107 +1,63 @@
+// Puzzle data indexed by puzzle ID
+// Each puzzle includes grid size, clues, and initial letters (optional)
+
 const puzzles = {
-  DS0001B: {
-    id: "DS0001B",
-    title: "Beginner Puzzle 1",
-    difficulty: "B",
+  "DS0001B": {
     size: 3,
-    words: [
-      "BAD",
-      "END",
-      "BYE",
-      "DAD"
+    letters: [
+      "B", "A", "D",
+      "E", "N", "D",
+      "B", "Y", "E"
     ],
-    grid: [
-      ["B", "A", "D"],
-      [" ", "X", " "],
-      ["E", "N", "D"]
+    across: [
+      "BaD",
+      "EnD"
     ],
+    down: [
+      "ByE",
+      "DaD"
+    ]
   },
 
-  DS0002B: {
-    id: "DS0002B",
-    title: "Beginner Puzzle 2",
-    difficulty: "B",
+  "DS0002B": {
     size: 3,
-    words: [
-      "LEG",
-      "DIG",
-      "LID",
-      "GIG"
+    letters: [
+      "L", "E", "G",
+      "D", "I", "G",
+      "L", "I", "D"
     ],
-    grid: [
-      ["L", "E", "G"],
-      [" ", "X", " "],
-      ["D", "I", "G"]
+    across: [
+      "LeG",
+      "DiG"
     ],
+    down: [
+      "LiD",
+      "GiG"
+    ]
   },
 
-  DS0001R: {
-    id: "DS0001R",
-    title: "Rookie Puzzle 1",
-    difficulty: "R",
+  "DS0001R": {
     size: 5,
-    words: [
+    letters: [
+      "C", "R", "E", "E", "P",
+      "N", "O", "R", "E", "D",
+      "S", "I", "L", "E", "N",
+      "T", "L", "A", "N", "E",
+      "R", "O", "A", "S", "T"
+    ],
+    across: [
       "CREEP",
-      "NORMS",
-      "ETHER",
-      "CANOE",
-      "EARTH",
-      "POSER"
+      "NORED",
+      "SILEN",
+      "TLANE",
+      "ROAST"
     ],
-    grid: [
-      ["C", "R", "E", "E", "P"],
-      [" ", "X", " ", "X", " "],
-      ["N", "O", "R", "M", "S"],
-      [" ", "X", " ", "X", " "],
-      ["E", "T", "H", "E", "R"]
-    ],
-  },
-
-  DS0001I: {
-    id: "DS0001I",
-    title: "Intermediate Puzzle 1",
-    difficulty: "I",
-    size: 5,
-    words: [
-      "BACON",
-      "EDICT",
-      "SOFAS",
-      "BREWS",
-      "CLIFF",
-      "NOTES"
-    ],
-    grid: [
-      ["B", "A", "C", "O", "N"],
-      [" ", "X", " ", "X", " "],
-      ["E", "D", "I", "C", "T"],
-      [" ", "X", " ", "X", " "],
-      ["S", "O", "F", "A", "S"]
-    ],
-  },
-
-  DS0001E: {
-    id: "DS0001E",
-    title: "Elite Puzzle 1",
-    difficulty: "E",
-    size: 7,
-    words: [
-      "MISTAKE",
-      "TAMPERS",
-      "HALOGEN",
-      "RESIDUE",
-      "MATCHER",
-      "SAMPLES",
-      "AVENGED",
-      "ESSENCE"
-    ],
-    grid: [
-      ["M", "I", "S", "T", "A", "K", "E"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["T", "A", "M", "P", "E", "R", "S"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["H", "A", "L", "O", "G", "E", "N"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["R", "E", "S", "I", "D", "U", "E"]
-    ],
-  },
+    down: [
+      "CNSTR",
+      "RIOLA",
+      "ELLAO",
+      "EENAN",
+      "PDNTE"
+    ]
+  }
 };
