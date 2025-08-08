@@ -7,12 +7,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFD700; /* Rich yellow */
+    background-color: #FFFACD; /* Light yellow background */
     color: black;
 }
 
 header {
-    background-color: #FFD700; /* match body bg */
+    background-color: #FFFACD; /* match body bg */
     color: black;
     width: 100%;
     padding: 10px;
@@ -22,7 +22,7 @@ header {
 #puzzleSearch {
     padding: 5px;
     font-size: 1rem;
-    background-color: #FFFACD; /* Light yellow */
+    background-color: #ADD8E6; /* Light blue */
     color: black;
     border: 1px solid black;
 }
@@ -31,7 +31,7 @@ header {
     padding: 6px 10px;
     font-size: 1rem;
     cursor: pointer;
-    background-color: #FFFACD; /* Light yellow */
+    background-color: #ADD8E6; /* Light blue */
     color: black;
     border: 1px solid black;
 }
@@ -51,16 +51,20 @@ header {
 }
 
 .grid-cell {
-    width: 100%; /* Make cells fill their grid container equally */
+    width: 100%; /* fill container */
     height: 0;
-    padding-bottom: 100%; /* Makes cells square */
+    padding-bottom: 100%; /* make square */
     box-sizing: border-box;
     border: 1px solid black;
-    text-align: center;
-    font-size: 1.2rem;
+    position: relative;
     font-weight: bold;
     color: black;
-    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
 }
 
 .grid-cell input {
@@ -71,16 +75,16 @@ header {
     left: 0;
     border: none;
     text-align: center;
-    font-size: 1.2rem;
     font-weight: bold;
     color: black;
     background: transparent;
     outline: none;
+    font-size: 1.2rem;
 }
 
 /* Editable cells background */
 .editable {
-    background-color: #FFFACD; /* Light yellow */
+    background-color: #ADD8E6; /* Light blue */
 }
 
 /* Shaded cells background */
