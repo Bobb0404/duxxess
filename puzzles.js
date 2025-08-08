@@ -1,81 +1,76 @@
 /* ==============================
-   Duxxess Main JS
+   Duxxess Puzzles Data
    ============================== */
+/*
+Format reminder:
+- id: puzzle code (e.g., DS0001B)
+- size: grid size (3, 5, or 7)
+- clues: object with "across" and "down" arrays of {row,col,word}
+- solution: list of 8 target words (for validation)
+*/
 
-/* --- Existing puzzle logic --- */
-// Example placeholder — replace with your actual puzzle rendering logic
-document.addEventListener("DOMContentLoaded", function() {
-  loadPuzzle("DS0001B"); // Default puzzle
-});
-
-function loadPuzzle(puzzleId) {
-  // Your existing logic to render grid & clues here
-  console.log("Loading puzzle:", puzzleId);
-
-  // Example: set grid size
-  let gridSize = 3; // Default
-  if (puzzleId.includes("R") || puzzleId.includes("I")) gridSize = 5;
-  if (puzzleId.includes("E") || puzzleId.includes("M")) gridSize = 7;
-
-  renderGrid(gridSize);
-  sizeGrid(gridSize); // <-- Call sizing after rendering
-}
-
-function renderGrid(size) {
-  const gridContainer = document.getElementById("grid-container");
-  gridContainer.innerHTML = "";
-  gridContainer.style.setProperty("--cols", size);
-  gridContainer.style.setProperty("--rows", size);
-
-  for (let r = 1; r <= size; r++) {
-    for (let c = 1; c <= size; c++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-
-      // Kamili milestone shading rules
-      if (r % 2 === 0 && c % 2 === 0) {
-        cell.classList.add("shaded");
-      } else {
-        cell.classList.add("editable");
-      }
-
-      gridContainer.appendChild(cell);
-    }
+const puzzles = [
+  {
+    id: "DS0001B",
+    size: 3,
+    clues: {
+      across: [
+        { row: 1, col: 1, word: "CAT" },
+        { row: 3, col: 1, word: "SUN" }
+      ],
+      down: [
+        { row: 1, col: 1, word: "CAR" },
+        { row: 1, col: 3, word: "TEN" }
+      ]
+    },
+    solution: ["CAT", "SUN", "CAR", "TEN", "CUT", "SIR", "CAN", "RUN"]
+  },
+  {
+    id: "DS0002R",
+    size: 5,
+    clues: {
+      across: [
+        { row: 1, col: 1, word: "HOUSE" },
+        { row: 3, col: 1, word: "RIVER" },
+        { row: 5, col: 1, word: "PLANT" }
+      ],
+      down: [
+        { row: 1, col: 1, word: "HORSE" },
+        { row: 1, col: 3, word: "ULTRA" },
+        { row: 1, col: 5, word: "ENTER" }
+      ]
+    },
+    solution: [
+      "HOUSE", "RIVER", "PLANT",
+      "HORSE", "ULTRA", "ENTER",
+      "HOVER", "REACT"
+    ]
+  },
+  {
+    id: "DS0003E",
+    size: 7,
+    clues: {
+      across: [
+        { row: 1, col: 1, word: "FREEDOM" },
+        { row: 3, col: 1, word: "BALANCE" },
+        { row: 5, col: 1, word: "GARDENS" },
+        { row: 7, col: 1, word: "MARKETS" }
+      ],
+      down: [
+        { row: 1, col: 1, word: "FABRICS" },
+        { row: 1, col: 3, word: "RENEWAL" },
+        { row: 1, col: 5, word: "ENDLESS" },
+        { row: 1, col: 7, word: "DESERTS" }
+      ]
+    },
+    solution: [
+      "FREEDOM", "BALANCE", "GARDENS", "MARKETS",
+      "FABRICS", "RENEWAL", "ENDLESS", "DESERTS"
+    ]
   }
+];
+
+/* Utility: Find puzzle by ID */
+function getPuzzleById(id) {
+  return puzzles.find(p => p.id.toUpperCase() === id.toUpperCase());
 }
-
-/* ==============================
-   GRID SIZING LOGIC (Merged)
-   ============================== */
-function sizeGrid(size) {
-  const PCT_FOR = {3: 0.40, 5: 0.50, 7: 0.60};
-  const gridContainer = document.getElementById("grid-container");
-  const pct = PCT_FOR[size] || 0.40;
-
-  function applySizing() {
-    const parent = document.getElementById("grid-wrapper") || document.body;
-    const parentWidth = parent.clientWidth;
-    const viewportHeight = window.innerHeight;
-    const limit = Math.min(parentWidth, viewportHeight);
-    const px = Math.max(80, Math.floor(limit * pct));
-    gridContainer.style.width = px + "px";
-    gridContainer.style.height = px + "px";
-  }
-
-  applySizing();
-  window.addEventListener("resize", applySizing);
-}
-
-/* ==============================
-   Puzzle Search & Loader
-   ============================== */
-document.getElementById("search-box").addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    loadPuzzle(this.value.trim());
-  }
-});
-
-document.getElementById("load-puzzle-btn").addEventListener("click", function() {
-  const id = document.getElementById("search-box").value.trim();
-  loadPuzzle(id);
-});
