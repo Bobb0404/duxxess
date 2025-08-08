@@ -1,57 +1,60 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
-    const gridContainer = document.getElementById("grid-container");
-    const puzzleIdInput = document.getElementById("puzzle-id");
-    const loadPuzzleBtn = document.getElementById("load-puzzle");
+    const gridContainer = document.getElementById("gridContainer");
+    const acrossClues = document.getElementById("acrossClues");
+    const downClues = document.getElementById("downClues");
 
-    // Load default puzzle on page load
-    loadPuzzle("DS0001B");
-
-    loadPuzzleBtn.addEventListener("click", () => {
-        const puzzleId = puzzleIdInput.value.trim().toUpperCase();
-        loadPuzzle(puzzleId);
+    document.getElementById("loadPuzzleBtn").addEventListener("click", () => {
+        const id = document.getElementById("puzzleSearch").value.trim().toUpperCase();
+        loadPuzzle(id);
     });
 
-    function loadPuzzle(puzzleId) {
-        const puzzle = getPuzzleById(puzzleId);
-        if (!puzzle) {
+    // Load DS0001B by default
+    loadPuzzle("DS0001B");
+
+    function loadPuzzle(id) {
+        if (!puzzles[id]) {
             alert("Puzzle not found!");
             return;
         }
-        renderGrid(puzzle);
+
+        const puzzle = puzzles[id];
+        generateGrid(puzzle.size);
+        acrossClues.innerHTML = "";
+        downClues.innerHTML = "";
+
+        puzzle.across.forEach(clue => {
+            addClue(acrossClues, clue.clue);
+        });
+        puzzle.down.forEach(clue => {
+            addClue(downClues, clue.clue);
+        });
     }
 
-    function renderGrid(puzzle) {
+    function generateGrid(size) {
         gridContainer.innerHTML = "";
-        const size = puzzle.size;
-
-        const table = document.createElement("table");
-        table.classList.add("duxxess-grid");
+        gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
 
         for (let row = 1; row <= size; row++) {
-            const tr = document.createElement("tr");
             for (let col = 1; col <= size; col++) {
-                const td = document.createElement("td");
+                const cell = document.createElement("input");
+                cell.maxLength = 1;
+                cell.classList.add("grid-cell");
 
                 if (row % 2 === 0 && col % 2 === 0) {
-                    td.classList.add("shaded");
+                    cell.classList.add("shaded");
+                    cell.disabled = true;
                 } else {
-                    td.contentEditable = true;
-                    td.classList.add("editable");
-
-                    const clue = puzzle.clues[`${row},${col}`];
-                    if (clue) {
-                        td.textContent = clue;
-                        td.classList.add("clue");
-                        td.contentEditable = false;
-                    }
+                    cell.classList.add("editable");
                 }
-                tr.appendChild(td);
+
+                gridContainer.appendChild(cell);
             }
-            table.appendChild(tr);
         }
-        gridContainer.appendChild(table);
     }
-}
-);
+
+    function addClue(container, clueText) {
+        const li = document.createElement("li");
+        li.textContent = clueText;
+        container.appendChild(li);
+    }
+});
