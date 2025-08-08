@@ -3,17 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Duxxess Square - Stable Baseline</title>
+  <title>Duxxess Square</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="duxxess-container">
+  <header>
     <h1>Duxxess Square</h1>
-    <input type="text" id="search-box" placeholder="Search words or puzzle ID..." />
-    <div id="puzzle-title"></div>
-    <div id="puzzle-info"></div>
-    <div id="grid-container" class="grid"></div>
-  </div>
+  </header>
+
+  <main>
+    <section id="puzzle-selector">
+      <label for="puzzleIdInput">Enter Puzzle ID:</label>
+      <input type="text" id="puzzleIdInput" placeholder="e.g. DS0001B" />
+      <button id="loadPuzzleBtn">Load Puzzle</button>
+      <p id="errorMessage" class="hidden"></p>
+    </section>
+
+    <section id="duxxessGrid" class="duxxess-grid"></section>
+
+    <section id="clues">
+      <h2>Across</h2>
+      <ul id="acrossClues"></ul>
+      <h2>Down</h2>
+      <ul id="downClues"></ul>
+    </section>
+  </main>
 
   <script src="puzzles.js"></script>
   <script src="script.js"></script>
