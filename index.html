@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>The Duxxess Square</title>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duxxess Square</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>The Duxxess Square</h1>
-  <input id="puzzleIdInput" placeholder="Puzzle ID (e.g. DS0001B)"/>
-  <button onclick="loadPuzzle()">Load Puzzle</button>
-  <div id="grid" class="grid-container"></div>
-  <script src="puzzles.js"></script>
-  <script src="script.js"></script>
+    <header>
+        <h1>Duxxess Square</h1>
+        <div class="search-container">
+            <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID">
+            <button id="loadPuzzleBtn">Load Puzzle</button>
+        </div>
+        <div id="notificationBell">🔔</div>
+    </header>
+
+    <main>
+        <div id="gridContainer"></div>
+        <div id="wordListContainer">
+            <h2>Words to Find</h2>
+            <ul id="wordList"></ul>
+        </div>
+    </main>
+
+    <script src="puzzles.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
