@@ -37,9 +37,8 @@ header {
     justify-content: center;
     margin: 20px 0;
     gap: 0;
-    width: 50vw;            /* Fixed width: 50% of viewport */
-    max-width: 600px;       /* Optional max width */
-    aspect-ratio: 1 / 1;    /* Keep grid perfectly square */
+    max-width: 700px;       /* Max width cap */
+    aspect-ratio: 1 / 1;    /* Keep square */
 }
 
 .grid-cell {
@@ -67,7 +66,7 @@ header {
 }
 
 #cluesContainer {
-    display: none; /* Hide clues and their headings */
+    display: none; /* Hide clues */
 }
 
 h2 {
