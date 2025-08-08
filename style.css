@@ -53,20 +53,23 @@ header h1 {
   background-color: royalblue;
   border: 3px solid royalblue;
   margin-bottom: 20px;
+  justify-content: start;
+  width: max-content;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   background-color: lightyellow;
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 22px;
   user-select: none;
   cursor: default;
+  box-sizing: border-box;
 }
 
 .cell.shaded {
@@ -83,17 +86,21 @@ header h1 {
 }
 
 .cell input {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   border: none;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
   background-color: transparent;
   outline: none;
   user-select: text;
   text-transform: uppercase;
   caret-color: royalblue;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-family: inherit;
 }
 
 .cell input::placeholder {
@@ -103,12 +110,12 @@ header h1 {
 
 @media (max-width: 600px) {
   .cell {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
   }
   .cell input {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
