@@ -47,17 +47,19 @@ header h1 {
 
 .duxxess-grid {
   display: grid;
-  gap: 2px;
-  border: 3px solid #444;
+  border: 2px solid #444;
   margin-bottom: 20px;
   justify-content: start;
   width: max-content;
+  grid-gap: 0; /* no gap for continuous lines */
+  grid-template-columns: repeat(auto-fit, 48px);
 }
 
 .cell {
   width: 48px;
   height: 48px;
-  border: 1px solid #999;
+  box-sizing: border-box;
+  border: 1px solid #444; /* all cells have same border to create continuous grid */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,16 +67,14 @@ header h1 {
   font-size: 22px;
   user-select: none;
   cursor: default;
-  box-sizing: border-box;
-  color: #222;
   background: transparent;
+  color: #222;
 }
 
 .cell.shaded {
+  background: #ddd;
   pointer-events: none;
   color: transparent;
-  background: #ddd; /* subtle difference to indicate shaded */
-  border-color: #bbb;
 }
 
 .cell.editable {
@@ -111,6 +111,7 @@ header h1 {
     width: 36px;
     height: 36px;
     font-size: 16px;
+    border-width: 1px;
   }
   .cell input {
     font-size: 16px;
