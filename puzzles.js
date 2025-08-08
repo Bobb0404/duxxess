@@ -1,85 +1,52 @@
-// puzzles.js
+// puzzles.js - stable baseline puzzles data
 
 const puzzles = {
-  "DS0001B": {
-    size: 3,
-    across: [
-      "BaD",   // row 1
-      "EnD",   // row 3
-    ],
-    down: [
-      "ByE",   // col 1
-      "DaD",   // col 3
-    ],
-  },
-  "DS0001R": {
-    size: 5,
-    across: [
-      "CREEP",  // row 1
-      "Norms",  // row 3
-      "EtheR",  // row 5
-    ],
-    down: [
-      "CANOE",  // col 1
-      "Earth",  // col 3
-      "PoseR",  // col 5
-    ],
-  },
-  "DS0001E": {
+  DS0001B: {
+    id: "DS0001B",
+    title: "Sample Beginner Puzzle",
+    difficulty: "B",
     size: 7,
-    across: [
-      "MISTAKE", // row 1
-      "TamPers", // row 3
-      "HaloGen", // row 5
-      "ResiduE", // row 7
+    words: [
+      "READ",
+      "WORD",
+      "DUXXESS",
+      "PUZZLE",
+      "SEARCH",
+      "LOGIC",
+      "GRID",
+      "CLUE"
     ],
-    down: [
-      "MATCHER", // col 1
-      "SamPles", // col 3
-      "AvenGed", // col 5
-      "EssencE", // col 7
-    ],
-  },
-
-  // New puzzles below
-
-  "DS0002B": {
-    size: 3,
-    across: [
-      "LeG",  // row 1
-      "DiG",  // row 3
-    ],
-    down: [
-      "LiD",  // col 1
-      "GiG",  // col 3
+    grid: [
+      ["R", " ", "E", " ", "A", " ", "D"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["W", " ", "O", " ", "R", " ", "D"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["D", " ", "U", " ", "X", " ", "S"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["S", " ", "S", " ", "E", " ", "S"]
     ],
   },
-  "DS0001I": {
+  DS0002R: {
+    id: "DS0002R",
+    title: "Rookie Challenge",
+    difficulty: "R",
     size: 5,
-    across: [
-      "BACON", // row 1
-      "EdIct", // row 3
-      "SofaS", // row 5
+    words: [
+      "APPLE",
+      "PLANE",
+      "LEARN",
+      "EAR",
+      "PEAR",
+      "NEAR",
+      "PAN",
+      "ALE"
     ],
-    down: [
-      "BREWS", // col 1
-      "ClIff", // col 3
-      "NoteS", // col 5
+    grid: [
+      ["A", " ", "P", " ", "L"],
+      [" ", "X", " ", "X", " "],
+      ["P", " ", "L", " ", "E"],
+      [" ", "X", " ", "X", " "],
+      ["E", " ", "A", " ", "N"]
     ],
-  },
-  "DS0001M": {
-    size: 7,
-    across: [
-      "USELESS",  // row 1
-      "UnClean",  // row 3
-      "Portrait", // row 5
-      "DusterS",  // row 7
-    ],
-    down: [
-      "USURPED",  // col 1
-      "ExCites",  // col 3
-      "Elevate",  // col 5
-      "SenateS",  // col 7
-    ],
-  },
+  }
 };
