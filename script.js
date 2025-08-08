@@ -12,7 +12,7 @@ function generateGrid(size, letters) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      // Kamili milestone shading rule: shade cells where both row and col are even
+      // Shade cells where BOTH row and col are EVEN numbers
       if (row % 2 === 0 && col % 2 === 0) {
         cell.classList.add('shaded');
         cell.textContent = '';
