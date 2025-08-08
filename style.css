@@ -37,8 +37,8 @@ header {
     justify-content: center;
     margin: 20px 0;
     gap: 0;
-    max-width: 900px;       /* slightly bigger max width */
-    aspect-ratio: 1 / 1;    /* Keep square */
+    max-width: 900px;       /* maximum grid width */
+    aspect-ratio: 1 / 1;    /* keep grid square */
 }
 
 .grid-cell {
@@ -49,6 +49,7 @@ header {
     font-size: 1.2rem;
     font-weight: bold;
     box-sizing: border-box;
+    text-transform: uppercase; /* display letters uppercase */
 }
 
 .editable {
@@ -62,11 +63,11 @@ header {
 .prefilled {
     background-color: #eee;
     font-weight: bold;
-    pointer-events: none;
+    pointer-events: none; /* prevent editing */
 }
 
 #cluesContainer {
-    display: none; /* Hide clues */
+    display: none; /* hide clues container */
 }
 
 h2 {
