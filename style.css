@@ -59,41 +59,44 @@ header {
     position: relative;
     font-weight: normal; /* normal font */
     color: black;
-    text-align: center;
-    vertical-align: middle;
+
+    /* Flex centering */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 .grid-cell input {
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
-    text-align: center;
+    outline: none;
+    background: transparent;
     font-weight: normal; /* normal font */
     color: black;
-    background: transparent;
-    outline: none;
     font-size: 1.2rem;
+    text-align: center;
+
+    /* Flex centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Editable cells background */
 .editable {
     background-color: #FFFACD; /* Light yellow */
 }
 
-/* Shaded cells background */
 .shaded {
     background-color: #4169E1; /* Royal blue */
     color: black;
 }
 
-/* Prefilled clues styling */
 .prefilled {
     font-weight: normal;
     color: black;
