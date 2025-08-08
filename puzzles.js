@@ -1,53 +1,41 @@
-// puzzles.js
-// Duxxess Puzzles Data
-
 const puzzles = {
     "DS0001B": {
         size: 3,
         clues: [
-            ["B", "", "D"],
-            ["", "#", ""],
-            ["E", "", "Y"]
+            { row: 1, col: 1, letter: "B" },
+            { row: 1, col: 3, letter: "D" },
+            { row: 2, col: 3, letter: "D" },
+            { row: 3, col: 2, letter: "E" }
         ],
-        words: ["BAD", "END", "BYE", "BED", "DAY", "BAY", "DEN", "BEY"]
+        across: ["BAD", "END"],
+        down: ["BYE", "DAD"]
     },
-
-    "DS0002R": {
+    "DS0001R": {
         size: 5,
         clues: [
-            ["E", "", "X", "", "E"],
-            ["", "#", "", "#", ""],
-            ["C", "", "E", "", "L"],
-            ["", "#", "", "#", ""],
-            ["L", "", "N", "", "T"]
+            { row: 1, col: 1, letter: "C" },
+            { row: 1, col: 5, letter: "P" },
+            { row: 2, col: 1, letter: "N" },
+            { row: 3, col: 1, letter: "E" },
+            { row: 3, col: 5, letter: "R" },
+            { row: 5, col: 3, letter: "R" }
         ],
-        words: ["EXCEL", "LENT", "CELL", "CENT", "TEN", "NET", "LET", "LEX"]
+        across: ["CREEP", "NORMS", "ETHER"],
+        down: ["CANOE", "EARTH", "POSER"]
     },
-
-    "DS0003M": {
+    "DS0001E": {
         size: 7,
         clues: [
-            ["S", "", "P", "", "A", "", "R"],
-            ["", "#", "", "#", "", "#", ""],
-            ["E", "", "A", "", "S", "", "T"],
-            ["", "#", "", "#", "", "#", ""],
-            ["C", "", "O", "", "A", "", "S"],
-            ["", "#", "", "#", "", "#", ""],
-            ["T", "", "S", "", "E", "", "A"]
+            { row: 1, col: 1, letter: "M" },
+            { row: 1, col: 7, letter: "E" },
+            { row: 2, col: 1, letter: "T" },
+            { row: 3, col: 1, letter: "H" },
+            { row: 3, col: 7, letter: "N" },
+            { row: 4, col: 1, letter: "R" },
+            { row: 4, col: 7, letter: "E" },
+            { row: 7, col: 1, letter: "E" }
         ],
-        words: ["SPAR", "EAST", "COAST", "SEA", "STAR", "COST", "SAT", "ART"]
+        across: ["MISTAKE", "TAMPERS", "HALOGEN", "RESIDUE"],
+        down: ["MATCHER", "SAMPLES", "AVENGED", "ESSENCE"]
     }
 };
-
-// Default puzzle ID
-let currentPuzzleId = "DS0001B";
-
-// Load a puzzle by ID
-function loadPuzzle(puzzleId) {
-    if (puzzles[puzzleId]) {
-        currentPuzzleId = puzzleId;
-        renderPuzzle(puzzles[puzzleId]);
-    } else {
-        alert("Puzzle not found!");
-    }
-}
