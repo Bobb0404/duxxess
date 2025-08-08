@@ -1,71 +1,78 @@
-/* style.css - Stable baseline with Kamili milestone grid rules */
+/* Duxxess Square base styles */
 
 body {
+  background-color: white;
   font-family: Arial, sans-serif;
-  background: white;
-  margin: 0;
-  padding: 20px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-#duxxess-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.grid {
+.duxxess-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
   gap: 2px;
-  margin-top: 20px;
+  background-color: royalblue; /* color for shaded cells background */
+  border: 3px solid royalblue;
+  /* We'll set grid-template-columns dynamically in JS based on size */
 }
 
 .cell {
-  border: 1px solid #333;
-  height: 40px;
-  width: 40px;
-  box-sizing: border-box;
-  user-select: none;
+  width: 50px;
+  height: 50px;
+  background-color: lightyellow; /* editable cells background */
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  font-size: 20px;
-  line-height: 40px;
-  text-align: left;  /* no centering yet */
-  padding-left: 5px;
+  font-size: 24px;
+  user-select: none;
   cursor: default;
-}
-
-.cell.editable {
-  background: #ffffcc; /* light yellow */
-  cursor: text;
 }
 
 .cell.shaded {
-  background: #4169e1; /* royal blue */
-  color: white;
+  background-color: royalblue; /* shaded cells */
+  border: 1px solid royalblue;
   cursor: default;
+  pointer-events: none;
+  color: transparent; /* hide letters if any */
 }
 
-.clue-letter {
-  font-weight: normal;
-  font-size: 14px;
-  color: #666;
+.cell.editable {
+  background-color: lightyellow;
+  cursor: text;
 }
 
-#search-box {
-  width: 100%;
-  padding: 8px;
-  font-size: 18px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-#puzzle-title {
-  font-size: 22px;
+.cell input {
+  width: 90%;
+  height: 90%;
+  border: none;
   font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 24px;
+  text-align: center;
+  background-color: transparent;
+  outline: none;
+  user-select: text;
+  text-transform: uppercase;
+  caret-color: royalblue;
 }
 
-#puzzle-info {
-  font-size: 14px;
-  color: #444;
-  margin-bottom: 15px;
+/* Make input letters centered */
+.cell input::placeholder {
+  color: #ccc;
+  text-align: center;
+}
+
+/* Responsive scaling if needed */
+@media (max-width: 600px) {
+  .cell {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .cell input {
+    font-size: 18px;
+  }
 }
