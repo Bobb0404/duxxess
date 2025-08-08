@@ -1,15 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #222;
+}
+
+header h1 {
+  margin-bottom: 15px;
+}
+
+#puzzle-selector {
+  margin-bottom: 15px;
+}
+
+#puzzleIdInput {
+  padding: 5px;
+  font-size: 16px;
+  width: 150px;
+  margin-right: 8px;
+}
+
+#loadPuzzleBtn {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #666;
+  background: none;
+  color: #222;
+}
+
+#loadPuzzleBtn:hover {
+  background-color: #eee;
+}
+
+#errorMessage {
+  color: red;
+  margin-top: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Grid container */
 .duxxess-grid {
   display: grid;
   grid-template-columns: repeat(var(--grid-size), 48px);
   grid-template-rows: repeat(var(--grid-size), 48px);
-  gap: 1px;                        /* 1px grid lines for crispness */
-  background-color: #444;          /* grid line color */
+  gap: 1px;                        /* 1px gap = grid line */
+  background-color: #444;          /* grid lines color */
   border: 2px solid #444;          /* outer border */
   width: max-content;
   margin-bottom: 20px;
 }
 
-/* Cells: no borders, just background and size */
+/* Grid cells */
 .cell {
   width: 48px;
   height: 48px;
@@ -25,7 +73,7 @@
   box-sizing: border-box;
 }
 
-/* Shaded cells with fill */
+/* Shaded cells (both row & col even) */
 .cell.shaded {
   background-color: #ddd;
   pointer-events: none;
