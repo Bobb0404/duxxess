@@ -6,14 +6,6 @@ const puzzles = {
       "E", "N", "D",
       "B", "Y", "E"
     ],
-    across: [
-      "BaD",
-      "EnD"
-    ],
-    down: [
-      "ByE",
-      "DaD"
-    ]
   },
 
   "DS0002B": {
@@ -23,13 +15,5 @@ const puzzles = {
       "D", "I", "G",
       "L", "I", "D"
     ],
-    across: [
-      "LeG",
-      "DiG"
-    ],
-    down: [
-      "LiD",
-      "GiG"
-    ]
   }
 };
