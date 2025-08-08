@@ -1,5 +1,3 @@
-// script.js
-
 function loadPuzzle(puzzleId) {
     const puzzle = puzzles[puzzleId];
     if (!puzzle) {
@@ -8,8 +6,20 @@ function loadPuzzle(puzzleId) {
     }
 
     const gridSize = puzzle.size;
-    const gridContainer = document.getElementById("grid");
+    const gridContainer = document.getElementById("gridContainer");
     gridContainer.innerHTML = "";
+
+    // Set grid container size based on puzzle size
+    if (gridSize === 3) {
+        gridContainer.style.width = "40vw";
+    } else if (gridSize === 5) {
+        gridContainer.style.width = "50vw";
+    } else if (gridSize === 7) {
+        gridContainer.style.width = "60vw";
+    } else {
+        gridContainer.style.width = "50vw"; // default fallback
+    }
+
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
@@ -18,6 +28,7 @@ function loadPuzzle(puzzleId) {
         for (let c = 1; c <= gridSize; c++) {
             const cell = document.createElement("input");
             cell.maxLength = 1;
+            cell.classList.add("grid-cell");
 
             // Shading rule: both row and column even → shaded cell
             if (r % 2 === 0 && c % 2 === 0) {
@@ -31,38 +42,42 @@ function loadPuzzle(puzzleId) {
         }
     }
 
-    // Fill across words
+    // Fill across words (only uppercase letters prefill)
     puzzle.across.forEach((word, index) => {
-        let row = index * 2 + 1; // across words go on odd rows
+        const row = index * 2 + 1; // across words on odd rows
         if (row <= gridSize) {
             for (let i = 0; i < word.length; i++) {
+                const letter = word[i];
                 const cellIndex = (row - 1) * gridSize + i;
                 const cell = gridContainer.children[cellIndex];
-                if (cell && word[i] !== " ") {
-                    cell.value = word[i];
+                if (cell && letter === letter.toUpperCase() && letter !== " ") {
+                    cell.value = letter;
                     cell.disabled = true;
+                    cell.classList.add("prefilled");
                 }
             }
         }
     });
 
-    // Fill down words
+    // Fill down words (only uppercase letters prefill)
     puzzle.down.forEach((word, index) => {
-        let col = index * 2 + 1; // down words go on odd columns
+        const col = index * 2 + 1; // down words on odd columns
         if (col <= gridSize) {
             for (let i = 0; i < word.length; i++) {
-                const cellIndex = (i * gridSize) + (col - 1);
+                const letter = word[i];
+                const cellIndex = i * gridSize + (col - 1);
                 const cell = gridContainer.children[cellIndex];
-                if (cell && word[i] !== " ") {
-                    cell.value = word[i];
+                if (cell && letter === letter.toUpperCase() && letter !== " ") {
+                    cell.value = letter;
                     cell.disabled = true;
+                    cell.classList.add("prefilled");
                 }
             }
         }
     });
 }
 
-// Search puzzle by ID
+// Puzzle search box
 document.getElementById("puzzleSearch").addEventListener("input", function () {
     const id = this.value.trim();
     if (puzzles[id]) {
@@ -70,7 +85,7 @@ document.getElementById("puzzleSearch").addEventListener("input", function () {
     }
 });
 
-// Load DS0001B by default on page load
+// Load default puzzle DS0001B on page load
 document.addEventListener("DOMContentLoaded", function () {
     loadPuzzle("DS0001B");
 });
