@@ -1,6 +1,5 @@
-/* style.css - Stable baseline before theme colors and centering fixes */
+/* style.css - Stable baseline with Kamili milestone grid rules */
 
-/* Base reset and font */
 body {
   font-family: Arial, sans-serif;
   background: white;
@@ -15,7 +14,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* assuming max 7x7 grid */
+  grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   margin-top: 20px;
 }
@@ -28,31 +27,29 @@ body {
   user-select: none;
   font-weight: bold;
   font-size: 20px;
-  line-height: 40px; /* centers letter vertically approx */
-  text-align: left;  /* letters not centered yet */
-  padding-left: 5px; /* letters aligned left, no centering yet */
+  line-height: 40px;
+  text-align: left;  /* no centering yet */
+  padding-left: 5px;
   cursor: default;
 }
 
 .cell.editable {
-  background: #ffffcc; /* light yellow for editable */
+  background: #ffffcc; /* light yellow */
   cursor: text;
 }
 
 .cell.shaded {
-  background: #4169e1; /* royal blue for shaded */
+  background: #4169e1; /* royal blue */
   color: white;
   cursor: default;
 }
 
-/* Clue letter styles */
 .clue-letter {
   font-weight: normal;
   font-size: 14px;
   color: #666;
 }
 
-/* Puzzle controls */
 #search-box {
   width: 100%;
   padding: 8px;
@@ -61,7 +58,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Puzzle title and info */
 #puzzle-title {
   font-size: 22px;
   font-weight: bold;
