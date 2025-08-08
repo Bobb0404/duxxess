@@ -1,26 +1,66 @@
-/* Duxxess Square base styles */
-
+/* Base body and layout */
 body {
   background-color: white;
   font-family: Arial, sans-serif;
   margin: 20px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  color: #222;
+}
+
+header h1 {
+  margin-bottom: 15px;
+  color: royalblue;
+}
+
+#puzzle-selector {
+  margin-bottom: 15px;
+}
+
+#puzzleIdInput {
+  padding: 5px;
+  font-size: 16px;
+  width: 150px;
+  margin-right: 8px;
+}
+
+#loadPuzzleBtn {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: royalblue;
+  border: none;
+  color: white;
+  border-radius: 4px;
+}
+
+#loadPuzzleBtn:hover {
+  background-color: #1a237e;
+}
+
+#errorMessage {
+  color: red;
+  margin-top: 8px;
+}
+
+.hidden {
+  display: none;
 }
 
 .duxxess-grid {
   display: grid;
   gap: 2px;
-  background-color: royalblue; /* color for shaded cells background */
+  background-color: royalblue;
   border: 3px solid royalblue;
-  /* We'll set grid-template-columns dynamically in JS based on size */
+  margin-bottom: 20px;
+  /* grid-template-columns set dynamically in script */
 }
 
 .cell {
   width: 50px;
   height: 50px;
-  background-color: lightyellow; /* editable cells background */
+  background-color: lightyellow;
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
@@ -32,11 +72,11 @@ body {
 }
 
 .cell.shaded {
-  background-color: royalblue; /* shaded cells */
+  background-color: royalblue;
   border: 1px solid royalblue;
   cursor: default;
   pointer-events: none;
-  color: transparent; /* hide letters if any */
+  color: transparent;
 }
 
 .cell.editable {
@@ -58,21 +98,40 @@ body {
   caret-color: royalblue;
 }
 
-/* Make input letters centered */
 .cell input::placeholder {
   color: #ccc;
   text-align: center;
 }
 
-/* Responsive scaling if needed */
 @media (max-width: 600px) {
   .cell {
     width: 35px;
     height: 35px;
     font-size: 18px;
   }
-
   .cell input {
     font-size: 18px;
   }
+}
+
+/* Clues styling */
+#clues {
+  width: 350px;
+  max-width: 90vw;
+}
+
+#clues h2 {
+  color: royalblue;
+  margin-bottom: 6px;
+}
+
+#clues ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 15px;
+}
+
+#clues li {
+  padding: 2px 0;
+  font-size: 16px;
 }
