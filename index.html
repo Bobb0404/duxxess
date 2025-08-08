@@ -9,21 +9,19 @@
 <body>
     <header>
         <h1>Duxxess Square</h1>
-        <div class="search-container">
-            <input type="text" id="puzzleIdInput" placeholder="Enter Puzzle ID">
-            <button id="loadPuzzleBtn">Load Puzzle</button>
-        </div>
-        <div id="notificationBell">🔔</div>
+        <input type="text" id="puzzleSearch" placeholder="Enter Puzzle ID...">
+        <button id="loadPuzzleBtn">Load Puzzle</button>
+        <span id="notificationBell">🔔</span>
     </header>
-
     <main>
         <div id="gridContainer"></div>
-        <div id="wordListContainer">
-            <h2>Words to Find</h2>
-            <ul id="wordList"></ul>
+        <div id="cluesContainer">
+            <h2>Across</h2>
+            <ul id="acrossClues"></ul>
+            <h2>Down</h2>
+            <ul id="downClues"></ul>
         </div>
     </main>
-
     <script src="puzzles.js"></script>
     <script src="script.js"></script>
 </body>
