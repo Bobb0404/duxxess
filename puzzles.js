@@ -4,44 +4,82 @@ const puzzles = {
   "DS0001B": {
     size: 3,
     across: [
-      "BaD",   // 1st word - row 1
-      "EnD",   // 2nd word - row 3
-      // No 3rd or 4th word for 3x3 grid
+      "BaD",   // row 1
+      "EnD",   // row 3
     ],
     down: [
-      "ByE",   // 1st word - col 1
-      "DaD",   // 2nd word - col 3
-      // No 3rd or 4th word for 3x3 grid
+      "ByE",   // col 1
+      "DaD",   // col 3
     ],
   },
   "DS0001R": {
     size: 5,
     across: [
-      "CREEP",  // 1st word - row 1
-      "Norms",  // 2nd word - row 3
-      "EtheR",  // 3rd word - row 5
-      // No 4th word for 5x5 grid
+      "CREEP",  // row 1
+      "Norms",  // row 3
+      "EtheR",  // row 5
     ],
     down: [
-      "CANOE",  // 1st word - col 1
-      "Earth",  // 2nd word - col 3
-      "PoseR",  // 3rd word - col 5
-      // No 4th word for 5x5 grid
+      "CANOE",  // col 1
+      "Earth",  // col 3
+      "PoseR",  // col 5
     ],
   },
   "DS0001E": {
     size: 7,
     across: [
-      "MISTAKE", // 1st word - row 1
-      "TamPers", // 2nd word - row 3
-      "HaloGen", // 3rd word - row 5
-      "ResiduE", // 4th word - row 7
+      "MISTAKE", // row 1
+      "TamPers", // row 3
+      "HaloGen", // row 5
+      "ResiduE", // row 7
     ],
     down: [
-      "MATCHER", // 1st word - col 1
-      "SamPles", // 2nd word - col 3
-      "AvenGed", // 3rd word - col 5
-      "EssencE", // 4th word - col 7
+      "MATCHER", // col 1
+      "SamPles", // col 3
+      "AvenGed", // col 5
+      "EssencE", // col 7
+    ],
+  },
+
+  // New puzzles below
+
+  "DS0002B": {
+    size: 3,
+    across: [
+      "LeG",  // row 1
+      "DiG",  // row 3
+    ],
+    down: [
+      "LiD",  // col 1
+      "GiG",  // col 3
+    ],
+  },
+  "DS0001I": {
+    size: 5,
+    across: [
+      "BACON", // row 1
+      "EdIct", // row 3
+      "SofaS", // row 5
+    ],
+    down: [
+      "BREWS", // col 1
+      "ClIff", // col 3
+      "NoteS", // col 5
+    ],
+  },
+  "DS0001M": {
+    size: 7,
+    across: [
+      "USELESS",  // row 1
+      "UnClean",  // row 3
+      "Portrait", // row 5
+      "DusterS",  // row 7
+    ],
+    down: [
+      "USURPED",  // col 1
+      "ExCites",  // col 3
+      "Elevate",  // col 5
+      "SenateS",  // col 7
     ],
   },
 };
