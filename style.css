@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    background-color: #ffffff; /* match body bg */
+    background-color: #ffffff;
     color: black;
     width: 100%;
     padding: 10px;
@@ -51,16 +51,15 @@ header {
 }
 
 .grid-cell {
-    width: 100%; /* fill container */
+    width: 100%;
     height: 0;
-    padding-bottom: 100%; /* make square */
+    padding-bottom: 100%; /* keep square */
     box-sizing: border-box;
     border: 1px solid black;
     position: relative;
-    font-weight: normal; /* normal font */
+    font-weight: normal;
     color: black;
 
-    /* Flex centering */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,15 +76,14 @@ header {
     border: none;
     outline: none;
     background: transparent;
-    font-weight: normal; /* normal font */
+    font-weight: normal;
     color: black;
     font-size: 1.2rem;
     text-align: center;
 
-    /* Flex centering */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* vertical center by line-height = height */
+    line-height: 50px;  /* or approximate cell height in px */
+    padding: 0;
 }
 
 .editable {
