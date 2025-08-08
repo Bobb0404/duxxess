@@ -1,67 +1,102 @@
+/* ==============================
+   Duxxess Main CSS
+   ============================== */
+
+/* --- Existing general styles --- */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  background: #f4f4f4;
+}
+
+/* Main container */
+#game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px;
 }
 
-h1 {
-  margin-top: 20px;
+/* Search box & controls */
+#controls {
+  margin-bottom: 10px;
 }
-
-#puzzle-id-input {
-  padding: 8px;
+#search-box {
+  padding: 5px;
   font-size: 16px;
-  margin-top: 10px;
 }
 
-#load-puzzle {
-  padding: 8px 16px;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
+/* ==============================
+   GRID STYLES (Merged Kamili + Sizing Fix)
+   ============================== */
+
+:root {
+  --grid-gap: 4px;
+  --grid-bg: #ffffff;
+  --cell-bg: transparent;
+  --cell-font-size: clamp(14px, 3vw, 28px);
 }
 
-#grid {
-  display: grid;
-  gap: 2px;
-  margin: 20px auto;
-  aspect-ratio: 1 / 1;
-}
-
-.grid-3x3 {
-  width: 40vw;
-}
-
-.grid-5x5 {
-  width: 50vw;
-}
-
-.grid-7x7 {
-  width: 60vw;
-}
-
-.grid-cell {
+/* Wrapper for playable area */
+#grid-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  font-size: clamp(12px, 2vw, 24px);
-  text-align: center;
-  vertical-align: middle;
-  background-color: white;
-  border: 1px solid #ccc;
+}
+
+/* Main grid container */
+#grid-container {
+  background: var(--grid-bg);
+  display: grid;
+  gap: var(--grid-gap);
+  aspect-ratio: 1 / 1; /* Keep grid square */
+  align-content: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  margin: 0 auto;
   box-sizing: border-box;
+}
+
+/* Template columns/rows will be set dynamically in JS */
+#grid-container {
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  grid-template-rows: repeat(var(--rows, 3), 1fr);
+}
+
+/* Cell styling */
+#grid-container .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1; /* Keep each cell square */
+  font-size: var(--cell-font-size);
+  background: var(--cell-bg);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
   padding: 0;
+  margin: 0;
 }
 
-.shaded {
-  background-color: #ccc;
+/* Preserve Kamili milestone shading */
+#grid-container .shaded,
+#grid-container .blocked,
+#grid-container .non-editable {
+  /* Keep existing shading visuals */
+  background: #ccc;
+}
+#grid-container .editable {
+  background: #fff;
 }
 
-.prefilled {
-  font-weight: bold;
-  color: #333;
-  background-color: #e6f3ff;
+/* Responsive tweaks */
+@media (max-width: 420px) {
+  :root {
+    --grid-gap: 2px;
+    --cell-font-size: clamp(12px, 4vw, 20px);
+  }
 }
