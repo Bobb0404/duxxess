@@ -1,4 +1,3 @@
-// Grab DOM elements
 const gridContainer = document.getElementById('duxxessGrid');
 const puzzleIdInput = document.getElementById('puzzleIdInput');
 const loadPuzzleBtn = document.getElementById('loadPuzzleBtn');
@@ -6,11 +5,6 @@ const acrossCluesList = document.getElementById('acrossClues');
 const downCluesList = document.getElementById('downClues');
 const errorMessage = document.getElementById('errorMessage');
 
-/**
- * Generate the Duxxess grid with correct shading and puzzle letters
- * @param {number} size grid size (3, 5, or 7)
- * @param {Array} letters flat array of letters (size*size length)
- */
 function generateGrid(size, letters) {
   gridContainer.innerHTML = '';
   gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
@@ -20,7 +14,6 @@ function generateGrid(size, letters) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      // Shading rule: shaded only if row and col are both even
       if (row % 2 === 0 && col % 2 === 0) {
         cell.classList.add('shaded');
         cell.textContent = '';
@@ -45,10 +38,6 @@ function generateGrid(size, letters) {
   }
 }
 
-/**
- * Load a puzzle by its ID and display it
- * @param {string} puzzleId
- */
 function loadPuzzle(puzzleId) {
   const puzzle = puzzles[puzzleId];
   if (!puzzle) {
@@ -61,7 +50,6 @@ function loadPuzzle(puzzleId) {
 
   generateGrid(puzzle.size, puzzle.letters);
 
-  // Render clues
   acrossCluesList.innerHTML = '';
   downCluesList.innerHTML = '';
 
@@ -78,13 +66,11 @@ function loadPuzzle(puzzleId) {
   });
 }
 
-// Load default puzzle on page load
 window.addEventListener('DOMContentLoaded', () => {
   puzzleIdInput.value = 'DS0001B';
   loadPuzzle('DS0001B');
 });
 
-// Load puzzle button event
 loadPuzzleBtn.addEventListener('click', () => {
   const id = puzzleIdInput.value.trim().toUpperCase();
   loadPuzzle(id);
