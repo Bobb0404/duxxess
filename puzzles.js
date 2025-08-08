@@ -1,6 +1,3 @@
-// Puzzle data indexed by puzzle ID
-// Each puzzle includes grid size, clues, and initial letters (optional)
-
 const puzzles = {
   "DS0001B": {
     size: 3,
