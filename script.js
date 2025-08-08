@@ -9,19 +9,28 @@ function loadPuzzle(puzzleId) {
     const gridContainer = document.getElementById("gridContainer");
     gridContainer.innerHTML = "";
 
-    // We no longer set width here - CSS handles fixed 50vw width
+    // Set grid container width dynamically by puzzle size
+    if (gridSize === 3) {
+        gridContainer.style.width = "50vw";
+    } else if (gridSize === 5) {
+        gridContainer.style.width = "60vw";
+    } else if (gridSize === 7) {
+        gridContainer.style.width = "70vw";
+    } else {
+        gridContainer.style.width = "60vw"; // fallback
+    }
 
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
-    // Build grid with Kamili shading rules
+    // Build grid with Kamili milestone shading rules
     for (let r = 1; r <= gridSize; r++) {
         for (let c = 1; c <= gridSize; c++) {
             const cell = document.createElement("input");
             cell.maxLength = 1;
             cell.classList.add("grid-cell");
 
-            // Shading rule: both row and column even → shaded cell
+            // Shade cell if both row and col are even
             if (r % 2 === 0 && c % 2 === 0) {
                 cell.classList.add("shaded");
                 cell.disabled = true;
@@ -33,9 +42,9 @@ function loadPuzzle(puzzleId) {
         }
     }
 
-    // Fill across clues (only uppercase letters)
+    // Fill across clues - uppercase letters prefilled
     puzzle.across.forEach((word, index) => {
-        const row = index * 2 + 1; // across words on odd rows
+        const row = index * 2 + 1;
         if (row <= gridSize) {
             for (let i = 0; i < word.length; i++) {
                 const letter = word[i];
@@ -50,9 +59,9 @@ function loadPuzzle(puzzleId) {
         }
     });
 
-    // Fill down clues (only uppercase letters)
+    // Fill down clues - uppercase letters prefilled
     puzzle.down.forEach((word, index) => {
-        const col = index * 2 + 1; // down words on odd columns
+        const col = index * 2 + 1;
         if (col <= gridSize) {
             for (let i = 0; i < word.length; i++) {
                 const letter = word[i];
@@ -68,7 +77,7 @@ function loadPuzzle(puzzleId) {
     });
 }
 
-// Puzzle search input handler
+// Puzzle search handler
 document.getElementById("puzzleSearch").addEventListener("input", function () {
     const id = this.value.trim();
     if (puzzles[id]) {
