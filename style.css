@@ -45,21 +45,23 @@ header h1 {
   display: none;
 }
 
+/* THE GRID CONTAINER: background is line color, gap is line width */
 .duxxess-grid {
   display: grid;
-  border: 2px solid #444;
+  grid-gap: 2px;               /* gap between cells is the grid line */
+  background-color: #444;      /* color of the grid lines */
+  border: 2px solid #444;      /* outer border same as grid lines */
   margin-bottom: 20px;
   justify-content: start;
   width: max-content;
-  grid-gap: 0; /* no gap for continuous lines */
   grid-template-columns: repeat(auto-fit, 48px);
 }
 
+/* CELLS have no border, fill area only */
 .cell {
   width: 48px;
   height: 48px;
-  box-sizing: border-box;
-  border: 1px solid #444; /* all cells have same border to create continuous grid */
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,19 +69,20 @@ header h1 {
   font-size: 22px;
   user-select: none;
   cursor: default;
-  background: transparent;
   color: #222;
+  box-sizing: border-box;
 }
 
+/* SHADED CELLS have fill color, no border */
 .cell.shaded {
-  background: #ddd;
+  background-color: #ddd;  /* light gray fill */
   pointer-events: none;
   color: transparent;
 }
 
 .cell.editable {
   cursor: text;
-  background: transparent;
+  background-color: transparent;
 }
 
 .cell input {
@@ -111,7 +114,6 @@ header h1 {
     width: 36px;
     height: 36px;
     font-size: 16px;
-    border-width: 1px;
   }
   .cell input {
     font-size: 16px;
