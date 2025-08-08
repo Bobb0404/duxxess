@@ -1,122 +1,75 @@
-/* style.css */
+/* style.css - Stable baseline before theme colors and centering fixes */
 
+/* Base reset and font */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff; /* White background */
-    color: black;
+  font-family: Arial, sans-serif;
+  background: white;
+  margin: 0;
+  padding: 20px;
 }
 
-header {
-    background-color: #ffffff;
-    color: black;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
+#duxxess-container {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-#puzzleSearch {
-    padding: 5px;
-    font-size: 1rem;
-    background-color: #FFFACD; /* Light yellow */
-    color: black;
-    border: 1px solid black;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* assuming max 7x7 grid */
+  gap: 2px;
+  margin-top: 20px;
 }
 
-#loadPuzzleBtn {
-    padding: 6px 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #FFFACD; /* Light yellow */
-    color: black;
-    border: 1px solid black;
+.cell {
+  border: 1px solid #333;
+  height: 40px;
+  width: 40px;
+  box-sizing: border-box;
+  user-select: none;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px; /* centers letter vertically approx */
+  text-align: left;  /* letters not centered yet */
+  padding-left: 5px; /* letters aligned left, no centering yet */
+  cursor: default;
 }
 
-#notificationBell {
-    font-size: 1.5rem;
-    margin-left: 10px;
-    cursor: pointer;
-    color: black;
+.cell.editable {
+  background: #ffffcc; /* light yellow for editable */
+  cursor: text;
 }
 
-#gridContainer {
-    display: grid;
-    justify-content: center;
-    margin: 20px 0;
-    gap: 0;
+.cell.shaded {
+  background: #4169e1; /* royal blue for shaded */
+  color: white;
+  cursor: default;
 }
 
-.grid-cell {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%; /* maintain square */
-    box-sizing: border-box;
-    border: 1px solid black;
-    position: relative;
-    font-weight: normal;
-    color: black;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    text-align: center;
+/* Clue letter styles */
+.clue-letter {
+  font-weight: normal;
+  font-size: 14px;
+  color: #666;
 }
 
-.grid-cell input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-weight: normal;
-    color: black;
-    font-size: 1.2rem;
-    text-align: center;
-
-    /* Remove absolute positioning */
-    position: static;
-    padding: 0;
-    margin: 0;
-    line-height: normal;
-
-    /* Center text vertically and horizontally */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Puzzle controls */
+#search-box {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
-/* Editable cells background */
-.editable {
-    background-color: #FFFACD; /* Light yellow */
+/* Puzzle title and info */
+#puzzle-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-/* Shaded cells background */
-.shaded {
-    background-color: #4169E1; /* Royal blue */
-    color: black;
-}
-
-/* Prefilled clues styling */
-.prefilled {
-    font-weight: normal;
-    color: black;
-}
-
-#cluesContainer {
-    max-width: 400px;
-    text-align: left;
-}
-
-h2 {
-    margin-bottom: 5px;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
+#puzzle-info {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 15px;
 }
