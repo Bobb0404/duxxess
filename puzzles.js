@@ -1,52 +1,107 @@
-// puzzles.js - stable baseline puzzles data
-
 const puzzles = {
   DS0001B: {
     id: "DS0001B",
-    title: "Sample Beginner Puzzle",
+    title: "Beginner Puzzle 1",
     difficulty: "B",
-    size: 7,
+    size: 3,
     words: [
-      "READ",
-      "WORD",
-      "DUXXESS",
-      "PUZZLE",
-      "SEARCH",
-      "LOGIC",
-      "GRID",
-      "CLUE"
+      "BAD",
+      "END",
+      "BYE",
+      "DAD"
     ],
     grid: [
-      ["R", " ", "E", " ", "A", " ", "D"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["W", " ", "O", " ", "R", " ", "D"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["D", " ", "U", " ", "X", " ", "S"],
-      [" ", "X", " ", "X", " ", "X", " "],
-      ["S", " ", "S", " ", "E", " ", "S"]
+      ["B", "A", "D"],
+      [" ", "X", " "],
+      ["E", "N", "D"]
     ],
   },
-  DS0002R: {
-    id: "DS0002R",
-    title: "Rookie Challenge",
+
+  DS0002B: {
+    id: "DS0002B",
+    title: "Beginner Puzzle 2",
+    difficulty: "B",
+    size: 3,
+    words: [
+      "LEG",
+      "DIG",
+      "LID",
+      "GIG"
+    ],
+    grid: [
+      ["L", "E", "G"],
+      [" ", "X", " "],
+      ["D", "I", "G"]
+    ],
+  },
+
+  DS0001R: {
+    id: "DS0001R",
+    title: "Rookie Puzzle 1",
     difficulty: "R",
     size: 5,
     words: [
-      "APPLE",
-      "PLANE",
-      "LEARN",
-      "EAR",
-      "PEAR",
-      "NEAR",
-      "PAN",
-      "ALE"
+      "CREEP",
+      "NORMS",
+      "ETHER",
+      "CANOE",
+      "EARTH",
+      "POSER"
     ],
     grid: [
-      ["A", " ", "P", " ", "L"],
+      ["C", "R", "E", "E", "P"],
       [" ", "X", " ", "X", " "],
-      ["P", " ", "L", " ", "E"],
+      ["N", "O", "R", "M", "S"],
       [" ", "X", " ", "X", " "],
-      ["E", " ", "A", " ", "N"]
+      ["E", "T", "H", "E", "R"]
     ],
-  }
+  },
+
+  DS0001I: {
+    id: "DS0001I",
+    title: "Intermediate Puzzle 1",
+    difficulty: "I",
+    size: 5,
+    words: [
+      "BACON",
+      "EDICT",
+      "SOFAS",
+      "BREWS",
+      "CLIFF",
+      "NOTES"
+    ],
+    grid: [
+      ["B", "A", "C", "O", "N"],
+      [" ", "X", " ", "X", " "],
+      ["E", "D", "I", "C", "T"],
+      [" ", "X", " ", "X", " "],
+      ["S", "O", "F", "A", "S"]
+    ],
+  },
+
+  DS0001E: {
+    id: "DS0001E",
+    title: "Elite Puzzle 1",
+    difficulty: "E",
+    size: 7,
+    words: [
+      "MISTAKE",
+      "TAMPERS",
+      "HALOGEN",
+      "RESIDUE",
+      "MATCHER",
+      "SAMPLES",
+      "AVENGED",
+      "ESSENCE"
+    ],
+    grid: [
+      ["M", "I", "S", "T", "A", "K", "E"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["T", "A", "M", "P", "E", "R", "S"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["H", "A", "L", "O", "G", "E", "N"],
+      [" ", "X", " ", "X", " ", "X", " "],
+      ["R", "E", "S", "I", "D", "U", "E"]
+    ],
+  },
 };
