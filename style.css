@@ -1,4 +1,3 @@
-/* Base body and layout */
 body {
   background-color: white;
   font-family: Arial, sans-serif;
@@ -54,7 +53,6 @@ header h1 {
   background-color: royalblue;
   border: 3px solid royalblue;
   margin-bottom: 20px;
-  /* grid-template-columns set dynamically in script */
 }
 
 .cell {
@@ -114,7 +112,6 @@ header h1 {
   }
 }
 
-/* Clues styling */
 #clues {
   width: 350px;
   max-width: 90vw;
