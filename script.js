@@ -1,77 +1,91 @@
+// Grab DOM elements
+const gridContainer = document.getElementById('duxxessGrid');
+const puzzleIdInput = document.getElementById('puzzleIdInput');
+const loadPuzzleBtn = document.getElementById('loadPuzzleBtn');
+const acrossCluesList = document.getElementById('acrossClues');
+const downCluesList = document.getElementById('downClues');
+const errorMessage = document.getElementById('errorMessage');
+
 /**
- * Generates the Duxxess grid inside a container element
- * @param {HTMLElement} container The container to fill with grid cells
- * @param {number} size The grid size (3, 5, or 7)
- * @param {Array} puzzleLetters 2D array or flat array of letters or empty strings for initial puzzle letters
+ * Generate the Duxxess grid with correct shading and puzzle letters
+ * @param {number} size grid size (3, 5, or 7)
+ * @param {Array} letters flat array of letters (size*size length)
  */
-function generateDuxxessGrid(container, size, puzzleLetters = []) {
-  // Clear existing content
-  container.innerHTML = '';
-
-  // Set CSS grid columns for a square grid
-  container.style.gridTemplateColumns = `repeat(${size}, 50px)`;
-
-  // We expect puzzleLetters as a flat array of size*size length or 2D array
-  // For safety, flatten if needed
-  let letters = [];
-  if (Array.isArray(puzzleLetters[0])) {
-    // 2D array
-    for (let r = 0; r < size; r++) {
-      for (let c = 0; c < size; c++) {
-        letters.push(puzzleLetters[r][c] || '');
-      }
-    }
-  } else {
-    letters = puzzleLetters;
-  }
+function generateGrid(size, letters) {
+  gridContainer.innerHTML = '';
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
 
   for (let row = 1; row <= size; row++) {
     for (let col = 1; col <= size; col++) {
-      // Create cell div
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      // Apply shading rule:
-      // Editable cells on odd rows and odd cols
-      // Shaded cells only where row AND col are even
+      // Shading rule: shaded only if row and col are both even
       if (row % 2 === 0 && col % 2 === 0) {
-        // Shaded cell - non editable
         cell.classList.add('shaded');
         cell.textContent = '';
       } else {
-        // Editable cell
         cell.classList.add('editable');
-
-        // Create input for letter entry
         const input = document.createElement('input');
         input.type = 'text';
         input.maxLength = 1;
 
-        // Fill letter if provided
         const idx = (row - 1) * size + (col - 1);
         if (letters[idx]) {
           input.value = letters[idx].toUpperCase();
-          input.readOnly = true; // if you want prefilled clues non-editable, otherwise remove this line
+          input.readOnly = true;
           input.style.color = 'royalblue';
         }
 
-        // Append input inside cell
         cell.appendChild(input);
       }
 
-      container.appendChild(cell);
+      gridContainer.appendChild(cell);
     }
   }
 }
 
-// Usage example: 
-// const gridContainer = document.getElementById('duxxessGrid');
-// generateDuxxessGrid(gridContainer, 7, [
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-//   '', '', '', '', '', '', '',
-// ]);
+/**
+ * Load a puzzle by its ID and display it
+ * @param {string} puzzleId
+ */
+function loadPuzzle(puzzleId) {
+  const puzzle = puzzles[puzzleId];
+  if (!puzzle) {
+    errorMessage.textContent = `Puzzle ID "${puzzleId}" not found.`;
+    errorMessage.classList.remove('hidden');
+    return;
+  }
+
+  errorMessage.classList.add('hidden');
+
+  generateGrid(puzzle.size, puzzle.letters);
+
+  // Render clues
+  acrossCluesList.innerHTML = '';
+  downCluesList.innerHTML = '';
+
+  puzzle.across.forEach(clue => {
+    const li = document.createElement('li');
+    li.textContent = clue;
+    acrossCluesList.appendChild(li);
+  });
+
+  puzzle.down.forEach(clue => {
+    const li = document.createElement('li');
+    li.textContent = clue;
+    downCluesList.appendChild(li);
+  });
+}
+
+// Load default puzzle on page load
+window.addEventListener('DOMContentLoaded', () => {
+  puzzleIdInput.value = 'DS0001B';
+  loadPuzzle('DS0001B');
+});
+
+// Load puzzle button event
+loadPuzzleBtn.addEventListener('click', () => {
+  const id = puzzleIdInput.value.trim().toUpperCase();
+  loadPuzzle(id);
+});
