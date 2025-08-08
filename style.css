@@ -1,5 +1,4 @@
 body {
-  background-color: white;
   font-family: Arial, sans-serif;
   margin: 20px;
   display: flex;
@@ -10,7 +9,6 @@ body {
 
 header h1 {
   margin-bottom: 15px;
-  color: royalblue;
 }
 
 #puzzle-selector {
@@ -28,14 +26,14 @@ header h1 {
   padding: 6px 12px;
   font-size: 16px;
   cursor: pointer;
-  background-color: royalblue;
-  border: none;
-  color: white;
   border-radius: 4px;
+  border: 1px solid #666;
+  background: none;
+  color: #222;
 }
 
 #loadPuzzleBtn:hover {
-  background-color: #1a237e;
+  background-color: #eee;
 }
 
 #errorMessage {
@@ -50,8 +48,7 @@ header h1 {
 .duxxess-grid {
   display: grid;
   gap: 2px;
-  background-color: royalblue;
-  border: 3px solid royalblue;
+  border: 3px solid #444;
   margin-bottom: 20px;
   justify-content: start;
   width: max-content;
@@ -60,8 +57,7 @@ header h1 {
 .cell {
   width: 48px;
   height: 48px;
-  background-color: lightyellow;
-  border: 1px solid #ccc;
+  border: 1px solid #999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,19 +66,20 @@ header h1 {
   user-select: none;
   cursor: default;
   box-sizing: border-box;
+  color: #222;
+  background: transparent;
 }
 
 .cell.shaded {
-  background-color: royalblue;
-  border: 1px solid royalblue;
-  cursor: default;
   pointer-events: none;
   color: transparent;
+  background: #ddd; /* subtle difference to indicate shaded */
+  border-color: #bbb;
 }
 
 .cell.editable {
-  background-color: lightyellow;
   cursor: text;
+  background: transparent;
 }
 
 .cell input {
@@ -96,15 +93,16 @@ header h1 {
   outline: none;
   user-select: text;
   text-transform: uppercase;
-  caret-color: royalblue;
+  caret-color: #222;
   padding: 0;
   margin: 0;
   line-height: 1;
   font-family: inherit;
+  color: #222;
 }
 
 .cell input::placeholder {
-  color: #ccc;
+  color: #aaa;
   text-align: center;
 }
 
@@ -125,7 +123,6 @@ header h1 {
 }
 
 #clues h2 {
-  color: royalblue;
   margin-bottom: 6px;
 }
 
