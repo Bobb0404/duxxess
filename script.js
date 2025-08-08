@@ -9,15 +9,15 @@ function loadPuzzle(puzzleId) {
     const gridContainer = document.getElementById("gridContainer");
     gridContainer.innerHTML = "";
 
-    // Set grid container width dynamically by puzzle size
+    // Set container width based on puzzle size (new sizing)
     if (gridSize === 3) {
-        gridContainer.style.width = "50vw";
-    } else if (gridSize === 5) {
         gridContainer.style.width = "60vw";
-    } else if (gridSize === 7) {
+    } else if (gridSize === 5) {
         gridContainer.style.width = "70vw";
+    } else if (gridSize === 7) {
+        gridContainer.style.width = "80vw";
     } else {
-        gridContainer.style.width = "60vw"; // fallback
+        gridContainer.style.width = "70vw"; // fallback
     }
 
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
@@ -30,7 +30,7 @@ function loadPuzzle(puzzleId) {
             cell.maxLength = 1;
             cell.classList.add("grid-cell");
 
-            // Shade cell if both row and col are even
+            // Shaded cell if both row and col even
             if (r % 2 === 0 && c % 2 === 0) {
                 cell.classList.add("shaded");
                 cell.disabled = true;
@@ -42,7 +42,7 @@ function loadPuzzle(puzzleId) {
         }
     }
 
-    // Fill across clues - uppercase letters prefilled
+    // Fill across clues (uppercase letters only)
     puzzle.across.forEach((word, index) => {
         const row = index * 2 + 1;
         if (row <= gridSize) {
@@ -59,7 +59,7 @@ function loadPuzzle(puzzleId) {
         }
     });
 
-    // Fill down clues - uppercase letters prefilled
+    // Fill down clues (uppercase letters only)
     puzzle.down.forEach((word, index) => {
         const col = index * 2 + 1;
         if (col <= gridSize) {
@@ -77,7 +77,7 @@ function loadPuzzle(puzzleId) {
     });
 }
 
-// Puzzle search handler
+// Puzzle search input listener
 document.getElementById("puzzleSearch").addEventListener("input", function () {
     const id = this.value.trim();
     if (puzzles[id]) {
@@ -85,7 +85,7 @@ document.getElementById("puzzleSearch").addEventListener("input", function () {
     }
 });
 
-// Load default puzzle DS0001B on page load
+// Load default puzzle on page load
 document.addEventListener("DOMContentLoaded", function () {
     loadPuzzle("DS0001B");
 });
