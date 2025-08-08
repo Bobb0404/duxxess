@@ -56,9 +56,14 @@ header {
     background-color: #999;
 }
 
+.prefilled {
+    background-color: #eee;
+    font-weight: bold;
+    pointer-events: none;
+}
+
 #cluesContainer {
-    max-width: 400px;
-    text-align: left;
+    display: none; /* Hide clues and their headings */
 }
 
 h2 {
