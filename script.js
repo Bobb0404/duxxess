@@ -9,21 +9,12 @@ function loadPuzzle(puzzleId) {
     const gridContainer = document.getElementById("gridContainer");
     gridContainer.innerHTML = "";
 
-    // Set grid container size based on puzzle size
-    if (gridSize === 3) {
-        gridContainer.style.width = "40vw";
-    } else if (gridSize === 5) {
-        gridContainer.style.width = "50vw";
-    } else if (gridSize === 7) {
-        gridContainer.style.width = "60vw";
-    } else {
-        gridContainer.style.width = "50vw"; // default fallback
-    }
+    // We no longer set width here - CSS handles fixed 50vw width
 
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
-    // Build empty grid with shading
+    // Build grid with Kamili shading rules
     for (let r = 1; r <= gridSize; r++) {
         for (let c = 1; c <= gridSize; c++) {
             const cell = document.createElement("input");
@@ -42,7 +33,7 @@ function loadPuzzle(puzzleId) {
         }
     }
 
-    // Fill across words (only uppercase letters prefill)
+    // Fill across clues (only uppercase letters)
     puzzle.across.forEach((word, index) => {
         const row = index * 2 + 1; // across words on odd rows
         if (row <= gridSize) {
@@ -59,7 +50,7 @@ function loadPuzzle(puzzleId) {
         }
     });
 
-    // Fill down words (only uppercase letters prefill)
+    // Fill down clues (only uppercase letters)
     puzzle.down.forEach((word, index) => {
         const col = index * 2 + 1; // down words on odd columns
         if (col <= gridSize) {
@@ -77,7 +68,7 @@ function loadPuzzle(puzzleId) {
     });
 }
 
-// Puzzle search box
+// Puzzle search input handler
 document.getElementById("puzzleSearch").addEventListener("input", function () {
     const id = this.value.trim();
     if (puzzles[id]) {
