@@ -1,19 +1,18 @@
 const gridContainer = document.getElementById('duxxessGrid');
 const puzzleIdInput = document.getElementById('puzzleIdInput');
 const loadPuzzleBtn = document.getElementById('loadPuzzleBtn');
-const acrossCluesList = document.getElementById('acrossClues');
-const downCluesList = document.getElementById('downClues');
 const errorMessage = document.getElementById('errorMessage');
 
 function generateGrid(size, letters) {
   gridContainer.innerHTML = '';
-  gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
+  gridContainer.style.setProperty('--grid-size', size);
 
   for (let row = 1; row <= size; row++) {
     for (let col = 1; col <= size; col++) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
+      // Kamili milestone shading rules
       if (row % 2 === 0 && col % 2 === 0) {
         cell.classList.add('shaded');
         cell.textContent = '';
@@ -27,7 +26,7 @@ function generateGrid(size, letters) {
         if (letters[idx]) {
           input.value = letters[idx].toUpperCase();
           input.readOnly = true;
-          input.style.color = 'royalblue';
+          input.style.color = '#222';
         }
 
         cell.appendChild(input);
@@ -47,23 +46,7 @@ function loadPuzzle(puzzleId) {
   }
 
   errorMessage.classList.add('hidden');
-
   generateGrid(puzzle.size, puzzle.letters);
-
-  acrossCluesList.innerHTML = '';
-  downCluesList.innerHTML = '';
-
-  puzzle.across.forEach(clue => {
-    const li = document.createElement('li');
-    li.textContent = clue;
-    acrossCluesList.appendChild(li);
-  });
-
-  puzzle.down.forEach(clue => {
-    const li = document.createElement('li');
-    li.textContent = clue;
-    downCluesList.appendChild(li);
-  });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
