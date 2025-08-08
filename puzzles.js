@@ -1,38 +1,13 @@
-// puzzles.js
 const puzzles = {
     "DS0001B": {
         size: 3,
-        clues: [
-            ["B", "", "D"],
-            ["", "#", ""],
-            ["E", "", "D"]
+        across: [
+            { clue: "Not soft", answer: "HARD", row: 1, col: 1 },
+            { clue: "Opposite of stop", answer: "GO", row: 3, col: 1 }
         ],
-        words: ["BAD", "END", "BYE", "BED", "DAD", "BEE", "DEN", "RED"]
-    },
-    "DS0002R": {
-        size: 5,
-        clues: [
-            ["T", "", "", "", "E"],
-            ["", "#", "", "#", ""],
-            ["", "", "A", "", ""],
-            ["", "#", "", "#", ""],
-            ["S", "", "", "", "T"]
-        ],
-        words: ["TEASE", "START", "SEA", "SET", "EAST", "SAT", "ART", "TEST"]
-    },
-    "DS0003E": {
-        size: 7,
-        clues: [
-            ["C", "", "", "", "", "", "T"],
-            ["", "#", "", "#", "", "#", ""],
-            ["", "", "A", "", "R", "", ""],
-            ["", "#", "", "#", "", "#", ""],
-            ["", "", "E", "", "S", "", ""],
-            ["", "#", "", "#", "", "#", ""],
-            ["P", "", "", "", "", "", "S"]
-        ],
-        words: ["CARTERS", "CAPTESS", "CAT", "PET", "CAR", "ART", "REST", "STEP"]
+        down: [
+            { clue: "To own", answer: "HAD", row: 1, col: 1 },
+            { clue: "Exists", answer: "ARE", row: 1, col: 3 }
+        ]
     }
 };
-
-let defaultPuzzleId = "DS0001B";
