@@ -1,3 +1,5 @@
+// script.js
+
 function loadPuzzle(puzzleId) {
     const puzzle = puzzles[puzzleId];
     if (!puzzle) {
@@ -9,7 +11,7 @@ function loadPuzzle(puzzleId) {
     const gridContainer = document.getElementById("gridContainer");
     gridContainer.innerHTML = "";
 
-    // Set container width based on puzzle size (new sizing)
+    // Set container width dynamically based on puzzle size
     if (gridSize === 3) {
         gridContainer.style.width = "60vw";
     } else if (gridSize === 5) {
@@ -23,14 +25,14 @@ function loadPuzzle(puzzleId) {
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
-    // Build grid with Kamili milestone shading rules
+    // Build grid respecting Kamili milestone shading rules
     for (let r = 1; r <= gridSize; r++) {
         for (let c = 1; c <= gridSize; c++) {
             const cell = document.createElement("input");
             cell.maxLength = 1;
             cell.classList.add("grid-cell");
 
-            // Shaded cell if both row and col even
+            // Shade cell if both row and col are even
             if (r % 2 === 0 && c % 2 === 0) {
                 cell.classList.add("shaded");
                 cell.disabled = true;
@@ -42,42 +44,46 @@ function loadPuzzle(puzzleId) {
         }
     }
 
-    // Fill across clues (uppercase letters only)
-    puzzle.across.forEach((word, index) => {
-        const row = index * 2 + 1;
+    // Fill across clues: words placed on odd rows 1,3,5,7
+    puzzle.across.forEach((word, idx) => {
+        const row = 1 + idx * 2; // 1,3,5,7
         if (row <= gridSize) {
             for (let i = 0; i < word.length; i++) {
                 const letter = word[i];
-                const cellIndex = (row - 1) * gridSize + i;
-                const cell = gridContainer.children[cellIndex];
-                if (cell && letter === letter.toUpperCase() && letter !== " ") {
-                    cell.value = letter;
-                    cell.disabled = true;
-                    cell.classList.add("prefilled");
+                if (letter === letter.toUpperCase() && letter !== " ") {
+                    const cellIndex = (row - 1) * gridSize + i;
+                    const cell = gridContainer.children[cellIndex];
+                    if (cell) {
+                        cell.value = letter;
+                        cell.disabled = true;
+                        cell.classList.add("prefilled");
+                    }
                 }
             }
         }
     });
 
-    // Fill down clues (uppercase letters only)
-    puzzle.down.forEach((word, index) => {
-        const col = index * 2 + 1;
+    // Fill down clues: words placed on odd columns 1,3,5,7
+    puzzle.down.forEach((word, idx) => {
+        const col = 1 + idx * 2; // 1,3,5,7
         if (col <= gridSize) {
             for (let i = 0; i < word.length; i++) {
                 const letter = word[i];
-                const cellIndex = i * gridSize + (col - 1);
-                const cell = gridContainer.children[cellIndex];
-                if (cell && letter === letter.toUpperCase() && letter !== " ") {
-                    cell.value = letter;
-                    cell.disabled = true;
-                    cell.classList.add("prefilled");
+                if (letter === letter.toUpperCase() && letter !== " ") {
+                    const cellIndex = i * gridSize + (col - 1);
+                    const cell = gridContainer.children[cellIndex];
+                    if (cell) {
+                        cell.value = letter;
+                        cell.disabled = true;
+                        cell.classList.add("prefilled");
+                    }
                 }
             }
         }
     });
 }
 
-// Puzzle search input listener
+// Search box input handler
 document.getElementById("puzzleSearch").addEventListener("input", function () {
     const id = this.value.trim();
     if (puzzles[id]) {
@@ -85,7 +91,7 @@ document.getElementById("puzzleSearch").addEventListener("input", function () {
     }
 });
 
-// Load default puzzle on page load
+// Load default puzzle DS0001B on page load
 document.addEventListener("DOMContentLoaded", function () {
     loadPuzzle("DS0001B");
 });
