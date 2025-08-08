@@ -1,97 +1,58 @@
-// script.js
+// script.js - stable baseline
 
-function loadPuzzle(puzzleId) {
-    const puzzle = puzzles[puzzleId];
-    if (!puzzle) {
-        alert("Puzzle not found!");
-        return;
+const container = document.getElementById('grid-container');
+const searchBox = document.getElementById('search-box');
+const puzzleTitle = document.getElementById('puzzle-title');
+const puzzleInfo = document.getElementById('puzzle-info');
+
+let currentPuzzle = null;
+
+function createGrid(puzzle) {
+  container.innerHTML = '';
+  container.style.gridTemplateColumns = `repeat(${puzzle.size}, 1fr)`;
+
+  for (let r = 0; r < puzzle.size; r++) {
+    for (let c = 0; c < puzzle.size; c++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+
+      // Shading rule: shaded if row and col are even-numbered (0-based)
+      if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
+        cell.classList.add('shaded');
+        cell.textContent = puzzle.grid[r][c] === "X" ? "" : puzzle.grid[r][c];
+      } else {
+        cell.classList.add('editable');
+        // Editable cells show letter if present
+        cell.textContent = puzzle.grid[r][c] === " " || puzzle.grid[r][c] === "X" ? "" : puzzle.grid[r][c];
+        cell.contentEditable = true;
+        cell.spellcheck = false;
+      }
+      container.appendChild(cell);
     }
-
-    const gridSize = puzzle.size;
-    const gridContainer = document.getElementById("gridContainer");
-    gridContainer.innerHTML = "";
-
-    // Set container width dynamically based on puzzle size
-    if (gridSize === 3) {
-        gridContainer.style.width = "60vw";
-    } else if (gridSize === 5) {
-        gridContainer.style.width = "70vw";
-    } else if (gridSize === 7) {
-        gridContainer.style.width = "80vw";
-    } else {
-        gridContainer.style.width = "70vw"; // fallback
-    }
-
-    gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-    gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
-
-    // Build grid respecting Kamili milestone shading rules
-    for (let r = 1; r <= gridSize; r++) {
-        for (let c = 1; c <= gridSize; c++) {
-            const cell = document.createElement("input");
-            cell.maxLength = 1;
-            cell.classList.add("grid-cell");
-
-            // Shade cell if both row and col are even
-            if (r % 2 === 0 && c % 2 === 0) {
-                cell.classList.add("shaded");
-                cell.disabled = true;
-            } else {
-                cell.classList.add("editable");
-            }
-
-            gridContainer.appendChild(cell);
-        }
-    }
-
-    // Fill across clues: words placed on odd rows 1,3,5,7
-    puzzle.across.forEach((word, idx) => {
-        const row = 1 + idx * 2; // 1,3,5,7
-        if (row <= gridSize) {
-            for (let i = 0; i < word.length; i++) {
-                const letter = word[i];
-                if (letter === letter.toUpperCase() && letter !== " ") {
-                    const cellIndex = (row - 1) * gridSize + i;
-                    const cell = gridContainer.children[cellIndex];
-                    if (cell) {
-                        cell.value = letter;
-                        cell.disabled = true;
-                        cell.classList.add("prefilled");
-                    }
-                }
-            }
-        }
-    });
-
-    // Fill down clues: words placed on odd columns 1,3,5,7
-    puzzle.down.forEach((word, idx) => {
-        const col = 1 + idx * 2; // 1,3,5,7
-        if (col <= gridSize) {
-            for (let i = 0; i < word.length; i++) {
-                const letter = word[i];
-                if (letter === letter.toUpperCase() && letter !== " ") {
-                    const cellIndex = i * gridSize + (col - 1);
-                    const cell = gridContainer.children[cellIndex];
-                    if (cell) {
-                        cell.value = letter;
-                        cell.disabled = true;
-                        cell.classList.add("prefilled");
-                    }
-                }
-            }
-        }
-    });
+  }
 }
 
-// Search box input handler
-document.getElementById("puzzleSearch").addEventListener("input", function () {
-    const id = this.value.trim();
-    if (puzzles[id]) {
-        loadPuzzle(id);
+function loadPuzzle(puzzleId) {
+  if (!(puzzleId in puzzles)) {
+    alert('Puzzle not found!');
+    return;
+  }
+  currentPuzzle = puzzles[puzzleId];
+  puzzleTitle.textContent = `${currentPuzzle.title} (${currentPuzzle.id})`;
+  puzzleInfo.textContent = `Difficulty: ${currentPuzzle.difficulty} | Size: ${currentPuzzle.size}x${currentPuzzle.size}`;
+  createGrid(currentPuzzle);
+}
+
+searchBox.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const query = searchBox.value.trim().toUpperCase();
+    if (puzzles[query]) {
+      loadPuzzle(query);
+    } else {
+      alert('Puzzle ID not found!');
     }
+  }
 });
 
-// Load default puzzle DS0001B on page load
-document.addEventListener("DOMContentLoaded", function () {
-    loadPuzzle("DS0001B");
-});
+// Load default puzzle at start
+loadPuzzle('DS0001B');
