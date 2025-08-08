@@ -16,17 +16,18 @@ function createGrid(puzzle) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      // Shading rule: shaded if row and col are even-numbered (0-based)
+      // Shading rule: shaded if row and col are even-numbered (1-based)
       if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
         cell.classList.add('shaded');
         cell.textContent = puzzle.grid[r][c] === "X" ? "" : puzzle.grid[r][c];
+        cell.contentEditable = false;
       } else {
         cell.classList.add('editable');
-        // Editable cells show letter if present
-        cell.textContent = puzzle.grid[r][c] === " " || puzzle.grid[r][c] === "X" ? "" : puzzle.grid[r][c];
+        cell.textContent = (puzzle.grid[r][c] === " " || puzzle.grid[r][c] === "X") ? "" : puzzle.grid[r][c];
         cell.contentEditable = true;
         cell.spellcheck = false;
       }
+
       container.appendChild(cell);
     }
   }
