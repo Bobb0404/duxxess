@@ -1,60 +1,46 @@
-const gridContainer = document.getElementById('duxxessGrid');
-const puzzleIdInput = document.getElementById('puzzleIdInput');
-const loadPuzzleBtn = document.getElementById('loadPuzzleBtn');
-const errorMessage = document.getElementById('errorMessage');
+// Create the grid following Kamili milestone shading rules
+function createGrid(size, clues) {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = ""; // clear existing grid
+    grid.style.gridTemplateColumns = `repeat(${size}, 50px)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 50px)`;
 
-function generateGrid(size, letters) {
-  gridContainer.innerHTML = '';
-  gridContainer.style.setProperty('--grid-size', size);
+    for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
 
-  for (let row = 1; row <= size; row++) {
-    for (let col = 1; col <= size; col++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
+            // Kamili milestone shading:
+            // Editable cells on all odd-numbered rows & columns (1,3,5,7 in human terms)
+            // Shaded cells only where BOTH row & column are even-numbered (R2C2, R4C4, etc.)
+            if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
+                cell.classList.add("shaded");
+            } else {
+                cell.classList.add("editable");
+            }
 
-      // Shade cells where BOTH row and col are EVEN numbers
-      if (row % 2 === 0 && col % 2 === 0) {
-        cell.classList.add('shaded');
-        cell.textContent = '';
-      } else {
-        cell.classList.add('editable');
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.maxLength = 1;
+            // Add clue letter if present
+            const key = `${r},${c}`;
+            if (clues[key]) {
+                cell.textContent = clues[key];
+            }
 
-        const idx = (row - 1) * size + (col - 1);
-        if (letters[idx]) {
-          input.value = letters[idx].toUpperCase();
-          input.readOnly = true;
-          input.style.color = '#222';
+            grid.appendChild(cell);
         }
-
-        cell.appendChild(input);
-      }
-
-      gridContainer.appendChild(cell);
     }
-  }
 }
 
-function loadPuzzle(puzzleId) {
-  const puzzle = puzzles[puzzleId];
-  if (!puzzle) {
-    errorMessage.textContent = `Puzzle ID "${puzzleId}" not found.`;
-    errorMessage.classList.remove('hidden');
-    return;
-  }
-
-  errorMessage.classList.add('hidden');
-  generateGrid(puzzle.size, puzzle.letters);
+// Load puzzle by ID
+function loadPuzzle(id) {
+    const puzzle = puzzles[id];
+    if (!puzzle) {
+        alert("Puzzle not found!");
+        return;
+    }
+    createGrid(puzzle.size, puzzle.clues);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  puzzleIdInput.value = 'DS0001B';
-  loadPuzzle('DS0001B');
-});
-
-loadPuzzleBtn.addEventListener('click', () => {
-  const id = puzzleIdInput.value.trim().toUpperCase();
-  loadPuzzle(id);
-});
+// Load default puzzle on page open
+window.onload = function() {
+    loadPuzzle("DS0001B");
+};
