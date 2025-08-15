@@ -8,16 +8,39 @@
 </head>
 <body>
     <header>
-        <h1 class="game-title">DUXXESS</h1>
-        <div class="search-container">
-            <input type="text" id="searchBox" placeholder="Enter Puzzle ID...">
+        <h1>Duxxess Square</h1>
+        <div class="top-right">
+            <input type="text" id="searchBox" placeholder="Enter Puzzle ID">
             <button id="loadPuzzleBtn">Load</button>
+            <span id="notificationBell">🔔</span>
         </div>
     </header>
 
     <main>
-        <div id="grid" class="grid"></div>
+        <div id="puzzleInfo">
+            <p id="puzzleID">Puzzle ID: —</p>
+            <p id="puzzleDifficulty">Difficulty: —</p>
+        </div>
+
+        <div id="gridContainer">
+            <table id="puzzleGrid"></table>
+        </div>
+
+        <div id="wordLists">
+            <div class="wordList">
+                <h3>Across</h3>
+                <ul id="acrossWords"></ul>
+            </div>
+            <div class="wordList">
+                <h3>Down</h3>
+                <ul id="downWords"></ul>
+            </div>
+        </div>
     </main>
+
+    <footer>
+        <p>© 2025 Duxxess</p>
+    </footer>
 
     <script src="puzzles.js"></script>
     <script src="script.js"></script>
