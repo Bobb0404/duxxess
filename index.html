@@ -8,39 +8,25 @@
 </head>
 <body>
     <header>
-        <h1>Duxxess Square</h1>
-        <div class="top-right">
-            <input type="text" id="searchBox" placeholder="Enter Puzzle ID">
-            <button id="loadPuzzleBtn">Load</button>
-            <span id="notificationBell">🔔</span>
-        </div>
+        <h1>Duxxess</h1>
     </header>
 
     <main>
-        <div id="puzzleInfo">
-            <p id="puzzleID">Puzzle ID: —</p>
-            <p id="puzzleDifficulty">Difficulty: —</p>
+        <!-- Search Box -->
+        <div id="search-container">
+            <input type="text" id="puzzle-id" placeholder="Enter Puzzle ID">
+            <button id="load-puzzle">Load</button>
         </div>
 
-        <div id="gridContainer">
-            <table id="puzzleGrid"></table>
-        </div>
+        <!-- Puzzle Grid -->
+        <div id="puzzle-container"></div>
 
-        <div id="wordLists">
-            <div class="wordList">
-                <h3>Across</h3>
-                <ul id="acrossWords"></ul>
-            </div>
-            <div class="wordList">
-                <h3>Down</h3>
-                <ul id="downWords"></ul>
-            </div>
+        <!-- Puzzle Navigation Buttons -->
+        <div id="nav-buttons">
+            <button id="prev-puzzle">Previous</button>
+            <button id="next-puzzle">Next</button>
         </div>
     </main>
-
-    <footer>
-        <p>© 2025 Duxxess</p>
-    </footer>
 
     <script src="puzzles.js"></script>
     <script src="script.js"></script>
