@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duxxess Square</title>
     <script>
-        // Dynamically add CSS link with cache-busting timestamp
+        // Add CSS dynamically with cache-busting
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = 'style.css?v=' + Date.now();
@@ -17,11 +17,14 @@
 
     <div id="puzzle-search">
         <input type="text" id="puzzle-id" placeholder="Search Puzzle...">
-        <button onclick="loadPuzzle()">Load Puzzle</button>
+        <button onclick="loadPuzzleFromSearch()">Load Puzzle</button>
     </div>
 
     <div id="grid"></div>
 
+    <!-- Load puzzle data first -->
+    <script src="puzzles.js"></script>
+    <!-- Then load grid logic -->
     <script src="script.js"></script>
 </body>
 </html>
