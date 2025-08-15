@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duxxess Square</title>
-    <script>
-        // Add CSS dynamically with cache-busting
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'style.css?v=' + Date.now();
-        document.head.appendChild(link);
-    </script>
+    <title>Duxxess</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Duxxess Square <span id="notification-bell">🔔</span></h1>
+    <header>
+        <h1 class="game-title">DUXXESS</h1>
+        <div class="search-container">
+            <input type="text" id="searchBox" placeholder="Enter Puzzle ID...">
+            <button id="loadPuzzleBtn">Load</button>
+        </div>
+    </header>
 
-    <div id="puzzle-search">
-        <input type="text" id="puzzle-id" placeholder="Search Puzzle...">
-        <button onclick="loadPuzzleFromSearch()">Load Puzzle</button>
-    </div>
+    <main>
+        <div id="grid" class="grid"></div>
+    </main>
 
-    <div id="grid"></div>
-
-    <!-- Load puzzle data first -->
     <script src="puzzles.js"></script>
-    <!-- Then load grid logic -->
     <script src="script.js"></script>
 </body>
 </html>
