@@ -1,7 +1,8 @@
 // Create the grid following Kamili milestone shading rules
 function createGrid(size, clues) {
     const grid = document.getElementById("grid");
-    grid.innerHTML = ""; // clear existing grid
+    grid.innerHTML = "";
+    grid.style.display = "grid";
     grid.style.gridTemplateColumns = `repeat(${size}, 50px)`;
     grid.style.gridTemplateRows = `repeat(${size}, 50px)`;
 
@@ -10,9 +11,7 @@ function createGrid(size, clues) {
             const cell = document.createElement("div");
             cell.classList.add("cell");
 
-            // Kamili milestone shading:
-            // Editable cells on all odd-numbered rows & columns (1,3,5,7 in human terms)
-            // Shaded cells only where BOTH row & column are even-numbered (R2C2, R4C4, etc.)
+            // Kamili milestone shading
             if ((r + 1) % 2 === 0 && (c + 1) % 2 === 0) {
                 cell.classList.add("shaded");
             } else {
@@ -32,12 +31,19 @@ function createGrid(size, clues) {
 
 // Load puzzle by ID
 function loadPuzzle(id) {
+    console.log("Loading puzzle:", id);
     const puzzle = puzzles[id];
     if (!puzzle) {
         alert("Puzzle not found!");
         return;
     }
     createGrid(puzzle.size, puzzle.clues);
+}
+
+// Load puzzle from search box
+function loadPuzzleFromSearch() {
+    const id = document.getElementById("puzzle-id").value.trim();
+    loadPuzzle(id);
 }
 
 // Load default puzzle on page open
