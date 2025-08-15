@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duxxess Square</title>
-    <!-- Cache-busting applied here -->
-    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
+    <script>
+        // Dynamically add CSS link with cache-busting timestamp
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'style.css?v=' + Date.now();
+        document.head.appendChild(link);
+    </script>
 </head>
 <body>
     <h1>Duxxess Square <span id="notification-bell">🔔</span></h1>
