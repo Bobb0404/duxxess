@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duxxess</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duxxess</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Duxxess</h1>
-    </header>
+    <h1>Duxxess Square</h1>
 
-    <main>
-        <!-- Search Box -->
-        <div id="search-container">
-            <input type="text" id="puzzle-id" placeholder="Enter Puzzle ID">
-            <button id="load-puzzle">Load</button>
-        </div>
+    <div class="controls">
+        <input type="text" id="search-box" placeholder="Search puzzle ID">
+        <button id="load-puzzle">Load</button>
+        <button id="prev-puzzle">Previous</button>
+        <button id="next-puzzle">Next</button>
+    </div>
 
-        <!-- Puzzle Grid -->
-        <div id="puzzle-container"></div>
-
-        <!-- Puzzle Navigation Buttons -->
-        <div id="nav-buttons">
-            <button id="prev-puzzle">Previous</button>
-            <button id="next-puzzle">Next</button>
-        </div>
-    </main>
+    <div id="duxxess-grid"></div>
 
     <script src="puzzles.js"></script>
     <script src="script.js"></script>
