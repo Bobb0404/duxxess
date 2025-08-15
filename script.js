@@ -1,74 +1,65 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const gridContainer = document.getElementById("grid");
-    const puzzleIdInput = document.getElementById("puzzle-id");
-    const loadPuzzleButton = document.getElementById("load-puzzle");
+let currentPuzzleIndex = 0;
 
-    // Example puzzles (replace with your full set)
-    const puzzles = {
-        "DS0001B": {
-            size: 3,
-            clues: {
-                "R1C1": "B", "R1C3": "D",
-                "R3C1": "E", "R3C3": "D"
+// Function to render the puzzle grid
+function renderPuzzle(puzzle) {
+    const container = document.getElementById('puzzle-container');
+    container.innerHTML = ''; // Clear old grid
+
+    const gridSize = puzzle.size;
+    const table = document.createElement('table');
+
+    for (let r = 0; r < gridSize; r++) {
+        const row = document.createElement('tr');
+        for (let c = 0; c < gridSize; c++) {
+            const cell = document.createElement('td');
+            const isShaded = (r % 2 === 1 && c % 2 === 1); // Example shading rule
+            if (isShaded) {
+                cell.classList.add('shaded');
+            } else {
+                const input = document.createElement('input');
+                input.maxLength = 1;
+                input.value = puzzle.grid[r][c] || '';
+                cell.appendChild(input);
             }
-        },
-        "DS0002B": {
-            size: 3,
-            clues: {
-                "R1C1": "L", "R1C3": "G",
-                "R3C1": "D", "R3C3": "G"
-            }
+            row.appendChild(cell);
         }
-    };
-
-    function createGrid(size, clues) {
-        gridContainer.innerHTML = "";
-        gridContainer.style.gridTemplateColumns = `repeat(${size}, 50px)`;
-        gridContainer.style.gridTemplateRows = `repeat(${size}, 50px)`;
-
-        for (let r = 1; r <= size; r++) {
-            for (let c = 1; c <= size; c++) {
-                const cell = document.createElement("div");
-                cell.classList.add("cell");
-
-                // Kamili milestone rule:
-                if (r % 2 === 0 && c % 2 === 0) {
-                    cell.classList.add("shaded");
-                } else {
-                    cell.classList.add("editable");
-                    const input = document.createElement("input");
-                    input.maxLength = 1;
-                    input.classList.add("cell-input");
-
-                    const clueKey = `R${r}C${c}`;
-                    if (clues[clueKey]) {
-                        input.value = clues[clueKey];
-                        input.disabled = true;
-                        input.classList.add("clue");
-                    }
-
-                    cell.appendChild(input);
-                }
-
-                gridContainer.appendChild(cell);
-            }
-        }
+        table.appendChild(row);
     }
 
-    function loadPuzzle(id) {
-        const puzzle = puzzles[id];
-        if (puzzle) {
-            createGrid(puzzle.size, puzzle.clues);
-        } else {
-            alert("Puzzle not found");
-        }
+    container.appendChild(table);
+}
+
+// Load puzzle by index
+function loadPuzzle(index) {
+    if (index >= 0 && index < puzzles.length) {
+        currentPuzzleIndex = index;
+        renderPuzzle(puzzles[index]);
     }
+}
 
-    loadPuzzleButton.addEventListener("click", function () {
-        const id = puzzleIdInput.value.trim();
-        loadPuzzle(id);
-    });
-
-    // Load default puzzle
-    loadPuzzle("DS0001B");
+// Search puzzle by ID
+document.getElementById('load-puzzle').addEventListener('click', () => {
+    const id = document.getElementById('puzzle-id').value.trim().toUpperCase();
+    const foundIndex = puzzles.findIndex(p => p.id === id);
+    if (foundIndex !== -1) {
+        loadPuzzle(foundIndex);
+    } else {
+        alert('Puzzle not found!');
+    }
 });
+
+// Navigation buttons
+document.getElementById('prev-puzzle').addEventListener('click', () => {
+    if (currentPuzzleIndex > 0) {
+        loadPuzzle(currentPuzzleIndex - 1);
+    }
+});
+
+document.getElementById('next-puzzle').addEventListener('click', () => {
+    if (currentPuzzleIndex < puzzles.length - 1) {
+        loadPuzzle(currentPuzzleIndex + 1);
+    }
+});
+
+// Load first puzzle by default
+loadPuzzle(0);
