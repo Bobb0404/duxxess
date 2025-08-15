@@ -1,93 +1,43 @@
-/* General Page Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-/* Main Container */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
     text-align: center;
+    background-color: #ffffff;
 }
 
-/* Puzzle Grid Styling */
-.grid {
+h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.controls {
+    margin-bottom: 15px;
+}
+
+#duxxess-grid {
     display: grid;
+    grid-template-columns: repeat(7, 50px);
+    grid-template-rows: repeat(7, 50px);
     gap: 2px;
     justify-content: center;
+    margin: 0 auto;
 }
 
-/* Grid Cell Styling */
 .cell {
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    font-size: 24px;
-    text-transform: uppercase;
-
-    /* Center letters perfectly */
     display: flex;
-    justify-content: center;
     align-items: center;
-
-    /* Prevent text shift when typing */
-    line-height: 1;
-    box-sizing: border-box;
-}
-
-/* Editable Cells (Light Yellow) */
-.cell.editable {
-    background-color: lightyellow;
-}
-
-/* Shaded Cells (Royal Blue) */
-.cell.shaded {
-    background-color: royalblue;
-}
-
-/* Input Field Inside Editable Cells */
-.cell input {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-size: inherit;
-    border: none;
-    background: transparent;
-    text-transform: uppercase;
-
-    /* Center letters vertically in inputs */
-    display: flex;
     justify-content: center;
-    align-items: center;
-}
-
-/* Remove outline on focus */
-.cell input:focus {
-    outline: none;
-}
-
-/* Puzzle Selector & Search */
-#puzzle-id {
-    padding: 5px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 8px 12px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-/* Notification Bell */
-.notification-bell {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
+.editable {
+    background-color: #fffacd; /* light yellow */
+    border: 1px solid #ccc;
+}
+
+.shaded {
+    background-color: #4169e1; /* royal blue */
+    color: #ffffff;
+    border: 1px solid #333;
 }
