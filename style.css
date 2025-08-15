@@ -1,3 +1,4 @@
+/* Reset basic styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -6,11 +7,13 @@ body {
     padding: 0;
 }
 
+/* Title */
 h1 {
     color: #003366;
     margin-top: 20px;
 }
 
+/* Notification bell */
 #notification-bell {
     position: absolute;
     right: 20px;
@@ -19,6 +22,7 @@ h1 {
     font-size: 1.5rem;
 }
 
+/* Search bar */
 #puzzle-search {
     margin: 20px 0;
 }
@@ -45,6 +49,7 @@ button:hover {
     background-color: #0055aa;
 }
 
+/* Grid container */
 #grid {
     display: grid;
     justify-content: center;
@@ -52,6 +57,7 @@ button:hover {
     border: 2px solid #003366;
 }
 
+/* Individual cells */
 .cell {
     width: 50px;
     height: 50px;
@@ -64,14 +70,17 @@ button:hover {
     box-sizing: border-box;
 }
 
+/* Editable cells - light yellow */
 .cell.editable {
-    background-color: #fff9c4; /* light yellow */
+    background-color: #fff9c4;
 }
 
+/* Shaded cells - light blue */
 .cell.shaded {
-    background-color: #bbdefb; /* light blue */
+    background-color: #bbdefb;
 }
 
+/* Mobile responsiveness */
 @media (max-width: 600px) {
     .cell {
         width: 40px;
